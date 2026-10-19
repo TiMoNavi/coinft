@@ -1,0 +1,88 @@
+# Teensy 端运行 CoinFT MLP：任务说明
+
+## 目标
+
+将左右两只 CoinFT 的 12 路原始通道数据分别送入 Teensy 上的对应 MLP，在 Teensy 完成归一化、前向推理和输出反归一化；电脑只接收、校验并解析每只传感器的六维力/力矩结果。电脑端结果沿用 CoinFT 项目的轴定义和单位。实现和验证文件放在本独立工作区；仓库原有源码没有被本任务修改。
+
+## 硬件与模型对应关系
+
+| 侧别 | Teensy UART | 模型目录 | 模型文件 | 归一化文件 |
+|---|---|---|---|---|
+| 左手 | TX5/RX5，即 `Serial5` | `models (3) (1)/coinft_260804_0001` | `CFT24_MLP.onnx` | `CFT24_norm.json` |
+| 右手 | TX1/RX1，即 `Serial1` | `models (3) (1)/coinft_260804_0010` | `CFT24_MLP.onnx` | `CFT24_norm.json` |
+
+路径均相对于仓库根目录 `/Users/550m/code/coin-ft`。固件侧必须按表使用 `Serial5` 左、`Serial1` 右；目前已有的 Teensy 源码使用 `Serial2/Serial3`，与本任务接线约定不同。CoinFT UART 速率和传感器原始帧应按现有硬件接口实现核对；仓库中的现有桥接源码设为 1,000,000 baud，并读取 `0x02 + 24 字节 + 0x03` 帧。
+
+两套模型均为单样本 `12 -> 128 -> 64 -> 36 -> 24 -> 12 -> 6` MLP。输入是该传感器自己的 12 个通道；依各自归一化参数执行 `(x - mu_x) / sd_x`。网络输出是 6 个归一化目标，使用 `(y * sd_y) + mu_y` 还原到物理量。不能把左右模型或归一化参数互换。
+
+## 六维输出语义
+
+每个传感器的六维结果都按 CoinFT 项目的标准顺序输出：
+
+`[Fx, Fy, Fz, Mx, My, Mz]`
+
+其中 `Fx/Fy/Fz` 单位为牛顿（N），`Mx/My/Mz` 单位为牛顿米（Nm）。现有模型接口和接收器按这一顺序解释输出。目标是让 Teensy 输出的值与当前电脑端对同一原始输入运行相同模型时一致；不得因为左右手映射而交换轴、改符号或改变单位。只按设备侧别放置结果：左手结果进入 `left` 槽，右手结果进入 `right` 槽。实现时需比对现有电脑端的归一化、反归一化以及实际启用的 tare、bias、平滑处理，避免迁移推理时悄然改变数值语义。
+
+## Teensy 到电脑的数据格式建议
+
+仓库的 `receiver/standard_receiver.py` 使用侧别明确的 `left/right` 数据，并把六轴字段按 `fx, fy, fz, mx, my, mz` 写入 JSONL/CSV。建议电脑输出仍映射为同样字段，例如 `left_fx ... left_mz`、`right_fx ... right_mz`；这描述的是主机端解析后的字段，不要求 Teensy 发送 CSV 文本。
+
+建议采用有版本标识的固定长度二进制帧，以便主机区分“原始 12 通道”与“已推理六轴”数据：
+
+```text
+magic[4] = ASCII "CFTF"
+version  : uint8 = 2
+calibration_status : uint8，见 README 中的状态表
+flags    : uint8，bit0 表示六轴载荷有效
+sequence : uint32 little-endian
+teensy_time_us : uint32 little-endian
+left     : 6 × IEEE-754 float32 little-endian，顺序 Fx,Fy,Fz,Mx,My,Mz
+right    : 6 × IEEE-754 float32 little-endian，顺序 Fx,Fy,Fz,Mx,My,Mz
+crc16    : uint16 little-endian，覆盖 version 至 right 载荷
+```
+
+固定总长 65 字节。CRC 使用 CRC-16/CCITT-FALSE（poly `0x1021`、init `0xFFFF`、不反射、xorout `0x0000`），覆盖 version 至 right 载荷。校准期间 bit0 清零，六轴字段是无效占位值；进入 `ready` 后 bit0 置一。PC 端按 magic/version/长度/CRC 校验后解析；`sequence` 用于检测丢帧，时间戳用于样本时间对齐。Teensy USB 串口波特率设为 115200，最终应与所选 USB CDC 串口配置一致。该帧是此任务的新协议，固件与电脑解析器已在工作区共同实现并做离线编码验证；仓库正式解析器尚未实现它，旧的 `dual-v2` 原始数据解析不能直接用于该载荷。
+
+若后续实现发现项目已有正式的下游接口格式，应优先兼容正式接口，并在实施前更新本节；不能把候选协议误认为当前已存在的协议。
+
+## 当前仓库与设备观察
+
+- 现有桥接文件：`hardware_files/Teensy/teensy_coinft_serial_interface.cpp`。当前使用 `Serial2/Serial3` 接 CoinFT，并向电脑发送原始通道数据，不是在 Teensy 上做 MLP。
+- 电脑接收器：`receiver/standard_receiver.py`、`receiver/protocol_v2.py`、`receiver/models.py`。当前模型推理在电脑端；`CoinFTModel` 加载 ONNX 与 JSON 归一化参数。
+- 仓库定义的旧 `dual-v2` 接收格式与当前桥接源码实际发出的帧不一致；不得假定现有串口帧已经承载六轴结果。
+- 烧录前对 `/dev/cu.usbmodem164546801`（USB 序列号 `16454680`）被动检查时，旧固件输出循环 `Hello World!`，没有观察到 CoinFT 数据帧。
+- 原桥接源码按 1 ms 定时器检查双侧输入；本工作区将配对输出限制为最多 1 kHz，并配置 4096 条原始样本环形历史，以覆盖约 4.096 秒。该历史占用约 208 KiB 静态 RAM。PlatformIO Teensy 5.1.0 对 Teensy 4.0 和 4.1 的构建均通过，RAM1 使用 327,296 字节、约 164 KiB 留给局部变量。实机型号现已由 Teensy 工具确认是 Teensy 4.0。
+- 仓库当时已有未提交修改和未跟踪文件。本任务应只在本目录增加文件，不能改动或清理这些已有内容。
+
+## 实机联调记录（2026-10-20）
+
+- `teensy_ports -L` 和 USB 信息将 `/dev/cu.usbmodem164546801` 确认为 Teensy 4.0，VID/PID 为 `16C0:0483`，序列号为 `16454680`。PlatformIO Teensy 5.1.0 使用已安装的 Teensy Loader GUI 上传器烧录 `teensy40` 固件，上传命令返回成功；烧录后 USB 串口重新可用。
+- 主机接收器运行约 47.2 秒，解析了 9,468 个有效 `CFTF` v2 帧，输出约 200.5 Hz；序号从 14,306 连续到 23,773，未发现序号缺口。记录到的状态依次到达 `warming_up`、`delayed`、`runtime_settling`、`final_tare`、`bias_calibration`、`zero_check` 和 `ready`，没有进入 `zero_check_failed` 或 `error`。
+- 自动归零判据为左右两侧各自三轴力在 1 秒 zero-check 窗口内的均值绝对值均不超过 0.15 N；到达 `ready` 表明本次固件归零检查通过。ready 期间 6,857 帧的六轴均值为：左侧 `[0.000201, 0.000357, 0.011694, -0.000063, 0.000134, -0.000039]`，右侧 `[0.010879, -0.003592, -0.080019, -0.000201, 0.000338, -0.000128]`。前三项单位 N，后三项单位 Nm。
+- 本次确认两侧输出和自动归零流程能工作；没有施加标准力/力矩，因此轴符号、比例和机械加载响应仍需后续用已知负载验证。约 200.5 Hz 是本次实测值，固件的 1 kHz 是上限而非实测保证。
+- 已增加可复用 Python `CoinFTInterface`/`CoinFTSample` 标准接口、JSONL 最小调用程序，以及两种实时绘图入口：左右分栏显示力/力矩，或六个轴叠加比较左右。三个入口共用 CFTF v2 解码器和串口 API；同一时间只能有一个入口占用 USB 串口。
+
+## 实施与剩余工作
+
+1. 已生成两套 ONNX 权重和归一化参数的静态 C++ 常量，完成双 UART 原始帧解析、Teensy MLP 推理、tare/bias/滤波迁移、六轴协议和 Python 主机解析器。
+2. 已完成离线 ONNX 数值验证、协议编码一致性检查、解析器测试，以及校准状态机与旧 Python `CoinFTWarmup` 的逐帧对照。
+3. Teensy 4.0/4.1 板级编译已通过；实机确认是 Teensy 4.0，双侧数据帧、USB 输出和自动归零流程已实测通过。
+4. 后续用已知六轴负载验证轴符号、比例、左右归属和负载响应；传感器数据帧没有硬件时间戳，当前只验证了固件按输入到达时间配对。
+
+## 验收条件
+
+- 两个传感器分别使用正确 UART、模型和归一化参数；接线与侧别映射可从日志/元数据确认。
+- 对一组覆盖正常范围的相同 12 通道输入，Teensy 的六轴结果与电脑端基准模型一致，并报告最大绝对/相对误差及浮点精度容差。
+- 输出的每侧轴顺序固定为 `Fx,Fy,Fz,Mx,My,Mz`，单位和符号与当前模型结果一致；左右手数据不串位。
+- PC 端能拒绝错误版本、错误长度、坏 CRC 和非有限浮点值，并能检测序号缺失；持续接收时没有无法恢复的帧错位。
+- 完成端到端测试后分别验证静止零点、三轴力、三轴力矩和左右侧同时工作；记录实际串口协议和测试结果。
+
+## 当前推进状态
+
+- 工作区中已生成左右两套模型参数，完成可移植 C++ 推理核心、双 UART Teensy 草稿、六轴输出帧编码器和 Python 接收解析器。
+- 离线测试将 C++ 与 ONNX Runtime 对比，每侧 2,048 个输入；最大绝对误差左侧约 `6.11e-5`、右侧约 `7.63e-5`，C++ 与 Python 输出帧编码逐字节一致。PlatformIO Teensy 5.1.0 对 4.0 和 4.1 均完成无警告构建；RAM1 使用 327,296 字节，约 164 KiB 留给局部变量。
+- Teensy 工作区已迁入旧电脑接收器的 raw 稳定性等待、两阶段 raw tare、模型力偏差校正、无载零点检查和 5 点移动平均。校准期间协议状态标记六轴无效，PC 输出 null；进入 `ready` 后输出最终六轴值。
+- 500 个包含启动噪声、稳定 tare、bias、zero-check 和 ready 后动态输入的样本，与旧 Python 状态机逐帧对照通过；状态序列一致，六轴最大差约 `2.29e-6`。
+- 固件仅在左右输入帧到达时间相差不超过 10 ms 时配对。传感器输入帧本身不含时间戳，因此这不是传感器硬件级同步保证。
+- 本次已用 PlatformIO Teensy 5.1.0 对 Teensy 4.0 完成烧录和在线接收；`CFTF` v2 帧连续通过主机解析，归零检查到达 `ready`。实测明细见“实机联调记录”。
+- 新增串口接口和协议单元测试共 10 项通过；新增两个绘图程序和最小调用程序的 Python 编译及 `--help` 检查通过。
