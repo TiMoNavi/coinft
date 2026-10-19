@@ -1,0 +1,22 @@
+device_id=coinft_260804_0010
+batch_id=20260827_053148_053514_11rounds
+status=complete
+scoring_version=5.0-cross-round-fz
+round=01 score=55.70 Fx=71.57 Fy=62.05 Fz=54.90 Mx=93.07 My=96.30 Mz=99.65 file=coinft_260804_0010_CFT24_calibrationData_20260827_053235_batch_20260827_053148_round_02_pending.h5
+round=02 score=3.87 Fx=86.63 Fy=73.33 Fz=62.36 Mx=93.91 My=96.31 Mz=89.11 file=coinft_260804_0010_CFT24_calibrationData_20260827_053328_batch_20260827_053148_round_03_pending.h5
+round=03 score=57.37 Fx=93.53 Fy=93.38 Fz=96.62 Mx=85.69 My=99.46 Mz=94.35 file=coinft_260804_0010_CFT24_calibrationData_20260827_053421_batch_20260827_053148_round_04_pending.h5
+round=04 score=70.28 Fx=81.70 Fy=85.45 Fz=75.00 Mx=100.00 My=99.83 Mz=91.44 file=coinft_260804_0010_CFT24_calibrationData_20260827_053607_batch_20260827_053514_round_05_pending.h5
+round=05 score=90.56 Fx=90.61 Fy=99.36 Fz=96.90 Mx=100.00 My=98.58 Mz=99.16 file=coinft_260804_0010_CFT24_calibrationData_20260827_053700_batch_20260827_053514_round_06_pending.h5
+round=06 score=44.12 Fx=98.20 Fy=95.40 Fz=73.96 Mx=99.55 My=100.00 Mz=97.71 file=coinft_260804_0010_CFT24_calibrationData_20260827_053753_batch_20260827_053514_round_07_pending.h5
+round=07 score=94.25 Fx=93.10 Fy=97.96 Fz=95.04 Mx=100.00 My=93.78 Mz=91.70 file=coinft_260804_0010_CFT24_calibrationData_20260827_053846_batch_20260827_053514_round_08_pending.h5
+round=08 score=32.48 Fx=99.69 Fy=96.52 Fz=89.88 Mx=100.00 My=99.96 Mz=99.55 file=coinft_260804_0010_CFT24_calibrationData_20260827_053939_batch_20260827_053514_round_09_pending.h5
+round=09 score=63.92 Fx=77.16 Fy=83.23 Fz=76.00 Mx=88.09 My=100.00 Mz=94.29 file=coinft_260804_0010_CFT24_calibrationData_20260827_054032_batch_20260827_053514_round_10_pending.h5
+round=10 score=76.42 Fx=83.13 Fy=66.45 Fz=67.21 Mx=96.50 My=95.84 Mz=94.09 file=coinft_260804_0010_CFT24_calibrationData_20260827_054125_batch_20260827_053514_round_11_pending.h5
+round=11 score=70.31 Fx=100.00 Fy=98.38 Fz=96.74 Mx=100.00 My=95.81 Mz=98.19 file=coinft_260804_0010_CFT24_calibrationData_20260827_054218_batch_20260827_053514_round_12_pending.h5
+device_score=63.92
+pass_line=all_used
+train=9
+val=1
+test=1
+reserve=0
+reserve_dir=none

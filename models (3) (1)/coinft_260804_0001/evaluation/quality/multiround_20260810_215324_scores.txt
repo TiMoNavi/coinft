@@ -1,0 +1,41 @@
+device_id=coinft_260804_0001
+batch_id=20260810_215324
+status=complete
+scoring_version=3.0-fit-waveform
+round=01 score=95.94 Fx=85.17 Fy=81.34 Fz=100.00 Mx=100.00 My=100.00 Mz=92.87 file=coinft_260804_0001_CFT24_calibrationData_20260810_213732_batch_20260810_213648_round_01_pending.h5
+round=02 score=97.23 Fx=100.00 Fy=100.00 Fz=95.59 Mx=95.35 My=98.97 Mz=100.00 file=coinft_260804_0001_CFT24_calibrationData_20260810_213825_batch_20260810_213648_round_02_pending.h5
+round=03 score=93.85 Fx=97.44 Fy=96.61 Fz=96.61 Mx=92.11 My=70.41 Mz=98.90 file=coinft_260804_0001_CFT24_calibrationData_20260810_213918_batch_20260810_213648_round_03_pending.h5
+round=04 score=88.85 Fx=93.58 Fy=85.06 Fz=82.52 Mx=98.61 My=98.69 Mz=100.00 file=coinft_260804_0001_CFT24_calibrationData_20260810_214011_batch_20260810_213648_round_04_pending.h5
+round=05 score=98.22 Fx=99.36 Fy=100.00 Fz=96.86 Mx=100.00 My=100.00 Mz=98.56 file=coinft_260804_0001_CFT24_calibrationData_20260810_214104_batch_20260810_213648_round_05_pending.h5
+round=06 score=96.93 Fx=75.55 Fy=100.00 Fz=100.00 Mx=100.00 My=97.28 Mz=96.50 file=coinft_260804_0001_CFT24_calibrationData_20260810_214157_batch_20260810_213648_round_06_pending.h5
+round=07 score=85.43 Fx=68.16 Fy=66.71 Fz=85.23 Mx=96.92 My=96.66 Mz=99.68 file=coinft_260804_0001_CFT24_calibrationData_20260810_214250_batch_20260810_213648_round_07_pending.h5
+round=08 score=95.13 Fx=90.91 Fy=65.86 Fz=98.90 Mx=100.00 My=100.00 Mz=100.00 file=coinft_260804_0001_CFT24_calibrationData_20260810_214343_batch_20260810_213648_round_08_pending.h5
+round=09 score=75.07 Fx=62.90 Fy=65.99 Fz=73.39 Mx=94.55 My=89.50 Mz=70.76 file=coinft_260804_0001_CFT24_calibrationData_20260810_214436_batch_20260810_213648_round_09_pending.h5
+round=10 score=78.23 Fx=86.97 Fy=83.27 Fz=73.16 Mx=85.97 My=89.47 Mz=70.78 file=coinft_260804_0001_CFT24_calibrationData_20260810_215427_batch_20260810_215324_round_10_pending.h5
+round=11 score=79.50 Fx=76.02 Fy=53.91 Fz=75.10 Mx=94.43 My=95.13 Mz=100.00 file=coinft_260804_0001_CFT24_calibrationData_20260810_215521_batch_20260810_215324_round_11_pending.h5
+round=12 score=89.85 Fx=86.20 Fy=75.70 Fz=89.75 Mx=100.00 My=87.86 Mz=100.00 file=coinft_260804_0001_CFT24_calibrationData_20260810_215614_batch_20260810_215324_round_12_pending.h5
+round=13 score=78.34 Fx=62.10 Fy=56.26 Fz=76.81 Mx=99.18 My=82.46 Mz=99.35 file=coinft_260804_0001_CFT24_calibrationData_20260810_215707_batch_20260810_215324_round_13_pending.h5
+round=14 score=73.38 Fx=62.64 Fy=56.88 Fz=69.12 Mx=91.00 My=81.66 Mz=96.00 file=coinft_260804_0001_CFT24_calibrationData_20260810_215800_batch_20260810_215324_round_14_pending.h5
+round=15 score=97.57 Fx=95.30 Fy=100.00 Fz=100.00 Mx=94.61 My=100.00 Mz=85.83 file=coinft_260804_0001_CFT24_calibrationData_20260810_215853_batch_20260810_215324_round_15_pending.h5
+round=16 score=97.48 Fx=94.76 Fy=79.99 Fz=100.00 Mx=100.00 My=100.00 Mz=100.00 file=coinft_260804_0001_CFT24_calibrationData_20260810_215946_batch_20260810_215324_round_16_pending.h5
+round=17 score=96.04 Fx=97.57 Fy=88.25 Fz=96.50 Mx=100.00 My=95.20 Mz=96.89 file=coinft_260804_0001_CFT24_calibrationData_20260810_220039_batch_20260810_215324_round_17_pending.h5
+round=18 score=93.65 Fx=100.00 Fy=95.70 Fz=89.56 Mx=100.00 My=92.98 Mz=100.00 file=coinft_260804_0001_CFT24_calibrationData_20260810_220133_batch_20260810_215324_round_18_pending.h5
+round=19 score=91.92 Fx=96.00 Fy=87.78 Fz=91.92 Mx=100.00 My=95.17 Mz=80.60 file=coinft_260804_0001_CFT24_calibrationData_20260810_220226_batch_20260810_215324_round_19_pending.h5
+round=20 score=90.75 Fx=83.08 Fy=82.08 Fz=97.15 Mx=92.60 My=92.54 Mz=71.43 file=coinft_260804_0001_CFT24_calibrationData_20260810_220319_batch_20260810_215324_round_20_pending.h5
+round=21 score=91.94 Fx=95.04 Fy=67.23 Fz=99.56 Mx=100.00 My=84.13 Mz=75.19 file=coinft_260804_0001_CFT24_calibrationData_20260810_220412_batch_20260810_215324_round_21_pending.h5
+round=22 score=71.36 Fx=68.16 Fy=64.40 Fz=60.47 Mx=94.17 My=86.63 Mz=97.84 file=coinft_260804_0001_CFT24_calibrationData_20260810_220506_batch_20260810_215324_round_22_pending.h5
+round=23 score=94.62 Fx=98.53 Fy=76.39 Fz=97.35 Mx=100.00 My=96.01 Mz=88.50 file=coinft_260804_0001_CFT24_calibrationData_20260810_220559_batch_20260810_215324_round_23_pending.h5
+round=24 score=81.79 Fx=72.31 Fy=57.11 Fz=81.42 Mx=94.56 My=86.90 Mz=99.91 file=coinft_260804_0001_CFT24_calibrationData_20260810_220652_batch_20260810_215324_round_24_pending.h5
+round=25 score=85.92 Fx=85.68 Fy=62.70 Fz=89.95 Mx=86.71 My=81.93 Mz=92.45 file=coinft_260804_0001_CFT24_calibrationData_20260810_220745_batch_20260810_215324_round_25_pending.h5
+round=26 score=85.22 Fx=65.48 Fy=57.75 Fz=98.38 Mx=95.90 My=98.97 Mz=42.20 file=coinft_260804_0001_CFT24_calibrationData_20260810_220838_batch_20260810_215324_round_26_pending.h5
+round=27 score=94.15 Fx=91.05 Fy=85.75 Fz=99.10 Mx=100.00 My=76.02 Mz=93.19 file=coinft_260804_0001_CFT24_calibrationData_20260810_220931_batch_20260810_215324_round_27_pending.h5
+round=28 score=99.04 Fx=97.49 Fy=100.00 Fz=99.25 Mx=100.00 My=96.62 Mz=100.00 file=coinft_260804_0001_CFT24_calibrationData_20260810_221025_batch_20260810_215324_round_28_pending.h5
+round=29 score=98.54 Fx=99.93 Fy=98.76 Fz=97.71 Mx=100.00 My=98.18 Mz=100.00 file=coinft_260804_0001_CFT24_calibrationData_20260810_221118_batch_20260810_215324_round_29_pending.h5
+round=30 score=94.13 Fx=100.00 Fy=58.22 Fz=100.00 Mx=100.00 My=83.27 Mz=99.81 file=coinft_260804_0001_CFT24_calibrationData_20260810_221211_batch_20260810_215324_round_30_pending.h5
+device_score=94.14
+pass_line=79.50
+train=20
+val=2
+test=2
+reserve=6
+reserve_dir=D:\CS_homework\creation\apple\camera\UMI_learn\Gripper hardware design\reference\Hardware\sensor\CoinFT Hardware Documentation\workflow_steps\05_testing_calibration_acceptance\coin-ft\data\coinft_260804_0001\raw_data\reserve_20260810_215324

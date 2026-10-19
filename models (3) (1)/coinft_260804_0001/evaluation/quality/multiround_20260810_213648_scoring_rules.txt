@@ -1,0 +1,15 @@
+CoinFT scoring version: 3.0-fit-waveform
+Per-axis waveform score:
+  tracking NRMSE: 50%
+  red/blue correlation: 25%
+  excess jitter: 25%
+Axis weights:
+  Fx: 10%
+  Fy: 10%
+  Fz: 50%
+  Mx: 10%
+  My: 10%
+  Mz: 10%
+NRMSE good/bad: 0.12 / 0.4
+Correlation good/bad: 0.9 / 0.5
+Jitter ratio good/bad: 0.04 / 0.15

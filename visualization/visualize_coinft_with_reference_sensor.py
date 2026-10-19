@@ -11,9 +11,21 @@ import queue
 import serial
 import threading
 import numpy as np
-import pandas as pd
+try:
+    import pandas as pd
+except ModuleNotFoundError as exc:
+    raise SystemExit(
+        "visualize_coinft_with_reference_sensor.py needs pandas; "
+        "install the CoinFT environment before running the GUI."
+    ) from exc
 import onnxruntime as ort
-import nidaqmx
+try:
+    import nidaqmx
+except ModuleNotFoundError as exc:
+    raise SystemExit(
+        "visualize_coinft_with_reference_sensor.py needs NI-DAQmx; "
+        "install NI-DAQmx to use ATI loading, or use the direct raw viewer."
+    ) from exc
 import matplotlib.pyplot as plt
 from nidaqmx.stream_readers import AnalogMultiChannelReader
 from matplotlib.widgets import Button, CheckButtons
@@ -40,7 +52,8 @@ ATI_CAL_MATRIX = np.array([
 M_ARM = 0.0115
 
 # Serial Settings (CoinFT)
-COM_NAME = 'COM6'
+# Override with COINFT_PORT when more than one serial device is present.
+COM_NAME = os.environ.get('COINFT_PORT', '/dev/cu.usbmodem14403')
 BAUD_RATE = 1000000
 START_BYTE = 2
 END_BYTE = 3
@@ -52,9 +65,11 @@ MAX_QUEUE_SIZE = 10000
 
 # File Paths
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_DIR = os.path.join(SCRIPT_DIR, '..', 'data')
-MODEL_PATH = os.path.join(DATA_DIR, 'CFT24_MLP.onnx')
-JSON_PATH = os.path.join(DATA_DIR, 'CFT24_norm.json')
+PROJECT_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, '..'))
+DATA_DIR = os.path.join(PROJECT_ROOT, 'data')
+CONFIG_DIR = os.path.join(PROJECT_ROOT, 'hardware_configs')
+MODEL_PATH = os.path.join(CONFIG_DIR, 'CFT24_MLP.onnx')
+JSON_PATH = os.path.join(CONFIG_DIR, 'CFT24_norm.json')
 
 #########################
 #  Global State         #

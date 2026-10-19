@@ -1,0 +1,4460 @@
+{
+  "schema_version": 1,
+  "device_id": "coinft_260804_0010",
+  "batch_id": "20260827_053148",
+  "coinft_root": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft",
+  "created_at": "2026-08-27T05:31:48",
+  "status": "paused",
+  "scoring_version": "5.0-cross-round-fz",
+  "config": {
+    "rounds": 30,
+    "interval_seconds": 5.0,
+    "test_count": 2,
+    "val_count": 2,
+    "reserve_count": 6,
+    "apply_micro_cleaning": false,
+    "minimum_score_gain": 0.0,
+    "rules": {
+      "axis_weights": {
+        "Fx": 0.1,
+        "Fy": 0.1,
+        "Fz": 0.5,
+        "Mx": 0.1,
+        "My": 0.1,
+        "Mz": 0.1
+      },
+      "axis_component_weights": {
+        "tracking": 0.35,
+        "correlation": 0.15,
+        "jitter": 0.15,
+        "zero_load_noise": 0.25,
+        "zero_load_drift": 0.1
+      },
+      "nrmse_good": 0.12,
+      "nrmse_bad": 0.4,
+      "correlation_good": 0.9,
+      "correlation_bad": 0.5,
+      "jitter_ratio_good": 0.04,
+      "jitter_ratio_bad": 0.15,
+      "window_seconds": 1.0,
+      "window_step_seconds": 0.5,
+      "skip_initial_seconds": 2.0,
+      "initial_baseline_seconds": 2.0,
+      "minimum_fallback_windows": 3,
+      "near_zero_center_limits": [
+        0.2,
+        0.2,
+        0.2,
+        0.02,
+        0.02,
+        0.02
+      ],
+      "near_zero_activity_limits": [
+        0.2,
+        0.2,
+        0.2,
+        0.02,
+        0.02,
+        0.02
+      ],
+      "zero_load_noise_good": {
+        "Fx": 0.12,
+        "Fy": 0.12,
+        "Fz": 0.18,
+        "Mx": 0.006,
+        "My": 0.006,
+        "Mz": 0.006
+      },
+      "zero_load_noise_bad": {
+        "Fx": 0.5,
+        "Fy": 0.5,
+        "Fz": 0.7,
+        "Mx": 0.03,
+        "My": 0.03,
+        "Mz": 0.03
+      },
+      "zero_load_drift_good": {
+        "Fx": 0.1,
+        "Fy": 0.1,
+        "Fz": 0.15,
+        "Mx": 0.005,
+        "My": 0.005,
+        "Mz": 0.005
+      },
+      "zero_load_drift_bad": {
+        "Fx": 0.6,
+        "Fy": 0.6,
+        "Fz": 0.75,
+        "Mx": 0.035,
+        "My": 0.035,
+        "Mz": 0.035
+      },
+      "duration_full_seconds": 39.0,
+      "duration_zero_seconds": 35.0,
+      "samples_full": 7800,
+      "samples_zero": 6000,
+      "batch_consistency": {
+        "enabled": true,
+        "minimum_rounds": 8,
+        "minimum_samples_per_round": 100,
+        "ridge": 0.0001,
+        "good_percentile": 25.0,
+        "bad_percentile": 90.0,
+        "near_zero_force_limits": [
+          0.1,
+          0.1,
+          0.05
+        ],
+        "selection_weights": {
+          "single_round_total": 0.1,
+          "single_round_fz_zero_noise": 0.2,
+          "raw_zero_load_noise": 0.2,
+          "cross_round_fz_zero_noise": 0.3,
+          "cross_round_fz_rmse": 0.2
+        }
+      }
+    }
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "h5": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053056_train.h5",
+      "source": "existing_raw_data",
+      "score": 86.2401,
+      "score_result": {
+        "scoring_version": "4.0-absolute-zero-load",
+        "status": "scored",
+        "device_id": "coinft_260804_0010",
+        "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053056_train.h5",
+        "dataset_split": "train",
+        "hardware_id": "coinft_260804_0010",
+        "total_score": 86.2401,
+        "raw_axis_score": 86.2401,
+        "integrity_factor": 1.0,
+        "integrity": {
+          "duration_seconds": 41.142412,
+          "samples": 8247,
+          "duplicate_timestamp_count": 571,
+          "duplicate_timestamp_ratio": 0.069246,
+          "duration_score": 100.0,
+          "sample_score": 100.0
+        },
+        "fit_waveform_scoring": {
+          "tracking_weight": 0.35,
+          "correlation_weight": 0.15,
+          "jitter_weight": 0.15,
+          "zero_load_noise_weight": 0.25,
+          "zero_load_drift_weight": 0.1
+        },
+        "zero_load_analysis": {
+          "selection_mode": "fallback_lowest_load",
+          "selected_window_count": 3,
+          "no_load_fraction_estimate": 0.07275373,
+          "selected_load_index_min": 0.10749956,
+          "selected_load_index_median": 6.92875005,
+          "window_seconds": 1.0,
+          "window_step_seconds": 0.5,
+          "skip_initial_seconds": 2.0
+        },
+        "reference_distribution": {
+          "p05": {
+            "Fx": -1.99952429,
+            "Fy": -2.33797686,
+            "Fz": -8.59602493,
+            "Mx": -0.05544341,
+            "My": -0.02316321,
+            "Mz": -0.02786822
+          },
+          "mean": {
+            "Fx": -0.48135485,
+            "Fy": -0.32979479,
+            "Fz": -4.19202716,
+            "Mx": -0.01440403,
+            "My": 0.01174889,
+            "Mz": -0.00358883
+          },
+          "median": {
+            "Fx": -0.36267432,
+            "Fy": -0.21264355,
+            "Fz": -4.5436666,
+            "Mx": -0.00839758,
+            "My": 0.00828946,
+            "Mz": -0.00260155
+          },
+          "p95": {
+            "Fx": 1.45865885,
+            "Fy": 1.19677317,
+            "Fz": 0.00133333,
+            "Mx": 0.01368292,
+            "My": 0.05407644,
+            "Mz": 0.02195512
+          },
+          "near_zero_fraction": 0.07275373
+        },
+        "axis_weights": {
+          "Fx": 0.1,
+          "Fy": 0.1,
+          "Fz": 0.5,
+          "Mx": 0.1,
+          "My": 0.1,
+          "Mz": 0.1
+        },
+        "axis_metrics": {
+          "Fx": {
+            "rmse": 0.40842274,
+            "mae": 0.3061978,
+            "p95_absolute_error": 0.811095,
+            "reference_span": 3.45818314,
+            "nrmse": 0.11810327,
+            "correlation": 0.90911823,
+            "jitter_amplitude": 0.144504,
+            "jitter_ratio": 0.0417861,
+            "zero_load_noise": 0.21773784,
+            "zero_load_drift": 0.11068219,
+            "tracking_score": 100.0,
+            "correlation_score": 100.0,
+            "jitter_score": 98.3763,
+            "zero_load_noise_score": 74.2795,
+            "zero_load_drift_score": 97.8636,
+            "axis_score": 93.1127
+          },
+          "Fy": {
+            "rmse": 0.36694855,
+            "mae": 0.25972554,
+            "p95_absolute_error": 0.81455751,
+            "reference_span": 3.53475002,
+            "nrmse": 0.10381174,
+            "correlation": 0.93398108,
+            "jitter_amplitude": 0.08184216,
+            "jitter_ratio": 0.02315359,
+            "zero_load_noise": 0.21521131,
+            "zero_load_drift": 0.1968805,
+            "tracking_score": 100.0,
+            "correlation_score": 100.0,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 74.9444,
+            "zero_load_drift_score": 80.6239,
+            "axis_score": 91.7985
+          },
+          "Fz": {
+            "rmse": 1.16651932,
+            "mae": 0.7475946,
+            "p95_absolute_error": 2.50850509,
+            "reference_span": 8.59735826,
+            "nrmse": 0.13568346,
+            "correlation": 0.93083764,
+            "jitter_amplitude": 0.17840293,
+            "jitter_ratio": 0.0207509,
+            "zero_load_noise": 0.44061036,
+            "zero_load_drift": 0.95974575,
+            "tracking_score": 94.3988,
+            "correlation_score": 100.0,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 49.8826,
+            "zero_load_drift_score": 0.0,
+            "axis_score": 75.5102
+          },
+          "Mx": {
+            "rmse": 0.00774749,
+            "mae": 0.00582416,
+            "p95_absolute_error": 0.01566494,
+            "reference_span": 0.06912633,
+            "nrmse": 0.11207729,
+            "correlation": 0.92984389,
+            "jitter_amplitude": 0.00240427,
+            "jitter_ratio": 0.03478083,
+            "zero_load_noise": 0.00547353,
+            "zero_load_drift": 0.00306592,
+            "tracking_score": 100.0,
+            "correlation_score": 100.0,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 100.0,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 100.0
+          },
+          "My": {
+            "rmse": 0.0080399,
+            "mae": 0.00608756,
+            "p95_absolute_error": 0.01646909,
+            "reference_span": 0.07723965,
+            "nrmse": 0.10409029,
+            "correlation": 0.93365777,
+            "jitter_amplitude": 0.00212833,
+            "jitter_ratio": 0.02755493,
+            "zero_load_noise": 0.00484065,
+            "zero_load_drift": 0.00518327,
+            "tracking_score": 100.0,
+            "correlation_score": 100.0,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 100.0,
+            "zero_load_drift_score": 99.3891,
+            "axis_score": 99.9389
+          },
+          "Mz": {
+            "rmse": 0.00586991,
+            "mae": 0.00389516,
+            "p95_absolute_error": 0.01160377,
+            "reference_span": 0.04982333,
+            "nrmse": 0.1178145,
+            "correlation": 0.93825605,
+            "jitter_amplitude": 0.00115193,
+            "jitter_ratio": 0.02312027,
+            "zero_load_noise": 0.00202027,
+            "zero_load_drift": 0.00169171,
+            "tracking_score": 100.0,
+            "correlation_score": 100.0,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 100.0,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 100.0
+          }
+        },
+        "warnings": []
+      },
+      "cleaning": {
+        "preview_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053056_train_quality_preview.png",
+        "raw_score": 86.2401,
+        "cleaned_score": 86.2401,
+        "score_gain": 0.0,
+        "removed_samples": 0,
+        "removed_ratio": 0.0,
+        "apply_requested": false,
+        "applied": false,
+        "apply_reason": "preview_only",
+        "backup_file": null
+      },
+      "completed_at": "2026-08-27T05:31:51"
+    },
+    {
+      "round": 2,
+      "h5": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053235_batch_20260827_053148_round_02_pending.h5",
+      "score": 69.7156,
+      "score_result": {
+        "scoring_version": "4.0-absolute-zero-load",
+        "status": "scored",
+        "device_id": "coinft_260804_0010",
+        "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053235_batch_20260827_053148_round_02_pending.h5",
+        "dataset_split": "pending",
+        "hardware_id": "coinft_260804_0010",
+        "total_score": 69.7156,
+        "raw_axis_score": 69.7156,
+        "integrity_factor": 1.0,
+        "integrity": {
+          "duration_seconds": 41.173172,
+          "samples": 8262,
+          "duplicate_timestamp_count": 518,
+          "duplicate_timestamp_ratio": 0.062704,
+          "duration_score": 100.0,
+          "sample_score": 100.0
+        },
+        "fit_waveform_scoring": {
+          "tracking_weight": 0.35,
+          "correlation_weight": 0.15,
+          "jitter_weight": 0.15,
+          "zero_load_noise_weight": 0.25,
+          "zero_load_drift_weight": 0.1
+        },
+        "zero_load_analysis": {
+          "selection_mode": "fallback_lowest_load",
+          "selected_window_count": 3,
+          "no_load_fraction_estimate": 0.06051803,
+          "selected_load_index_min": 8.42499984,
+          "selected_load_index_median": 9.99954155,
+          "window_seconds": 1.0,
+          "window_step_seconds": 0.5,
+          "skip_initial_seconds": 2.0
+        },
+        "reference_distribution": {
+          "p05": {
+            "Fx": -1.56158893,
+            "Fy": -1.40098466,
+            "Fz": -12.36949438,
+            "Mx": -0.07562431,
+            "My": -0.01317689,
+            "Mz": -0.04214341
+          },
+          "mean": {
+            "Fx": -0.56477492,
+            "Fy": -0.56966659,
+            "Fz": -4.08395181,
+            "Mx": -0.01779467,
+            "My": 0.01301486,
+            "Mz": -0.00573409
+          },
+          "median": {
+            "Fx": -0.44725569,
+            "Fy": -0.4991512,
+            "Fz": -2.8666279,
+            "Mx": -0.01189101,
+            "My": 0.01007586,
+            "Mz": -0.00637674
+          },
+          "p95": {
+            "Fx": -0.02200577,
+            "Fy": 0.10668209,
+            "Fz": 0.00237209,
+            "Mx": 0.00519077,
+            "My": 0.05558894,
+            "Mz": 0.03798492
+          },
+          "near_zero_fraction": 0.06051803
+        },
+        "axis_weights": {
+          "Fx": 0.1,
+          "Fy": 0.1,
+          "Fz": 0.5,
+          "Mx": 0.1,
+          "My": 0.1,
+          "Mz": 0.1
+        },
+        "axis_metrics": {
+          "Fx": {
+            "rmse": 0.30294497,
+            "mae": 0.22666221,
+            "p95_absolute_error": 0.62865853,
+            "reference_span": 1.53958316,
+            "nrmse": 0.19677077,
+            "correlation": 0.80078685,
+            "jitter_amplitude": 0.09633085,
+            "jitter_ratio": 0.06256944,
+            "zero_load_noise": 0.30290147,
+            "zero_load_drift": 0.03873024,
+            "tracking_score": 72.5819,
+            "correlation_score": 75.1967,
+            "jitter_score": 79.4823,
+            "zero_load_noise_score": 51.868,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 71.5725
+          },
+          "Fy": {
+            "rmse": 0.29993895,
+            "mae": 0.22344811,
+            "p95_absolute_error": 0.60763644,
+            "reference_span": 1.50766675,
+            "nrmse": 0.19894247,
+            "correlation": 0.80569793,
+            "jitter_amplitude": 0.10222628,
+            "jitter_ratio": 0.06780429,
+            "zero_load_noise": 0.42996759,
+            "zero_load_drift": 0.11793997,
+            "tracking_score": 71.8063,
+            "correlation_score": 76.4245,
+            "jitter_score": 74.7234,
+            "zero_load_noise_score": 18.4296,
+            "zero_load_drift_score": 96.412,
+            "axis_score": 62.053
+          },
+          "Fz": {
+            "rmse": 2.23490795,
+            "mae": 1.70140954,
+            "p95_absolute_error": 4.6472159,
+            "reference_span": 12.37186647,
+            "nrmse": 0.18064436,
+            "correlation": 0.83287826,
+            "jitter_amplitude": 0.36973778,
+            "jitter_ratio": 0.02988537,
+            "zero_load_noise": 2.33382276,
+            "zero_load_drift": 1.00243651,
+            "tracking_score": 78.3413,
+            "correlation_score": 83.2196,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 0.0,
+            "zero_load_drift_score": 0.0,
+            "axis_score": 54.9024
+          },
+          "Mx": {
+            "rmse": 0.0116523,
+            "mae": 0.00756571,
+            "p95_absolute_error": 0.02554731,
+            "reference_span": 0.08081508,
+            "nrmse": 0.1441847,
+            "correlation": 0.90207191,
+            "jitter_amplitude": 0.00237978,
+            "jitter_ratio": 0.02944725,
+            "zero_load_noise": 0.00974971,
+            "zero_load_drift": 0.00251485,
+            "tracking_score": 91.3626,
+            "correlation_score": 100.0,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 84.3762,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 93.071
+          },
+          "My": {
+            "rmse": 0.01017058,
+            "mae": 0.00714904,
+            "p95_absolute_error": 0.02073178,
+            "reference_span": 0.06876583,
+            "nrmse": 0.14790169,
+            "correlation": 0.89422634,
+            "jitter_amplitude": 0.00228459,
+            "jitter_ratio": 0.03322275,
+            "zero_load_noise": 0.0058165,
+            "zero_load_drift": 0.00337202,
+            "tracking_score": 90.0351,
+            "correlation_score": 98.5566,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 100.0,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 96.2958
+          },
+          "Mz": {
+            "rmse": 0.00928806,
+            "mae": 0.00664275,
+            "p95_absolute_error": 0.02050505,
+            "reference_span": 0.08012833,
+            "nrmse": 0.11591475,
+            "correlation": 0.89071536,
+            "jitter_amplitude": 0.00213631,
+            "jitter_ratio": 0.02666117,
+            "zero_load_noise": 0.00456679,
+            "zero_load_drift": 0.00244674,
+            "tracking_score": 100.0,
+            "correlation_score": 97.6788,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 100.0,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 99.6518
+          }
+        },
+        "warnings": []
+      },
+      "source": "new_collection",
+      "cleaning": {
+        "preview_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053235_batch_20260827_053148_round_02_pending_quality_preview.png",
+        "raw_score": 69.7156,
+        "cleaned_score": 69.03,
+        "score_gain": -0.6856,
+        "removed_samples": 13,
+        "removed_ratio": 0.00157347,
+        "apply_requested": false,
+        "applied": false,
+        "apply_reason": "preview_only",
+        "backup_file": null
+      },
+      "completed_at": "2026-08-27T05:32:39"
+    },
+    {
+      "round": 3,
+      "h5": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053328_batch_20260827_053148_round_03_pending.h5",
+      "score": 75.1084,
+      "score_result": {
+        "scoring_version": "4.0-absolute-zero-load",
+        "status": "scored",
+        "device_id": "coinft_260804_0010",
+        "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053328_batch_20260827_053148_round_03_pending.h5",
+        "dataset_split": "pending",
+        "hardware_id": "coinft_260804_0010",
+        "total_score": 75.1084,
+        "raw_axis_score": 75.1084,
+        "integrity_factor": 1.0,
+        "integrity": {
+          "duration_seconds": 41.234016,
+          "samples": 8267,
+          "duplicate_timestamp_count": 536,
+          "duplicate_timestamp_ratio": 0.064844,
+          "duration_score": 100.0,
+          "sample_score": 100.0
+        },
+        "fit_waveform_scoring": {
+          "tracking_weight": 0.35,
+          "correlation_weight": 0.15,
+          "jitter_weight": 0.15,
+          "zero_load_noise_weight": 0.25,
+          "zero_load_drift_weight": 0.1
+        },
+        "zero_load_analysis": {
+          "selection_mode": "fallback_lowest_load",
+          "selected_window_count": 3,
+          "no_load_fraction_estimate": 0.06048143,
+          "selected_load_index_min": 15.42416652,
+          "selected_load_index_median": 18.39166691,
+          "window_seconds": 1.0,
+          "window_step_seconds": 0.5,
+          "skip_initial_seconds": 2.0
+        },
+        "reference_distribution": {
+          "p05": {
+            "Fx": -1.58485196,
+            "Fy": -0.86825475,
+            "Fz": -14.67896602,
+            "Mx": -0.04911034,
+            "My": -0.02361636,
+            "Mz": -0.02246357
+          },
+          "mean": {
+            "Fx": -0.27081918,
+            "Fy": 0.01848966,
+            "Fz": -3.83135602,
+            "Mx": -0.00621615,
+            "My": 0.00825465,
+            "Mz": 0.00202642
+          },
+          "median": {
+            "Fx": -0.06566865,
+            "Fy": 0.01289533,
+            "Fz": -2.33056586,
+            "Mx": -0.00173851,
+            "My": 0.00189997,
+            "Mz": -6.357e-05
+          },
+          "p95": {
+            "Fx": 0.31481456,
+            "Fy": 0.81782856,
+            "Fz": 0.00194244,
+            "Mx": 0.02735858,
+            "My": 0.06458284,
+            "Mz": 0.0428031
+          },
+          "near_zero_fraction": 0.06048143
+        },
+        "axis_weights": {
+          "Fx": 0.1,
+          "Fy": 0.1,
+          "Fz": 0.5,
+          "Mx": 0.1,
+          "My": 0.1,
+          "Mz": 0.1
+        },
+        "axis_metrics": {
+          "Fx": {
+            "rmse": 0.29758974,
+            "mae": 0.20597144,
+            "p95_absolute_error": 0.65993606,
+            "reference_span": 1.89966652,
+            "nrmse": 0.15665368,
+            "correlation": 0.86267734,
+            "jitter_amplitude": 0.07681395,
+            "jitter_ratio": 0.04043549,
+            "zero_load_noise": 0.23141288,
+            "zero_load_drift": 0.07188551,
+            "tracking_score": 86.9094,
+            "correlation_score": 90.6693,
+            "jitter_score": 99.6041,
+            "zero_load_noise_score": 70.6808,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 86.6295
+          },
+          "Fy": {
+            "rmse": 0.30938036,
+            "mae": 0.22687589,
+            "p95_absolute_error": 0.66455372,
+            "reference_span": 1.68608332,
+            "nrmse": 0.18349055,
+            "correlation": 0.77721927,
+            "jitter_amplitude": 0.05842392,
+            "jitter_ratio": 0.03465067,
+            "zero_load_noise": 0.33469259,
+            "zero_load_drift": 0.07787249,
+            "tracking_score": 77.3248,
+            "correlation_score": 69.3048,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 43.5019,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 73.3349
+          },
+          "Fz": {
+            "rmse": 2.15727109,
+            "mae": 1.61209523,
+            "p95_absolute_error": 4.32086533,
+            "reference_span": 14.68090846,
+            "nrmse": 0.14694398,
+            "correlation": 0.87746272,
+            "jitter_amplitude": 0.30291211,
+            "jitter_ratio": 0.02063306,
+            "zero_load_noise": 2.14474501,
+            "zero_load_drift": 0.65579087,
+            "tracking_score": 90.3772,
+            "correlation_score": 94.3657,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 0.0,
+            "zero_load_drift_score": 15.7015,
+            "axis_score": 62.357
+          },
+          "Mx": {
+            "rmse": 0.01144728,
+            "mae": 0.00743463,
+            "p95_absolute_error": 0.02557928,
+            "reference_span": 0.07646892,
+            "nrmse": 0.14969843,
+            "correlation": 0.84086068,
+            "jitter_amplitude": 0.00143003,
+            "jitter_ratio": 0.01870075,
+            "zero_load_noise": 0.00615458,
+            "zero_load_drift": 0.00204421,
+            "tracking_score": 89.3934,
+            "correlation_score": 85.2152,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 99.3559,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 93.9089
+          },
+          "My": {
+            "rmse": 0.01106773,
+            "mae": 0.00778085,
+            "p95_absolute_error": 0.02343114,
+            "reference_span": 0.08819921,
+            "nrmse": 0.12548558,
+            "correlation": 0.89350423,
+            "jitter_amplitude": 0.00152985,
+            "jitter_ratio": 0.01734544,
+            "zero_load_noise": 0.00864666,
+            "zero_load_drift": 0.00324526,
+            "tracking_score": 98.0409,
+            "correlation_score": 98.3761,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 88.9723,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 96.3138
+          },
+          "Mz": {
+            "rmse": 0.00863507,
+            "mae": 0.00599978,
+            "p95_absolute_error": 0.02005708,
+            "reference_span": 0.06526667,
+            "nrmse": 0.13230446,
+            "correlation": 0.85913882,
+            "jitter_amplitude": 0.0015099,
+            "jitter_ratio": 0.02313436,
+            "zero_load_noise": 0.01350535,
+            "zero_load_drift": 0.00490042,
+            "tracking_score": 95.6055,
+            "correlation_score": 89.7847,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 68.7277,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 89.1116
+          }
+        },
+        "warnings": []
+      },
+      "source": "new_collection",
+      "cleaning": {
+        "preview_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053328_batch_20260827_053148_round_03_pending_quality_preview.png",
+        "raw_score": 75.1084,
+        "cleaned_score": 74.9645,
+        "score_gain": -0.1439,
+        "removed_samples": 5,
+        "removed_ratio": 0.00060481,
+        "apply_requested": false,
+        "applied": false,
+        "apply_reason": "preview_only",
+        "backup_file": null
+      },
+      "completed_at": "2026-08-27T05:33:32"
+    },
+    {
+      "round": 4,
+      "h5": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053421_batch_20260827_053148_round_04_pending.h5",
+      "score": 94.9535,
+      "score_result": {
+        "scoring_version": "4.0-absolute-zero-load",
+        "status": "scored",
+        "device_id": "coinft_260804_0010",
+        "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053421_batch_20260827_053148_round_04_pending.h5",
+        "dataset_split": "pending",
+        "hardware_id": "coinft_260804_0010",
+        "total_score": 94.9535,
+        "raw_axis_score": 94.9535,
+        "integrity_factor": 1.0,
+        "integrity": {
+          "duration_seconds": 41.067921,
+          "samples": 8240,
+          "duplicate_timestamp_count": 544,
+          "duplicate_timestamp_ratio": 0.066027,
+          "duration_score": 100.0,
+          "sample_score": 100.0
+        },
+        "fit_waveform_scoring": {
+          "tracking_weight": 0.35,
+          "correlation_weight": 0.15,
+          "jitter_weight": 0.15,
+          "zero_load_noise_weight": 0.25,
+          "zero_load_drift_weight": 0.1
+        },
+        "zero_load_analysis": {
+          "selection_mode": "near_zero",
+          "selected_window_count": 3,
+          "no_load_fraction_estimate": 0.06067961,
+          "selected_load_index_min": 0.19504064,
+          "selected_load_index_median": 0.24772725,
+          "window_seconds": 1.0,
+          "window_step_seconds": 0.5,
+          "skip_initial_seconds": 2.0
+        },
+        "reference_distribution": {
+          "p05": {
+            "Fx": -1.21979551,
+            "Fy": -0.86131805,
+            "Fz": -14.44068949,
+            "Mx": -0.01980025,
+            "My": -0.0130199,
+            "Mz": -0.01994848
+          },
+          "mean": {
+            "Fx": -0.26001892,
+            "Fy": -0.07942609,
+            "Fz": -2.71452768,
+            "Mx": -0.0034548,
+            "My": 0.00639508,
+            "Mz": 0.00212661
+          },
+          "median": {
+            "Fx": -0.12587862,
+            "Fy": -0.01006811,
+            "Fz": -1.00902272,
+            "Mx": -0.00162625,
+            "My": 0.0018581,
+            "Mz": 0.00048485
+          },
+          "p95": {
+            "Fx": 0.19778796,
+            "Fy": 0.47943185,
+            "Fz": 2.49631062,
+            "Mx": 0.00915846,
+            "My": 0.04521935,
+            "Mz": 0.02351818
+          },
+          "near_zero_fraction": 0.06067961
+        },
+        "axis_weights": {
+          "Fx": 0.1,
+          "Fy": 0.1,
+          "Fz": 0.5,
+          "Mx": 0.1,
+          "My": 0.1,
+          "Mz": 0.1
+        },
+        "axis_metrics": {
+          "Fx": {
+            "rmse": 0.21765801,
+            "mae": 0.15734614,
+            "p95_absolute_error": 0.45665499,
+            "reference_span": 1.41758347,
+            "nrmse": 0.15354159,
+            "correlation": 0.87850217,
+            "jitter_amplitude": 0.06923603,
+            "jitter_ratio": 0.04884089,
+            "zero_load_noise": 0.09518338,
+            "zero_load_drift": 0.11338316,
+            "tracking_score": 88.0209,
+            "correlation_score": 94.6255,
+            "jitter_score": 91.9628,
+            "zero_load_noise_score": 100.0,
+            "zero_load_drift_score": 97.3234,
+            "axis_score": 93.5279
+          },
+          "Fy": {
+            "rmse": 0.21105558,
+            "mae": 0.14719788,
+            "p95_absolute_error": 0.4632163,
+            "reference_span": 1.3407499,
+            "nrmse": 0.15741607,
+            "correlation": 0.84830932,
+            "jitter_amplitude": 0.04413178,
+            "jitter_ratio": 0.03291574,
+            "zero_load_noise": 0.05457251,
+            "zero_load_drift": 0.03835093,
+            "tracking_score": 86.6371,
+            "correlation_score": 87.0773,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 100.0,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 93.3846
+          },
+          "Fz": {
+            "rmse": 1.27153833,
+            "mae": 0.78443335,
+            "p95_absolute_error": 2.42037857,
+            "reference_span": 16.93700012,
+            "nrmse": 0.07507459,
+            "correlation": 0.96949692,
+            "jitter_amplitude": 0.15140922,
+            "jitter_ratio": 0.00893955,
+            "zero_load_noise": 0.17221626,
+            "zero_load_drift": 0.35250563,
+            "tracking_score": 100.0,
+            "correlation_score": 100.0,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 100.0,
+            "zero_load_drift_score": 66.2491,
+            "axis_score": 96.6249
+          },
+          "Mx": {
+            "rmse": 0.00608962,
+            "mae": 0.00352179,
+            "p95_absolute_error": 0.01161281,
+            "reference_span": 0.0289587,
+            "nrmse": 0.21028633,
+            "correlation": 0.81923105,
+            "jitter_amplitude": 0.0011549,
+            "jitter_ratio": 0.0398808,
+            "zero_load_noise": 0.00156909,
+            "zero_load_drift": 0.00144958,
+            "tracking_score": 67.7549,
+            "correlation_score": 79.8078,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 100.0,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 85.6854
+          },
+          "My": {
+            "rmse": 0.00723805,
+            "mae": 0.00455241,
+            "p95_absolute_error": 0.01536542,
+            "reference_span": 0.05823925,
+            "nrmse": 0.12428123,
+            "correlation": 0.90706439,
+            "jitter_amplitude": 0.00093072,
+            "jitter_ratio": 0.01598093,
+            "zero_load_noise": 0.00099471,
+            "zero_load_drift": 0.00108748,
+            "tracking_score": 98.471,
+            "correlation_score": 100.0,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 100.0,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 99.4648
+          },
+          "Mz": {
+            "rmse": 0.00668036,
+            "mae": 0.00452846,
+            "p95_absolute_error": 0.01344419,
+            "reference_span": 0.04346667,
+            "nrmse": 0.15368937,
+            "correlation": 0.8615812,
+            "jitter_amplitude": 0.00131606,
+            "jitter_ratio": 0.03027752,
+            "zero_load_noise": 0.00173398,
+            "zero_load_drift": 0.00103564,
+            "tracking_score": 87.9681,
+            "correlation_score": 90.3953,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 100.0,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 94.3481
+          }
+        },
+        "warnings": []
+      },
+      "source": "new_collection",
+      "cleaning": {
+        "preview_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053421_batch_20260827_053148_round_04_pending_quality_preview.png",
+        "raw_score": 94.9535,
+        "cleaned_score": 94.9627,
+        "score_gain": 0.0092,
+        "removed_samples": 1,
+        "removed_ratio": 0.00012136,
+        "apply_requested": false,
+        "applied": false,
+        "apply_reason": "preview_only",
+        "backup_file": null
+      },
+      "completed_at": "2026-08-27T05:34:24"
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "target_round": 1,
+      "status": "imported_existing",
+      "h5": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053056_train.h5",
+      "score": 86.2401
+    },
+    {
+      "attempt": 2,
+      "target_round": 2,
+      "started_at": "2026-08-27T05:31:51",
+      "pending_h5": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053235_batch_20260827_053148_round_02_pending.h5",
+      "status": "scored",
+      "cleaner_payload": {
+        "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053235_batch_20260827_053148_round_02_pending.h5",
+        "preview_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053235_batch_20260827_053148_round_02_pending_quality_preview.png",
+        "device_id": "coinft_260804_0010",
+        "raw_score": 69.7156,
+        "cleaned_score": 69.03,
+        "score_gain": -0.6856,
+        "removed_samples": 13,
+        "removed_ratio": 0.00157347,
+        "removed_events": [
+          {
+            "start_index": 3628,
+            "end_index_exclusive": 3629,
+            "length": 1,
+            "max_force_error_n": 4.586321358920556,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0675913447415564,
+            "neighbor_local_deviation_n": 0.23813009388232942,
+            "reference_context_change_n": 0.38500000101824594,
+            "action": "removed_isolated_spike",
+            "reason": "short spike, neighbors recovered, reference was quiet"
+          },
+          {
+            "start_index": 3979,
+            "end_index_exclusive": 3980,
+            "length": 1,
+            "max_force_error_n": 2.46856408485279,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0057644556800125,
+            "neighbor_local_deviation_n": 0.13638080283779663,
+            "reference_context_change_n": 0.49500004450480173,
+            "action": "removed_isolated_spike",
+            "reason": "short spike, neighbors recovered, reference was quiet"
+          },
+          {
+            "start_index": 4445,
+            "end_index_exclusive": 4446,
+            "length": 1,
+            "max_force_error_n": 2.8055950081228396,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1829923564239166,
+            "neighbor_local_deviation_n": 0.4796903952211906,
+            "reference_context_change_n": 0.4303334554036464,
+            "action": "removed_isolated_spike",
+            "reason": "short spike, neighbors recovered, reference was quiet"
+          },
+          {
+            "start_index": 4448,
+            "end_index_exclusive": 4449,
+            "length": 1,
+            "max_force_error_n": 2.6485144607160027,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0331844943381085,
+            "neighbor_local_deviation_n": 0.4796903952211906,
+            "reference_context_change_n": 0.2225834528605155,
+            "action": "removed_isolated_spike",
+            "reason": "short spike, neighbors recovered, reference was quiet"
+          },
+          {
+            "start_index": 4475,
+            "end_index_exclusive": 4476,
+            "length": 1,
+            "max_force_error_n": 2.3664764496044715,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0770974153912363,
+            "neighbor_local_deviation_n": 0.30315696526440483,
+            "reference_context_change_n": 0.3470001220703125,
+            "action": "removed_isolated_spike",
+            "reason": "short spike, neighbors recovered, reference was quiet"
+          },
+          {
+            "start_index": 4486,
+            "end_index_exclusive": 4487,
+            "length": 1,
+            "max_force_error_n": 2.1129185577549077,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.7791476318536414,
+            "neighbor_local_deviation_n": 0.46162488999245355,
+            "reference_context_change_n": 0.3542499542236328,
+            "action": "removed_isolated_spike",
+            "reason": "short spike, neighbors recovered, reference was quiet"
+          },
+          {
+            "start_index": 4507,
+            "end_index_exclusive": 4508,
+            "length": 1,
+            "max_force_error_n": 0.9416620573254733,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.3457954066028144,
+            "neighbor_local_deviation_n": 0.3054743874769912,
+            "reference_context_change_n": 0.48008298873901367,
+            "action": "removed_isolated_spike",
+            "reason": "short spike, neighbors recovered, reference was quiet"
+          },
+          {
+            "start_index": 4512,
+            "end_index_exclusive": 4513,
+            "length": 1,
+            "max_force_error_n": 1.029981054623022,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.434114403900363,
+            "neighbor_local_deviation_n": 0.41028718722642665,
+            "reference_context_change_n": 0.29199981689453125,
+            "action": "removed_isolated_spike",
+            "reason": "short spike, neighbors recovered, reference was quiet"
+          },
+          {
+            "start_index": 4573,
+            "end_index_exclusive": 4574,
+            "length": 1,
+            "max_force_error_n": 1.7170349452675282,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.399620628600962,
+            "neighbor_local_deviation_n": 0.3682828990288023,
+            "reference_context_change_n": 0.3946666717529279,
+            "action": "removed_isolated_spike",
+            "reason": "short spike, neighbors recovered, reference was quiet"
+          },
+          {
+            "start_index": 4576,
+            "end_index_exclusive": 4577,
+            "length": 1,
+            "max_force_error_n": 0.5082432669764021,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.184216315869154,
+            "neighbor_local_deviation_n": 0.35855873222618584,
+            "reference_context_change_n": 0.41374993324279963,
+            "action": "removed_isolated_spike",
+            "reason": "short spike, neighbors recovered, reference was quiet"
+          },
+          {
+            "start_index": 6804,
+            "end_index_exclusive": 6806,
+            "length": 2,
+            "max_force_error_n": 1.4177897013835299,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1818251183229158,
+            "neighbor_local_deviation_n": 0.39458154997458195,
+            "reference_context_change_n": 0.27466678619384766,
+            "action": "removed_isolated_spike",
+            "reason": "short spike, neighbors recovered, reference was quiet"
+          },
+          {
+            "start_index": 6828,
+            "end_index_exclusive": 6829,
+            "length": 1,
+            "max_force_error_n": 1.266656657396986,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0769791107188027,
+            "neighbor_local_deviation_n": 0.1809673390061235,
+            "reference_context_change_n": 0.3993333180745431,
+            "action": "removed_isolated_spike",
+            "reason": "short spike, neighbors recovered, reference was quiet"
+          }
+        ],
+        "preserved_events": [
+          {
+            "start_index": 646,
+            "end_index_exclusive": 647,
+            "length": 1,
+            "max_force_error_n": 6.4451716191321635,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0691586643840214,
+            "neighbor_local_deviation_n": 0.3636253561109788,
+            "reference_context_change_n": 1.8186667760213213,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 1137,
+            "end_index_exclusive": 1138,
+            "length": 1,
+            "max_force_error_n": 5.184457898106643,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1915745836257714,
+            "neighbor_local_deviation_n": 0.17790718207242717,
+            "reference_context_change_n": 1.3069999565680819,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 1190,
+            "end_index_exclusive": 1191,
+            "length": 1,
+            "max_force_error_n": 5.440814656206902,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1450454536141272,
+            "neighbor_local_deviation_n": 0.441682768168711,
+            "reference_context_change_n": 1.1076668103535967,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 1430,
+            "end_index_exclusive": 1431,
+            "length": 1,
+            "max_force_error_n": 6.082056613150927,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1103586544311606,
+            "neighbor_local_deviation_n": 0.6135843649106558,
+            "reference_context_change_n": 1.0433332920074467,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 1456,
+            "end_index_exclusive": 1457,
+            "length": 1,
+            "max_force_error_n": 3.3672672572768327,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1893660483455548,
+            "neighbor_local_deviation_n": 0.5301135276410989,
+            "reference_context_change_n": 1.4382500648498535,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 2337,
+            "end_index_exclusive": 2338,
+            "length": 1,
+            "max_force_error_n": 7.033738887714336,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1006972428362003,
+            "neighbor_local_deviation_n": 0.48696320396821147,
+            "reference_context_change_n": 0.6106665929158535,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 2756,
+            "end_index_exclusive": 2757,
+            "length": 1,
+            "max_force_error_n": 4.170715185012719,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.14181225969062,
+            "neighbor_local_deviation_n": 0.4034396194338985,
+            "reference_context_change_n": 0.8493333657582602,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 2816,
+            "end_index_exclusive": 2817,
+            "length": 1,
+            "max_force_error_n": 6.248305693612187,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.048934807830042,
+            "neighbor_local_deviation_n": 0.27443082768255156,
+            "reference_context_change_n": 1.0476665496826172,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 3634,
+            "end_index_exclusive": 3635,
+            "length": 1,
+            "max_force_error_n": 4.416391140718541,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0700180291148094,
+            "neighbor_local_deviation_n": 0.8564383703972314,
+            "reference_context_change_n": 0.7020000070333479,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 3692,
+            "end_index_exclusive": 3693,
+            "length": 1,
+            "max_force_error_n": 6.00218271400842,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.046953439221431,
+            "neighbor_local_deviation_n": 0.3773595193860011,
+            "reference_context_change_n": 1.637750069300333,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 3846,
+            "end_index_exclusive": 3847,
+            "length": 1,
+            "max_force_error_n": 3.3643757884045575,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.027315030856835,
+            "neighbor_local_deviation_n": 0.1501222035322698,
+            "reference_context_change_n": 0.7550000349680586,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4065,
+            "end_index_exclusive": 4066,
+            "length": 1,
+            "max_force_error_n": 5.023904670391882,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.085994976842903,
+            "neighbor_local_deviation_n": 0.8223757874103859,
+            "reference_context_change_n": 0.8813333511352539,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4196,
+            "end_index_exclusive": 4197,
+            "length": 1,
+            "max_force_error_n": 3.8650775144993172,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1690380178716628,
+            "neighbor_local_deviation_n": 0.6082695661016375,
+            "reference_context_change_n": 0.34066667159398367,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4262,
+            "end_index_exclusive": 4264,
+            "length": 2,
+            "max_force_error_n": 3.3693957463833817,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.4275542124190057,
+            "neighbor_local_deviation_n": 0.39755370370550036,
+            "reference_context_change_n": 0.6316666603088379,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4403,
+            "end_index_exclusive": 4404,
+            "length": 1,
+            "max_force_error_n": 2.231152977557427,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1278593143097213,
+            "neighbor_local_deviation_n": 0.3782623854787852,
+            "reference_context_change_n": 0.9876666863759356,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4409,
+            "end_index_exclusive": 4410,
+            "length": 1,
+            "max_force_error_n": 0.22653434603414202,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0273225995761868,
+            "neighbor_local_deviation_n": 0.4203547349949579,
+            "reference_context_change_n": 1.0089999834696455,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4417,
+            "end_index_exclusive": 4418,
+            "length": 1,
+            "max_force_error_n": 0.6270526481713734,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0157659974014077,
+            "neighbor_local_deviation_n": 0.29813202826808727,
+            "reference_context_change_n": 1.267000039418539,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4434,
+            "end_index_exclusive": 4435,
+            "length": 1,
+            "max_force_error_n": 2.5488284621227937,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.321855529729433,
+            "neighbor_local_deviation_n": 0.1560796283390875,
+            "reference_context_change_n": 0.565333366394043,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4453,
+            "end_index_exclusive": 4454,
+            "length": 1,
+            "max_force_error_n": 2.3421323075954206,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0973628660394006,
+            "neighbor_local_deviation_n": 0.6342378097382682,
+            "reference_context_change_n": 0.3866666158040353,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4459,
+            "end_index_exclusive": 4460,
+            "length": 1,
+            "max_force_error_n": 0.28982471460567716,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1282204840596073,
+            "neighbor_local_deviation_n": 0.7002885322865335,
+            "reference_context_change_n": 0.4823331832885742,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4479,
+            "end_index_exclusive": 4481,
+            "length": 2,
+            "max_force_error_n": 0.1807160336224527,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1431021718628163,
+            "neighbor_local_deviation_n": 0.6378620009584193,
+            "reference_context_change_n": 0.5267501672108956,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4491,
+            "end_index_exclusive": 4492,
+            "length": 1,
+            "max_force_error_n": 0.7305568243369986,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0643277502382649,
+            "neighbor_local_deviation_n": 0.5044749204704235,
+            "reference_context_change_n": 0.3705000877380389,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4495,
+            "end_index_exclusive": 4496,
+            "length": 1,
+            "max_force_error_n": 1.6000840587969378,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.6803038389207785,
+            "neighbor_local_deviation_n": 1.031888169661956,
+            "reference_context_change_n": 0.37399991353352746,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4497,
+            "end_index_exclusive": 4499,
+            "length": 2,
+            "max_force_error_n": 1.0504455753310484,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1228772904319104,
+            "neighbor_local_deviation_n": 0.7185398734957413,
+            "reference_context_change_n": 0.37524986267089844,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4519,
+            "end_index_exclusive": 4520,
+            "length": 1,
+            "max_force_error_n": 1.5261808983633962,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.191922686096472,
+            "neighbor_local_deviation_n": 0.5395653629648027,
+            "reference_context_change_n": 0.2003332773844413,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4525,
+            "end_index_exclusive": 4529,
+            "length": 4,
+            "max_force_error_n": 1.3161483030363783,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.6504065153033025,
+            "action": "preserved_continuous_error",
+            "reason": "candidate run exceeds 3 samples"
+          },
+          {
+            "start_index": 4535,
+            "end_index_exclusive": 4537,
+            "length": 2,
+            "max_force_error_n": 1.1864979319839684,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.2480026231564239,
+            "neighbor_local_deviation_n": 0.561899010447803,
+            "reference_context_change_n": 0.09366671244303504,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4545,
+            "end_index_exclusive": 4546,
+            "length": 1,
+            "max_force_error_n": 1.4757411664500246,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1587288844661785,
+            "neighbor_local_deviation_n": 0.8059463247570307,
+            "reference_context_change_n": 0.1035001277923584,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4549,
+            "end_index_exclusive": 4551,
+            "length": 2,
+            "max_force_error_n": 1.472278967852919,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.121057381269754,
+            "neighbor_local_deviation_n": 0.8059463247570307,
+            "reference_context_change_n": 0.1230001449584961,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4571,
+            "end_index_exclusive": 4572,
+            "length": 1,
+            "max_force_error_n": 0.36812530012326405,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.044098349016016,
+            "neighbor_local_deviation_n": 0.5950989250441516,
+            "reference_context_change_n": 0.3946666717529279,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4580,
+            "end_index_exclusive": 4585,
+            "length": 5,
+            "max_force_error_n": 3.3459390836522527,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.5153024988540604,
+            "action": "preserved_continuous_error",
+            "reason": "candidate run exceeds 3 samples"
+          },
+          {
+            "start_index": 4590,
+            "end_index_exclusive": 4591,
+            "length": 1,
+            "max_force_error_n": 4.792146399307246,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1896220832987012,
+            "neighbor_local_deviation_n": 0.247832340603916,
+            "reference_context_change_n": 0.6813332239786778,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4605,
+            "end_index_exclusive": 4606,
+            "length": 1,
+            "max_force_error_n": 3.244504489114597,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1481041723080896,
+            "neighbor_local_deviation_n": 0.5728032035686699,
+            "reference_context_change_n": 1.660333315531414,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4711,
+            "end_index_exclusive": 4712,
+            "length": 1,
+            "max_force_error_n": 4.072566840588793,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.168945598103102,
+            "neighbor_local_deviation_n": 0.5362233025435783,
+            "reference_context_change_n": 1.5743333498636884,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4786,
+            "end_index_exclusive": 4787,
+            "length": 1,
+            "max_force_error_n": 6.62679290204098,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.414531617212023,
+            "neighbor_local_deviation_n": 0.7826654261979824,
+            "reference_context_change_n": 1.5873333613077794,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4797,
+            "end_index_exclusive": 4798,
+            "length": 1,
+            "max_force_error_n": 6.208193650572252,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1392692761175356,
+            "neighbor_local_deviation_n": 0.5179382593261375,
+            "reference_context_change_n": 1.6910001039505005,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 5668,
+            "end_index_exclusive": 5669,
+            "length": 1,
+            "max_force_error_n": 0.5733068927757174,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0414662831994863,
+            "neighbor_local_deviation_n": 0.21857757994722293,
+            "reference_context_change_n": 0.6896666487058005,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 5904,
+            "end_index_exclusive": 5905,
+            "length": 1,
+            "max_force_error_n": 4.286068879949583,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.085578526782557,
+            "neighbor_local_deviation_n": 0.8235666036155918,
+            "reference_context_change_n": 0.12400007247924805,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 5908,
+            "end_index_exclusive": 5909,
+            "length": 1,
+            "max_force_error_n": 4.285572059768112,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0850817066010867,
+            "neighbor_local_deviation_n": 0.8235666036155918,
+            "reference_context_change_n": 0.27066659927368253,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6405,
+            "end_index_exclusive": 6406,
+            "length": 1,
+            "max_force_error_n": 4.885322419227823,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.3400128876444288,
+            "neighbor_local_deviation_n": 0.8756841625196765,
+            "reference_context_change_n": 0.6757500171661377,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6719,
+            "end_index_exclusive": 6720,
+            "length": 1,
+            "max_force_error_n": 6.417962682634457,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.219538505148651,
+            "neighbor_local_deviation_n": 0.7491280859050677,
+            "reference_context_change_n": 1.4253333806991573,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6859,
+            "end_index_exclusive": 6860,
+            "length": 1,
+            "max_force_error_n": 1.3819335573721219,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0254851484850604,
+            "neighbor_local_deviation_n": 0.4296932106603748,
+            "reference_context_change_n": 0.5016663869221993,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6886,
+            "end_index_exclusive": 6887,
+            "length": 1,
+            "max_force_error_n": 5.016844119548409,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.162030175952582,
+            "neighbor_local_deviation_n": 0.2725852176825807,
+            "reference_context_change_n": 0.89966646830241,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6907,
+            "end_index_exclusive": 6908,
+            "length": 1,
+            "max_force_error_n": 10.043609025197467,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.558613239383618,
+            "neighbor_local_deviation_n": 0.2554154482631059,
+            "reference_context_change_n": 1.9486668904622402,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6927,
+            "end_index_exclusive": 6928,
+            "length": 1,
+            "max_force_error_n": 3.47263450008564,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.2517044108922573,
+            "neighbor_local_deviation_n": 0.2644681022718611,
+            "reference_context_change_n": 2.6236666043599444,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 7364,
+            "end_index_exclusive": 7365,
+            "length": 1,
+            "max_force_error_n": 4.924586623578705,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0274331615393457,
+            "neighbor_local_deviation_n": 0.7127639893533289,
+            "reference_context_change_n": 0.5296665827433262,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 7367,
+            "end_index_exclusive": 7368,
+            "length": 1,
+            "max_force_error_n": 4.959139516582911,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0246121128330783,
+            "neighbor_local_deviation_n": 0.7127639893533289,
+            "reference_context_change_n": 0.6389999389648438,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 7612,
+            "end_index_exclusive": 7613,
+            "length": 1,
+            "max_force_error_n": 5.729872053904762,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1509123311438785,
+            "neighbor_local_deviation_n": 0.3294673066156939,
+            "reference_context_change_n": 0.7586667140324908,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 7662,
+            "end_index_exclusive": 7663,
+            "length": 1,
+            "max_force_error_n": 6.435964823805932,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.34895703894865,
+            "neighbor_local_deviation_n": 0.41788885749079085,
+            "reference_context_change_n": 1.161999861399333,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 7747,
+            "end_index_exclusive": 7748,
+            "length": 1,
+            "max_force_error_n": 4.397739005576982,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0562717063825842,
+            "neighbor_local_deviation_n": 0.24827828585675693,
+            "reference_context_change_n": 0.918000022570292,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 7807,
+            "end_index_exclusive": 7808,
+            "length": 1,
+            "max_force_error_n": 5.0557556740253125,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.2306741238696914,
+            "neighbor_local_deviation_n": 0.45405870509020163,
+            "reference_context_change_n": 0.9079999923706055,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 7940,
+            "end_index_exclusive": 7941,
+            "length": 1,
+            "max_force_error_n": 4.43927842601585,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1000286013704885,
+            "neighbor_local_deviation_n": 0.40847290493389465,
+            "reference_context_change_n": 0.5145000616709403,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          }
+        ],
+        "apply_requested": false,
+        "applied": false,
+        "apply_reason": "preview_only",
+        "backup_file": null,
+        "applied_result": null,
+        "raw_result": {
+          "scoring_version": "4.0-absolute-zero-load",
+          "status": "scored",
+          "device_id": "coinft_260804_0010",
+          "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053235_batch_20260827_053148_round_02_pending.h5",
+          "dataset_split": "pending",
+          "hardware_id": "coinft_260804_0010",
+          "total_score": 69.7156,
+          "raw_axis_score": 69.7156,
+          "integrity_factor": 1.0,
+          "integrity": {
+            "duration_seconds": 41.173172,
+            "samples": 8262,
+            "duplicate_timestamp_count": 518,
+            "duplicate_timestamp_ratio": 0.062704,
+            "duration_score": 100.0,
+            "sample_score": 100.0
+          },
+          "fit_waveform_scoring": {
+            "tracking_weight": 0.35,
+            "correlation_weight": 0.15,
+            "jitter_weight": 0.15,
+            "zero_load_noise_weight": 0.25,
+            "zero_load_drift_weight": 0.1
+          },
+          "zero_load_analysis": {
+            "selection_mode": "fallback_lowest_load",
+            "selected_window_count": 3,
+            "no_load_fraction_estimate": 0.06051803,
+            "selected_load_index_min": 8.42499984,
+            "selected_load_index_median": 9.99954155,
+            "window_seconds": 1.0,
+            "window_step_seconds": 0.5,
+            "skip_initial_seconds": 2.0
+          },
+          "reference_distribution": {
+            "p05": {
+              "Fx": -1.56158893,
+              "Fy": -1.40098466,
+              "Fz": -12.36949438,
+              "Mx": -0.07562431,
+              "My": -0.01317689,
+              "Mz": -0.04214341
+            },
+            "mean": {
+              "Fx": -0.56477492,
+              "Fy": -0.56966659,
+              "Fz": -4.08395181,
+              "Mx": -0.01779467,
+              "My": 0.01301486,
+              "Mz": -0.00573409
+            },
+            "median": {
+              "Fx": -0.44725569,
+              "Fy": -0.4991512,
+              "Fz": -2.8666279,
+              "Mx": -0.01189101,
+              "My": 0.01007586,
+              "Mz": -0.00637674
+            },
+            "p95": {
+              "Fx": -0.02200577,
+              "Fy": 0.10668209,
+              "Fz": 0.00237209,
+              "Mx": 0.00519077,
+              "My": 0.05558894,
+              "Mz": 0.03798492
+            },
+            "near_zero_fraction": 0.06051803
+          },
+          "axis_weights": {
+            "Fx": 0.1,
+            "Fy": 0.1,
+            "Fz": 0.5,
+            "Mx": 0.1,
+            "My": 0.1,
+            "Mz": 0.1
+          },
+          "axis_metrics": {
+            "Fx": {
+              "rmse": 0.30294497,
+              "mae": 0.22666221,
+              "p95_absolute_error": 0.62865853,
+              "reference_span": 1.53958316,
+              "nrmse": 0.19677077,
+              "correlation": 0.80078685,
+              "jitter_amplitude": 0.09633085,
+              "jitter_ratio": 0.06256944,
+              "zero_load_noise": 0.30290147,
+              "zero_load_drift": 0.03873024,
+              "tracking_score": 72.5819,
+              "correlation_score": 75.1967,
+              "jitter_score": 79.4823,
+              "zero_load_noise_score": 51.868,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 71.5725
+            },
+            "Fy": {
+              "rmse": 0.29993895,
+              "mae": 0.22344811,
+              "p95_absolute_error": 0.60763644,
+              "reference_span": 1.50766675,
+              "nrmse": 0.19894247,
+              "correlation": 0.80569793,
+              "jitter_amplitude": 0.10222628,
+              "jitter_ratio": 0.06780429,
+              "zero_load_noise": 0.42996759,
+              "zero_load_drift": 0.11793997,
+              "tracking_score": 71.8063,
+              "correlation_score": 76.4245,
+              "jitter_score": 74.7234,
+              "zero_load_noise_score": 18.4296,
+              "zero_load_drift_score": 96.412,
+              "axis_score": 62.053
+            },
+            "Fz": {
+              "rmse": 2.23490795,
+              "mae": 1.70140954,
+              "p95_absolute_error": 4.6472159,
+              "reference_span": 12.37186647,
+              "nrmse": 0.18064436,
+              "correlation": 0.83287826,
+              "jitter_amplitude": 0.36973778,
+              "jitter_ratio": 0.02988537,
+              "zero_load_noise": 2.33382276,
+              "zero_load_drift": 1.00243651,
+              "tracking_score": 78.3413,
+              "correlation_score": 83.2196,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 0.0,
+              "zero_load_drift_score": 0.0,
+              "axis_score": 54.9024
+            },
+            "Mx": {
+              "rmse": 0.0116523,
+              "mae": 0.00756571,
+              "p95_absolute_error": 0.02554731,
+              "reference_span": 0.08081508,
+              "nrmse": 0.1441847,
+              "correlation": 0.90207191,
+              "jitter_amplitude": 0.00237978,
+              "jitter_ratio": 0.02944725,
+              "zero_load_noise": 0.00974971,
+              "zero_load_drift": 0.00251485,
+              "tracking_score": 91.3626,
+              "correlation_score": 100.0,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 84.3762,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 93.071
+            },
+            "My": {
+              "rmse": 0.01017058,
+              "mae": 0.00714904,
+              "p95_absolute_error": 0.02073178,
+              "reference_span": 0.06876583,
+              "nrmse": 0.14790169,
+              "correlation": 0.89422634,
+              "jitter_amplitude": 0.00228459,
+              "jitter_ratio": 0.03322275,
+              "zero_load_noise": 0.0058165,
+              "zero_load_drift": 0.00337202,
+              "tracking_score": 90.0351,
+              "correlation_score": 98.5566,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 100.0,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 96.2958
+            },
+            "Mz": {
+              "rmse": 0.00928806,
+              "mae": 0.00664275,
+              "p95_absolute_error": 0.02050505,
+              "reference_span": 0.08012833,
+              "nrmse": 0.11591475,
+              "correlation": 0.89071536,
+              "jitter_amplitude": 0.00213631,
+              "jitter_ratio": 0.02666117,
+              "zero_load_noise": 0.00456679,
+              "zero_load_drift": 0.00244674,
+              "tracking_score": 100.0,
+              "correlation_score": 97.6788,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 100.0,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 99.6518
+            }
+          },
+          "warnings": []
+        },
+        "cleaned_result": {
+          "scoring_version": "4.0-absolute-zero-load",
+          "status": "scored",
+          "device_id": "coinft_260804_0010",
+          "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053235_batch_20260827_053148_round_02_pending.h5 [cleaned view]",
+          "dataset_split": "pending",
+          "hardware_id": "coinft_260804_0010",
+          "total_score": 69.03,
+          "raw_axis_score": 69.03,
+          "integrity_factor": 1.0,
+          "integrity": {
+            "duration_seconds": 41.173172,
+            "samples": 8249,
+            "duplicate_timestamp_count": 516,
+            "duplicate_timestamp_ratio": 0.062561,
+            "duration_score": 100.0,
+            "sample_score": 100.0
+          },
+          "fit_waveform_scoring": {
+            "tracking_weight": 0.35,
+            "correlation_weight": 0.15,
+            "jitter_weight": 0.15,
+            "zero_load_noise_weight": 0.25,
+            "zero_load_drift_weight": 0.1
+          },
+          "zero_load_analysis": {
+            "selection_mode": "fallback_lowest_load",
+            "selected_window_count": 3,
+            "no_load_fraction_estimate": 0.06061341,
+            "selected_load_index_min": 8.42499984,
+            "selected_load_index_median": 8.81083321,
+            "window_seconds": 1.0,
+            "window_step_seconds": 0.5,
+            "skip_initial_seconds": 2.0
+          },
+          "reference_distribution": {
+            "p05": {
+              "Fx": -1.54925601,
+              "Fy": -1.40065119,
+              "Fz": -12.188828,
+              "Mx": -0.07494647,
+              "My": -0.01317689,
+              "Mz": -0.04214341
+            },
+            "mean": {
+              "Fx": -0.56263316,
+              "Fy": -0.56835552,
+              "Fz": -4.06908086,
+              "Mx": -0.01767425,
+              "My": 0.01291351,
+              "Mz": -0.00571047
+            },
+            "median": {
+              "Fx": -0.44675585,
+              "Fy": -0.49798462,
+              "Fz": -2.85796121,
+              "Mx": -0.01187847,
+              "My": 0.01003445,
+              "Mz": -0.00635174
+            },
+            "p95": {
+              "Fx": -0.02195576,
+              "Fy": 0.10668209,
+              "Fz": 0.00237209,
+              "Mx": 0.00519311,
+              "My": 0.05531012,
+              "Mz": 0.03798992
+            },
+            "near_zero_fraction": 0.06061341
+          },
+          "axis_weights": {
+            "Fx": 0.1,
+            "Fy": 0.1,
+            "Fz": 0.5,
+            "Mx": 0.1,
+            "My": 0.1,
+            "Mz": 0.1
+          },
+          "axis_metrics": {
+            "Fx": {
+              "rmse": 0.3028379,
+              "mae": 0.22658217,
+              "p95_absolute_error": 0.62856883,
+              "reference_span": 1.52730025,
+              "nrmse": 0.19828315,
+              "correlation": 0.79811444,
+              "jitter_amplitude": 0.09653767,
+              "jitter_ratio": 0.06320805,
+              "zero_load_noise": 0.32285944,
+              "zero_load_drift": 0.04469438,
+              "tracking_score": 72.0417,
+              "correlation_score": 74.5286,
+              "jitter_score": 78.9018,
+              "zero_load_noise_score": 46.6159,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 69.8831
+            },
+            "Fy": {
+              "rmse": 0.29990329,
+              "mae": 0.22339678,
+              "p95_absolute_error": 0.60741406,
+              "reference_span": 1.50733328,
+              "nrmse": 0.19896283,
+              "correlation": 0.80493014,
+              "jitter_amplitude": 0.10243614,
+              "jitter_ratio": 0.06795852,
+              "zero_load_noise": 0.45309369,
+              "zero_load_drift": 0.14086891,
+              "tracking_score": 71.799,
+              "correlation_score": 76.2325,
+              "jitter_score": 74.5832,
+              "zero_load_noise_score": 12.3438,
+              "zero_load_drift_score": 91.8262,
+              "axis_score": 60.0206
+            },
+            "Fz": {
+              "rmse": 2.23491571,
+              "mae": 1.70134613,
+              "p95_absolute_error": 4.64406342,
+              "reference_span": 12.19120009,
+              "nrmse": 0.18332204,
+              "correlation": 0.83112774,
+              "jitter_amplitude": 0.37331413,
+              "jitter_ratio": 0.03062161,
+              "zero_load_noise": 2.53287352,
+              "zero_load_drift": 0.83061577,
+              "tracking_score": 77.385,
+              "correlation_score": 82.7819,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 0.0,
+              "zero_load_drift_score": 0.0,
+              "axis_score": 54.502
+            },
+            "Mx": {
+              "rmse": 0.01165501,
+              "mae": 0.00756749,
+              "p95_absolute_error": 0.02555927,
+              "reference_span": 0.08013958,
+              "nrmse": 0.14543382,
+              "correlation": 0.90005622,
+              "jitter_amplitude": 0.00237158,
+              "jitter_ratio": 0.02959312,
+              "zero_load_noise": 0.01019507,
+              "zero_load_drift": 0.00270868,
+              "tracking_score": 90.9165,
+              "correlation_score": 100.0,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 82.5205,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 92.4509
+            },
+            "My": {
+              "rmse": 0.0101722,
+              "mae": 0.00715156,
+              "p95_absolute_error": 0.02071512,
+              "reference_span": 0.068487,
+              "nrmse": 0.14852749,
+              "correlation": 0.89219369,
+              "jitter_amplitude": 0.00228089,
+              "jitter_ratio": 0.03330402,
+              "zero_load_noise": 0.00634607,
+              "zero_load_drift": 0.00319484,
+              "tracking_score": 89.8116,
+              "correlation_score": 98.0484,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 98.5581,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 95.7808
+            },
+            "Mz": {
+              "rmse": 0.00928652,
+              "mae": 0.00664178,
+              "p95_absolute_error": 0.02051836,
+              "reference_span": 0.08013333,
+              "nrmse": 0.11588829,
+              "correlation": 0.8907711,
+              "jitter_amplitude": 0.00213899,
+              "jitter_ratio": 0.02669284,
+              "zero_load_noise": 0.00481132,
+              "zero_load_drift": 0.00222116,
+              "tracking_score": 100.0,
+              "correlation_score": 97.6928,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 100.0,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 99.6539
+            }
+          },
+          "warnings": []
+        }
+      },
+      "score_result": {
+        "scoring_version": "4.0-absolute-zero-load",
+        "status": "scored",
+        "device_id": "coinft_260804_0010",
+        "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053235_batch_20260827_053148_round_02_pending.h5",
+        "dataset_split": "pending",
+        "hardware_id": "coinft_260804_0010",
+        "total_score": 69.7156,
+        "raw_axis_score": 69.7156,
+        "integrity_factor": 1.0,
+        "integrity": {
+          "duration_seconds": 41.173172,
+          "samples": 8262,
+          "duplicate_timestamp_count": 518,
+          "duplicate_timestamp_ratio": 0.062704,
+          "duration_score": 100.0,
+          "sample_score": 100.0
+        },
+        "fit_waveform_scoring": {
+          "tracking_weight": 0.35,
+          "correlation_weight": 0.15,
+          "jitter_weight": 0.15,
+          "zero_load_noise_weight": 0.25,
+          "zero_load_drift_weight": 0.1
+        },
+        "zero_load_analysis": {
+          "selection_mode": "fallback_lowest_load",
+          "selected_window_count": 3,
+          "no_load_fraction_estimate": 0.06051803,
+          "selected_load_index_min": 8.42499984,
+          "selected_load_index_median": 9.99954155,
+          "window_seconds": 1.0,
+          "window_step_seconds": 0.5,
+          "skip_initial_seconds": 2.0
+        },
+        "reference_distribution": {
+          "p05": {
+            "Fx": -1.56158893,
+            "Fy": -1.40098466,
+            "Fz": -12.36949438,
+            "Mx": -0.07562431,
+            "My": -0.01317689,
+            "Mz": -0.04214341
+          },
+          "mean": {
+            "Fx": -0.56477492,
+            "Fy": -0.56966659,
+            "Fz": -4.08395181,
+            "Mx": -0.01779467,
+            "My": 0.01301486,
+            "Mz": -0.00573409
+          },
+          "median": {
+            "Fx": -0.44725569,
+            "Fy": -0.4991512,
+            "Fz": -2.8666279,
+            "Mx": -0.01189101,
+            "My": 0.01007586,
+            "Mz": -0.00637674
+          },
+          "p95": {
+            "Fx": -0.02200577,
+            "Fy": 0.10668209,
+            "Fz": 0.00237209,
+            "Mx": 0.00519077,
+            "My": 0.05558894,
+            "Mz": 0.03798492
+          },
+          "near_zero_fraction": 0.06051803
+        },
+        "axis_weights": {
+          "Fx": 0.1,
+          "Fy": 0.1,
+          "Fz": 0.5,
+          "Mx": 0.1,
+          "My": 0.1,
+          "Mz": 0.1
+        },
+        "axis_metrics": {
+          "Fx": {
+            "rmse": 0.30294497,
+            "mae": 0.22666221,
+            "p95_absolute_error": 0.62865853,
+            "reference_span": 1.53958316,
+            "nrmse": 0.19677077,
+            "correlation": 0.80078685,
+            "jitter_amplitude": 0.09633085,
+            "jitter_ratio": 0.06256944,
+            "zero_load_noise": 0.30290147,
+            "zero_load_drift": 0.03873024,
+            "tracking_score": 72.5819,
+            "correlation_score": 75.1967,
+            "jitter_score": 79.4823,
+            "zero_load_noise_score": 51.868,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 71.5725
+          },
+          "Fy": {
+            "rmse": 0.29993895,
+            "mae": 0.22344811,
+            "p95_absolute_error": 0.60763644,
+            "reference_span": 1.50766675,
+            "nrmse": 0.19894247,
+            "correlation": 0.80569793,
+            "jitter_amplitude": 0.10222628,
+            "jitter_ratio": 0.06780429,
+            "zero_load_noise": 0.42996759,
+            "zero_load_drift": 0.11793997,
+            "tracking_score": 71.8063,
+            "correlation_score": 76.4245,
+            "jitter_score": 74.7234,
+            "zero_load_noise_score": 18.4296,
+            "zero_load_drift_score": 96.412,
+            "axis_score": 62.053
+          },
+          "Fz": {
+            "rmse": 2.23490795,
+            "mae": 1.70140954,
+            "p95_absolute_error": 4.6472159,
+            "reference_span": 12.37186647,
+            "nrmse": 0.18064436,
+            "correlation": 0.83287826,
+            "jitter_amplitude": 0.36973778,
+            "jitter_ratio": 0.02988537,
+            "zero_load_noise": 2.33382276,
+            "zero_load_drift": 1.00243651,
+            "tracking_score": 78.3413,
+            "correlation_score": 83.2196,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 0.0,
+            "zero_load_drift_score": 0.0,
+            "axis_score": 54.9024
+          },
+          "Mx": {
+            "rmse": 0.0116523,
+            "mae": 0.00756571,
+            "p95_absolute_error": 0.02554731,
+            "reference_span": 0.08081508,
+            "nrmse": 0.1441847,
+            "correlation": 0.90207191,
+            "jitter_amplitude": 0.00237978,
+            "jitter_ratio": 0.02944725,
+            "zero_load_noise": 0.00974971,
+            "zero_load_drift": 0.00251485,
+            "tracking_score": 91.3626,
+            "correlation_score": 100.0,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 84.3762,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 93.071
+          },
+          "My": {
+            "rmse": 0.01017058,
+            "mae": 0.00714904,
+            "p95_absolute_error": 0.02073178,
+            "reference_span": 0.06876583,
+            "nrmse": 0.14790169,
+            "correlation": 0.89422634,
+            "jitter_amplitude": 0.00228459,
+            "jitter_ratio": 0.03322275,
+            "zero_load_noise": 0.0058165,
+            "zero_load_drift": 0.00337202,
+            "tracking_score": 90.0351,
+            "correlation_score": 98.5566,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 100.0,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 96.2958
+          },
+          "Mz": {
+            "rmse": 0.00928806,
+            "mae": 0.00664275,
+            "p95_absolute_error": 0.02050505,
+            "reference_span": 0.08012833,
+            "nrmse": 0.11591475,
+            "correlation": 0.89071536,
+            "jitter_amplitude": 0.00213631,
+            "jitter_ratio": 0.02666117,
+            "zero_load_noise": 0.00456679,
+            "zero_load_drift": 0.00244674,
+            "tracking_score": 100.0,
+            "correlation_score": 97.6788,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 100.0,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 99.6518
+          }
+        },
+        "warnings": []
+      },
+      "score": 69.7156
+    },
+    {
+      "attempt": 3,
+      "target_round": 3,
+      "started_at": "2026-08-27T05:32:44",
+      "pending_h5": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053328_batch_20260827_053148_round_03_pending.h5",
+      "status": "scored",
+      "cleaner_payload": {
+        "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053328_batch_20260827_053148_round_03_pending.h5",
+        "preview_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053328_batch_20260827_053148_round_03_pending_quality_preview.png",
+        "device_id": "coinft_260804_0010",
+        "raw_score": 75.1084,
+        "cleaned_score": 74.9645,
+        "score_gain": -0.1439,
+        "removed_samples": 5,
+        "removed_ratio": 0.00060481,
+        "removed_events": [
+          {
+            "start_index": 5958,
+            "end_index_exclusive": 5959,
+            "length": 1,
+            "max_force_error_n": 0.9481164690965524,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0167448043645084,
+            "neighbor_local_deviation_n": 0.4150901871609589,
+            "reference_context_change_n": 0.30999990304311,
+            "action": "removed_isolated_spike",
+            "reason": "short spike, neighbors recovered, reference was quiet"
+          },
+          {
+            "start_index": 6245,
+            "end_index_exclusive": 6246,
+            "length": 1,
+            "max_force_error_n": 1.3477863717811722,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.5211441713616694,
+            "neighbor_local_deviation_n": 0.23973608955882253,
+            "reference_context_change_n": 0.2529996236165353,
+            "action": "removed_isolated_spike",
+            "reason": "short spike, neighbors recovered, reference was quiet"
+          },
+          {
+            "start_index": 6279,
+            "end_index_exclusive": 6280,
+            "length": 1,
+            "max_force_error_n": 0.623234741058937,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0298913899905138,
+            "neighbor_local_deviation_n": 0.41108674075568885,
+            "reference_context_change_n": 0.06333335240681981,
+            "action": "removed_isolated_spike",
+            "reason": "short spike, neighbors recovered, reference was quiet"
+          },
+          {
+            "start_index": 6916,
+            "end_index_exclusive": 6917,
+            "length": 1,
+            "max_force_error_n": 0.4210929226314164,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0773521877797307,
+            "neighbor_local_deviation_n": 0.4228051333659728,
+            "reference_context_change_n": 0.3470832506815569,
+            "action": "removed_isolated_spike",
+            "reason": "short spike, neighbors recovered, reference was quiet"
+          },
+          {
+            "start_index": 6964,
+            "end_index_exclusive": 6965,
+            "length": 1,
+            "max_force_error_n": 1.3149668209248873,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.071671908526227,
+            "neighbor_local_deviation_n": 0.19685095767259142,
+            "reference_context_change_n": 0.1423333485921212,
+            "action": "removed_isolated_spike",
+            "reason": "short spike, neighbors recovered, reference was quiet"
+          }
+        ],
+        "preserved_events": [
+          {
+            "start_index": 1259,
+            "end_index_exclusive": 1260,
+            "length": 1,
+            "max_force_error_n": 3.1427354028551324,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1042605901242206,
+            "neighbor_local_deviation_n": 0.1688646075149176,
+            "reference_context_change_n": 1.2093332608540859,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 2522,
+            "end_index_exclusive": 2524,
+            "length": 2,
+            "max_force_error_n": 6.668014180468915,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.2106470567554775,
+            "neighbor_local_deviation_n": 0.406911805902455,
+            "reference_context_change_n": 1.2787499738236268,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 2888,
+            "end_index_exclusive": 2889,
+            "length": 1,
+            "max_force_error_n": 5.0854359454601425,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0410825537575992,
+            "neighbor_local_deviation_n": 0.3569002394966958,
+            "reference_context_change_n": 1.414333264033,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 3410,
+            "end_index_exclusive": 3411,
+            "length": 1,
+            "max_force_error_n": 5.375426931146847,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.311841925243682,
+            "neighbor_local_deviation_n": 0.39695050520036546,
+            "reference_context_change_n": 1.2453333189090097,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 3414,
+            "end_index_exclusive": 3415,
+            "length": 1,
+            "max_force_error_n": 5.268388976074189,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.149911105353108,
+            "neighbor_local_deviation_n": 0.7283574480729325,
+            "reference_context_change_n": 2.015499992916981,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 3422,
+            "end_index_exclusive": 3423,
+            "length": 1,
+            "max_force_error_n": 4.542075208453535,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1498159277807005,
+            "neighbor_local_deviation_n": 0.11890160447782083,
+            "reference_context_change_n": 0.7982500096162166,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 3726,
+            "end_index_exclusive": 3727,
+            "length": 1,
+            "max_force_error_n": 4.4819147648578195,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.2545053542336708,
+            "neighbor_local_deviation_n": 0.8850876548249729,
+            "reference_context_change_n": 1.2866666316986082,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 3862,
+            "end_index_exclusive": 3863,
+            "length": 1,
+            "max_force_error_n": 3.7080246789904816,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0856725341335594,
+            "neighbor_local_deviation_n": 0.4698828223298781,
+            "reference_context_change_n": 0.9294999912381172,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 3890,
+            "end_index_exclusive": 3891,
+            "length": 1,
+            "max_force_error_n": 4.235640319971221,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.2684289708007324,
+            "neighbor_local_deviation_n": 0.2038047274677366,
+            "reference_context_change_n": 0.7973332405090332,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4022,
+            "end_index_exclusive": 4023,
+            "length": 1,
+            "max_force_error_n": 3.450891088157612,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0707433892420002,
+            "neighbor_local_deviation_n": 0.5920014207295106,
+            "reference_context_change_n": 0.4089166919390359,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4034,
+            "end_index_exclusive": 4035,
+            "length": 1,
+            "max_force_error_n": 2.0570965412922373,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.062026623768471,
+            "neighbor_local_deviation_n": 0.33058846764133865,
+            "reference_context_change_n": 1.0963332653045654,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 4166,
+            "end_index_exclusive": 4168,
+            "length": 2,
+            "max_force_error_n": 6.312634464181499,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.7802757847664914,
+            "neighbor_local_deviation_n": 0.8295136690944647,
+            "reference_context_change_n": 1.1280000209808345,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 5646,
+            "end_index_exclusive": 5647,
+            "length": 1,
+            "max_force_error_n": 5.521496905261088,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0702589156060291,
+            "neighbor_local_deviation_n": 0.16066295495159572,
+            "reference_context_change_n": 1.3860000371932983,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 5947,
+            "end_index_exclusive": 5948,
+            "length": 1,
+            "max_force_error_n": 1.5530667461571044,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.150815738709051,
+            "neighbor_local_deviation_n": 0.28576398921231494,
+            "reference_context_change_n": 1.4646668434143058,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 5955,
+            "end_index_exclusive": 5956,
+            "length": 1,
+            "max_force_error_n": 2.1301212361926334,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.136139889137076,
+            "neighbor_local_deviation_n": 0.4150901871609589,
+            "reference_context_change_n": 1.278000036875408,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6020,
+            "end_index_exclusive": 6021,
+            "length": 1,
+            "max_force_error_n": 6.0330662326864015,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0329190543410451,
+            "neighbor_local_deviation_n": 0.20914724395345097,
+            "reference_context_change_n": 2.0133334795633955,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6175,
+            "end_index_exclusive": 6177,
+            "length": 2,
+            "max_force_error_n": 0.7010597109919132,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.5469963306806545,
+            "neighbor_local_deviation_n": 0.9819186051896303,
+            "reference_context_change_n": 0.6282501220703125,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6182,
+            "end_index_exclusive": 6185,
+            "length": 3,
+            "max_force_error_n": 2.8034993832962893,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.6948393271140123,
+            "neighbor_local_deviation_n": 0.8003306457750323,
+            "reference_context_change_n": 0.905083417892456,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6195,
+            "end_index_exclusive": 6196,
+            "length": 1,
+            "max_force_error_n": 0.5842318515759981,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.179055334641781,
+            "neighbor_local_deviation_n": 0.41629220241770604,
+            "reference_context_change_n": 0.6759999593098964,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6197,
+            "end_index_exclusive": 6198,
+            "length": 1,
+            "max_force_error_n": 0.5354692628530628,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1302927459188457,
+            "neighbor_local_deviation_n": 0.21470819560702736,
+            "reference_context_change_n": 0.961833159128826,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6301,
+            "end_index_exclusive": 6302,
+            "length": 1,
+            "max_force_error_n": 4.91441709221875,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0061101295098567,
+            "neighbor_local_deviation_n": 0.26185851361172086,
+            "reference_context_change_n": 0.5939998626708984,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6321,
+            "end_index_exclusive": 6324,
+            "length": 3,
+            "max_force_error_n": 6.79794192733104,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.8276182715362967,
+            "neighbor_local_deviation_n": 0.22859967264380643,
+            "reference_context_change_n": 3.600500027338663,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6331,
+            "end_index_exclusive": 6332,
+            "length": 1,
+            "max_force_error_n": 3.554450591599813,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.101180746436948,
+            "neighbor_local_deviation_n": 0.4340313357084007,
+            "reference_context_change_n": 2.9140000343322754,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6863,
+            "end_index_exclusive": 6865,
+            "length": 2,
+            "max_force_error_n": 2.700968402624257,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.3211926520423436,
+            "neighbor_local_deviation_n": 0.5043509139449682,
+            "reference_context_change_n": 1.2716665267944336,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6870,
+            "end_index_exclusive": 6871,
+            "length": 1,
+            "max_force_error_n": 0.9036383869187841,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0768286438602406,
+            "neighbor_local_deviation_n": 0.2469583118549057,
+            "reference_context_change_n": 1.1086667378743478,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6876,
+            "end_index_exclusive": 6877,
+            "length": 1,
+            "max_force_error_n": 1.4704828837927888,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.3212186738132878,
+            "neighbor_local_deviation_n": 0.6421933017028625,
+            "reference_context_change_n": 0.9273331960042324,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6882,
+            "end_index_exclusive": 6883,
+            "length": 1,
+            "max_force_error_n": 1.1354632363177135,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1474605217367486,
+            "neighbor_local_deviation_n": 0.37593352764453947,
+            "reference_context_change_n": 0.5576667785644531,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6911,
+            "end_index_exclusive": 6912,
+            "length": 1,
+            "max_force_error_n": 1.8988357508735945,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.3916155662421588,
+            "neighbor_local_deviation_n": 0.4420459113365389,
+            "reference_context_change_n": 0.6823329925537109,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6924,
+            "end_index_exclusive": 6926,
+            "length": 2,
+            "max_force_error_n": 2.1389643743998157,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.5482957168054732,
+            "neighbor_local_deviation_n": 0.47776424621386226,
+            "reference_context_change_n": 0.6763337453206404,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6927,
+            "end_index_exclusive": 6928,
+            "length": 1,
+            "max_force_error_n": 1.8041203910679684,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.147861125919654,
+            "neighbor_local_deviation_n": 1.1848411985521885,
+            "reference_context_change_n": 0.3298335075378418,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6933,
+            "end_index_exclusive": 6934,
+            "length": 1,
+            "max_force_error_n": 0.3476250252296218,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1768649995344447,
+            "neighbor_local_deviation_n": 0.7872342375152712,
+            "reference_context_change_n": 1.1206669807434082,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6942,
+            "end_index_exclusive": 6943,
+            "length": 1,
+            "max_force_error_n": 1.0966638588944306,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0246513118448775,
+            "neighbor_local_deviation_n": 0.6441189832698058,
+            "reference_context_change_n": 1.2436664899190255,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6948,
+            "end_index_exclusive": 6949,
+            "length": 1,
+            "max_force_error_n": 0.46393753327495446,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.02501169644869,
+            "neighbor_local_deviation_n": 0.5597945050361481,
+            "reference_context_change_n": 0.6906668345133475,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6951,
+            "end_index_exclusive": 6952,
+            "length": 1,
+            "max_force_error_n": 2.137031736966449,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.3823668024504023,
+            "neighbor_local_deviation_n": 0.8815381922677759,
+            "reference_context_change_n": 0.6906668345133475,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6954,
+            "end_index_exclusive": 6955,
+            "length": 1,
+            "max_force_error_n": 2.266699951998053,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.12199413829412,
+            "neighbor_local_deviation_n": 0.8815381922677759,
+            "reference_context_change_n": 0.47366650899251184,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6959,
+            "end_index_exclusive": 6961,
+            "length": 2,
+            "max_force_error_n": 0.5769068640854478,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.5179549694244585,
+            "neighbor_local_deviation_n": 0.5913391598862958,
+            "reference_context_change_n": 0.36049985885620117,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6976,
+            "end_index_exclusive": 6978,
+            "length": 2,
+            "max_force_error_n": 2.6180374344926953,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.2869704353210096,
+            "neighbor_local_deviation_n": 0.9800373232173314,
+            "reference_context_change_n": 0.23700014750162524,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6979,
+            "end_index_exclusive": 6980,
+            "length": 1,
+            "max_force_error_n": 3.0385071885831607,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.107418081200791,
+            "neighbor_local_deviation_n": 1.203310819609225,
+            "reference_context_change_n": 0.2453333536783866,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 6997,
+            "end_index_exclusive": 6999,
+            "length": 2,
+            "max_force_error_n": 10.334261878540367,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.3859613809835292,
+            "neighbor_local_deviation_n": 0.4567721543954413,
+            "reference_context_change_n": 2.1412499745686873,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 7005,
+            "end_index_exclusive": 7006,
+            "length": 1,
+            "max_force_error_n": 8.12863073588081,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.3081831490480589,
+            "neighbor_local_deviation_n": 0.5068531323817211,
+            "reference_context_change_n": 2.193333307902016,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 7009,
+            "end_index_exclusive": 7010,
+            "length": 1,
+            "max_force_error_n": 10.71081965174424,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0091507529361081,
+            "neighbor_local_deviation_n": 0.6713531670382302,
+            "reference_context_change_n": 2.116333325703941,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 7531,
+            "end_index_exclusive": 7532,
+            "length": 1,
+            "max_force_error_n": 5.61326083370939,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.09174959189124,
+            "neighbor_local_deviation_n": 0.6162426198428381,
+            "reference_context_change_n": 1.4443333794673283,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 7735,
+            "end_index_exclusive": 7736,
+            "length": 1,
+            "max_force_error_n": 2.504787719981019,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0686647261614506,
+            "neighbor_local_deviation_n": 0.19213130786076205,
+            "reference_context_change_n": 0.695499986410141,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 7958,
+            "end_index_exclusive": 7959,
+            "length": 1,
+            "max_force_error_n": 4.336700079223261,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0629137245476454,
+            "neighbor_local_deviation_n": 0.6286068358308068,
+            "reference_context_change_n": 1.1049999793370562,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 8213,
+            "end_index_exclusive": 8215,
+            "length": 2,
+            "max_force_error_n": 5.914791980228183,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.2026872277389513,
+            "neighbor_local_deviation_n": 1.2209887844395952,
+            "reference_context_change_n": 0.5239999890327458,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 8216,
+            "end_index_exclusive": 8218,
+            "length": 2,
+            "max_force_error_n": 6.469791777072747,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.7576870245835154,
+            "neighbor_local_deviation_n": 1.0334123223672345,
+            "reference_context_change_n": 1.1326666722695031,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          }
+        ],
+        "apply_requested": false,
+        "applied": false,
+        "apply_reason": "preview_only",
+        "backup_file": null,
+        "applied_result": null,
+        "raw_result": {
+          "scoring_version": "4.0-absolute-zero-load",
+          "status": "scored",
+          "device_id": "coinft_260804_0010",
+          "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053328_batch_20260827_053148_round_03_pending.h5",
+          "dataset_split": "pending",
+          "hardware_id": "coinft_260804_0010",
+          "total_score": 75.1084,
+          "raw_axis_score": 75.1084,
+          "integrity_factor": 1.0,
+          "integrity": {
+            "duration_seconds": 41.234016,
+            "samples": 8267,
+            "duplicate_timestamp_count": 536,
+            "duplicate_timestamp_ratio": 0.064844,
+            "duration_score": 100.0,
+            "sample_score": 100.0
+          },
+          "fit_waveform_scoring": {
+            "tracking_weight": 0.35,
+            "correlation_weight": 0.15,
+            "jitter_weight": 0.15,
+            "zero_load_noise_weight": 0.25,
+            "zero_load_drift_weight": 0.1
+          },
+          "zero_load_analysis": {
+            "selection_mode": "fallback_lowest_load",
+            "selected_window_count": 3,
+            "no_load_fraction_estimate": 0.06048143,
+            "selected_load_index_min": 15.42416652,
+            "selected_load_index_median": 18.39166691,
+            "window_seconds": 1.0,
+            "window_step_seconds": 0.5,
+            "skip_initial_seconds": 2.0
+          },
+          "reference_distribution": {
+            "p05": {
+              "Fx": -1.58485196,
+              "Fy": -0.86825475,
+              "Fz": -14.67896602,
+              "Mx": -0.04911034,
+              "My": -0.02361636,
+              "Mz": -0.02246357
+            },
+            "mean": {
+              "Fx": -0.27081918,
+              "Fy": 0.01848966,
+              "Fz": -3.83135602,
+              "Mx": -0.00621615,
+              "My": 0.00825465,
+              "Mz": 0.00202642
+            },
+            "median": {
+              "Fx": -0.06566865,
+              "Fy": 0.01289533,
+              "Fz": -2.33056586,
+              "Mx": -0.00173851,
+              "My": 0.00189997,
+              "Mz": -6.357e-05
+            },
+            "p95": {
+              "Fx": 0.31481456,
+              "Fy": 0.81782856,
+              "Fz": 0.00194244,
+              "Mx": 0.02735858,
+              "My": 0.06458284,
+              "Mz": 0.0428031
+            },
+            "near_zero_fraction": 0.06048143
+          },
+          "axis_weights": {
+            "Fx": 0.1,
+            "Fy": 0.1,
+            "Fz": 0.5,
+            "Mx": 0.1,
+            "My": 0.1,
+            "Mz": 0.1
+          },
+          "axis_metrics": {
+            "Fx": {
+              "rmse": 0.29758974,
+              "mae": 0.20597144,
+              "p95_absolute_error": 0.65993606,
+              "reference_span": 1.89966652,
+              "nrmse": 0.15665368,
+              "correlation": 0.86267734,
+              "jitter_amplitude": 0.07681395,
+              "jitter_ratio": 0.04043549,
+              "zero_load_noise": 0.23141288,
+              "zero_load_drift": 0.07188551,
+              "tracking_score": 86.9094,
+              "correlation_score": 90.6693,
+              "jitter_score": 99.6041,
+              "zero_load_noise_score": 70.6808,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 86.6295
+            },
+            "Fy": {
+              "rmse": 0.30938036,
+              "mae": 0.22687589,
+              "p95_absolute_error": 0.66455372,
+              "reference_span": 1.68608332,
+              "nrmse": 0.18349055,
+              "correlation": 0.77721927,
+              "jitter_amplitude": 0.05842392,
+              "jitter_ratio": 0.03465067,
+              "zero_load_noise": 0.33469259,
+              "zero_load_drift": 0.07787249,
+              "tracking_score": 77.3248,
+              "correlation_score": 69.3048,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 43.5019,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 73.3349
+            },
+            "Fz": {
+              "rmse": 2.15727109,
+              "mae": 1.61209523,
+              "p95_absolute_error": 4.32086533,
+              "reference_span": 14.68090846,
+              "nrmse": 0.14694398,
+              "correlation": 0.87746272,
+              "jitter_amplitude": 0.30291211,
+              "jitter_ratio": 0.02063306,
+              "zero_load_noise": 2.14474501,
+              "zero_load_drift": 0.65579087,
+              "tracking_score": 90.3772,
+              "correlation_score": 94.3657,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 0.0,
+              "zero_load_drift_score": 15.7015,
+              "axis_score": 62.357
+            },
+            "Mx": {
+              "rmse": 0.01144728,
+              "mae": 0.00743463,
+              "p95_absolute_error": 0.02557928,
+              "reference_span": 0.07646892,
+              "nrmse": 0.14969843,
+              "correlation": 0.84086068,
+              "jitter_amplitude": 0.00143003,
+              "jitter_ratio": 0.01870075,
+              "zero_load_noise": 0.00615458,
+              "zero_load_drift": 0.00204421,
+              "tracking_score": 89.3934,
+              "correlation_score": 85.2152,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 99.3559,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 93.9089
+            },
+            "My": {
+              "rmse": 0.01106773,
+              "mae": 0.00778085,
+              "p95_absolute_error": 0.02343114,
+              "reference_span": 0.08819921,
+              "nrmse": 0.12548558,
+              "correlation": 0.89350423,
+              "jitter_amplitude": 0.00152985,
+              "jitter_ratio": 0.01734544,
+              "zero_load_noise": 0.00864666,
+              "zero_load_drift": 0.00324526,
+              "tracking_score": 98.0409,
+              "correlation_score": 98.3761,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 88.9723,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 96.3138
+            },
+            "Mz": {
+              "rmse": 0.00863507,
+              "mae": 0.00599978,
+              "p95_absolute_error": 0.02005708,
+              "reference_span": 0.06526667,
+              "nrmse": 0.13230446,
+              "correlation": 0.85913882,
+              "jitter_amplitude": 0.0015099,
+              "jitter_ratio": 0.02313436,
+              "zero_load_noise": 0.01350535,
+              "zero_load_drift": 0.00490042,
+              "tracking_score": 95.6055,
+              "correlation_score": 89.7847,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 68.7277,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 89.1116
+            }
+          },
+          "warnings": []
+        },
+        "cleaned_result": {
+          "scoring_version": "4.0-absolute-zero-load",
+          "status": "scored",
+          "device_id": "coinft_260804_0010",
+          "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053328_batch_20260827_053148_round_03_pending.h5 [cleaned view]",
+          "dataset_split": "pending",
+          "hardware_id": "coinft_260804_0010",
+          "total_score": 74.9645,
+          "raw_axis_score": 74.9645,
+          "integrity_factor": 1.0,
+          "integrity": {
+            "duration_seconds": 41.234016,
+            "samples": 8262,
+            "duplicate_timestamp_count": 536,
+            "duplicate_timestamp_ratio": 0.064883,
+            "duration_score": 100.0,
+            "sample_score": 100.0
+          },
+          "fit_waveform_scoring": {
+            "tracking_weight": 0.35,
+            "correlation_weight": 0.15,
+            "jitter_weight": 0.15,
+            "zero_load_noise_weight": 0.25,
+            "zero_load_drift_weight": 0.1
+          },
+          "zero_load_analysis": {
+            "selection_mode": "fallback_lowest_load",
+            "selected_window_count": 3,
+            "no_load_fraction_estimate": 0.06051803,
+            "selected_load_index_min": 15.42416652,
+            "selected_load_index_median": 18.39166691,
+            "window_seconds": 1.0,
+            "window_step_seconds": 0.5,
+            "skip_initial_seconds": 2.0
+          },
+          "reference_distribution": {
+            "p05": {
+              "Fx": -1.5746686,
+              "Fy": -0.8662714,
+              "Fz": -14.61656579,
+              "Mx": -0.04910817,
+              "My": -0.02361636,
+              "Mz": -0.02246357
+            },
+            "mean": {
+              "Fx": -0.26989672,
+              "Fy": 0.01873042,
+              "Fz": -3.8227254,
+              "Mx": -0.00620075,
+              "My": 0.00822258,
+              "Mz": 0.00203079
+            },
+            "median": {
+              "Fx": -0.06566859,
+              "Fy": 0.01306194,
+              "Fz": -2.32948257,
+              "Mx": -0.00173134,
+              "My": 0.00189631,
+              "Mz": -6.357e-05
+            },
+            "p95": {
+              "Fx": 0.31489786,
+              "Fy": 0.81857855,
+              "Fz": 0.00200494,
+              "Mx": 0.02734084,
+              "My": 0.06422681,
+              "Mz": 0.0428031
+            },
+            "near_zero_fraction": 0.06051803
+          },
+          "axis_weights": {
+            "Fx": 0.1,
+            "Fy": 0.1,
+            "Fz": 0.5,
+            "Mx": 0.1,
+            "My": 0.1,
+            "Mz": 0.1
+          },
+          "axis_metrics": {
+            "Fx": {
+              "rmse": 0.29764047,
+              "mae": 0.20598926,
+              "p95_absolute_error": 0.66009616,
+              "reference_span": 1.88956645,
+              "nrmse": 0.15751787,
+              "correlation": 0.86189876,
+              "jitter_amplitude": 0.0769516,
+              "jitter_ratio": 0.04072447,
+              "zero_load_noise": 0.23146322,
+              "zero_load_drift": 0.07185537,
+              "tracking_score": 86.6008,
+              "correlation_score": 90.4747,
+              "jitter_score": 99.3414,
+              "zero_load_noise_score": 70.6676,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 86.4496
+            },
+            "Fy": {
+              "rmse": 0.30945877,
+              "mae": 0.2269607,
+              "p95_absolute_error": 0.66464967,
+              "reference_span": 1.68484995,
+              "nrmse": 0.18367141,
+              "correlation": 0.7769378,
+              "jitter_amplitude": 0.05851672,
+              "jitter_ratio": 0.03473111,
+              "zero_load_noise": 0.33477073,
+              "zero_load_drift": 0.07762918,
+              "tracking_score": 77.2602,
+              "correlation_score": 69.2345,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 43.4814,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 73.2966
+            },
+            "Fz": {
+              "rmse": 2.15778164,
+              "mae": 1.61252421,
+              "p95_absolute_error": 4.31958853,
+              "reference_span": 14.61857074,
+              "nrmse": 0.14760551,
+              "correlation": 0.87658064,
+              "jitter_amplitude": 0.30298391,
+              "jitter_ratio": 0.02072596,
+              "zero_load_noise": 2.15073935,
+              "zero_load_drift": 0.6545753,
+              "tracking_score": 90.1409,
+              "correlation_score": 94.1452,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 0.0,
+              "zero_load_drift_score": 15.9041,
+              "axis_score": 62.2615
+            },
+            "Mx": {
+              "rmse": 0.0114482,
+              "mae": 0.00743489,
+              "p95_absolute_error": 0.02562754,
+              "reference_span": 0.07644901,
+              "nrmse": 0.14974952,
+              "correlation": 0.84037214,
+              "jitter_amplitude": 0.00142968,
+              "jitter_ratio": 0.01870108,
+              "zero_load_noise": 0.00613567,
+              "zero_load_drift": 0.00204494,
+              "tracking_score": 89.3752,
+              "correlation_score": 85.093,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 99.4347,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 93.9039
+            },
+            "My": {
+              "rmse": 0.01106918,
+              "mae": 0.00778225,
+              "p95_absolute_error": 0.02344162,
+              "reference_span": 0.08784317,
+              "nrmse": 0.12601069,
+              "correlation": 0.89290977,
+              "jitter_amplitude": 0.00153221,
+              "jitter_ratio": 0.01744254,
+              "zero_load_noise": 0.00927476,
+              "zero_load_drift": 0.00331413,
+              "tracking_score": 97.8533,
+              "correlation_score": 98.2274,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 86.3552,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 95.5716
+            },
+            "Mz": {
+              "rmse": 0.00863743,
+              "mae": 0.0060021,
+              "p95_absolute_error": 0.02006245,
+              "reference_span": 0.06526667,
+              "nrmse": 0.13234056,
+              "correlation": 0.85912371,
+              "jitter_amplitude": 0.00151048,
+              "jitter_ratio": 0.02314317,
+              "zero_load_noise": 0.0134967,
+              "zero_load_drift": 0.00490389,
+              "tracking_score": 95.5927,
+              "correlation_score": 89.7809,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 68.7637,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 89.1155
+            }
+          },
+          "warnings": []
+        }
+      },
+      "score_result": {
+        "scoring_version": "4.0-absolute-zero-load",
+        "status": "scored",
+        "device_id": "coinft_260804_0010",
+        "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053328_batch_20260827_053148_round_03_pending.h5",
+        "dataset_split": "pending",
+        "hardware_id": "coinft_260804_0010",
+        "total_score": 75.1084,
+        "raw_axis_score": 75.1084,
+        "integrity_factor": 1.0,
+        "integrity": {
+          "duration_seconds": 41.234016,
+          "samples": 8267,
+          "duplicate_timestamp_count": 536,
+          "duplicate_timestamp_ratio": 0.064844,
+          "duration_score": 100.0,
+          "sample_score": 100.0
+        },
+        "fit_waveform_scoring": {
+          "tracking_weight": 0.35,
+          "correlation_weight": 0.15,
+          "jitter_weight": 0.15,
+          "zero_load_noise_weight": 0.25,
+          "zero_load_drift_weight": 0.1
+        },
+        "zero_load_analysis": {
+          "selection_mode": "fallback_lowest_load",
+          "selected_window_count": 3,
+          "no_load_fraction_estimate": 0.06048143,
+          "selected_load_index_min": 15.42416652,
+          "selected_load_index_median": 18.39166691,
+          "window_seconds": 1.0,
+          "window_step_seconds": 0.5,
+          "skip_initial_seconds": 2.0
+        },
+        "reference_distribution": {
+          "p05": {
+            "Fx": -1.58485196,
+            "Fy": -0.86825475,
+            "Fz": -14.67896602,
+            "Mx": -0.04911034,
+            "My": -0.02361636,
+            "Mz": -0.02246357
+          },
+          "mean": {
+            "Fx": -0.27081918,
+            "Fy": 0.01848966,
+            "Fz": -3.83135602,
+            "Mx": -0.00621615,
+            "My": 0.00825465,
+            "Mz": 0.00202642
+          },
+          "median": {
+            "Fx": -0.06566865,
+            "Fy": 0.01289533,
+            "Fz": -2.33056586,
+            "Mx": -0.00173851,
+            "My": 0.00189997,
+            "Mz": -6.357e-05
+          },
+          "p95": {
+            "Fx": 0.31481456,
+            "Fy": 0.81782856,
+            "Fz": 0.00194244,
+            "Mx": 0.02735858,
+            "My": 0.06458284,
+            "Mz": 0.0428031
+          },
+          "near_zero_fraction": 0.06048143
+        },
+        "axis_weights": {
+          "Fx": 0.1,
+          "Fy": 0.1,
+          "Fz": 0.5,
+          "Mx": 0.1,
+          "My": 0.1,
+          "Mz": 0.1
+        },
+        "axis_metrics": {
+          "Fx": {
+            "rmse": 0.29758974,
+            "mae": 0.20597144,
+            "p95_absolute_error": 0.65993606,
+            "reference_span": 1.89966652,
+            "nrmse": 0.15665368,
+            "correlation": 0.86267734,
+            "jitter_amplitude": 0.07681395,
+            "jitter_ratio": 0.04043549,
+            "zero_load_noise": 0.23141288,
+            "zero_load_drift": 0.07188551,
+            "tracking_score": 86.9094,
+            "correlation_score": 90.6693,
+            "jitter_score": 99.6041,
+            "zero_load_noise_score": 70.6808,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 86.6295
+          },
+          "Fy": {
+            "rmse": 0.30938036,
+            "mae": 0.22687589,
+            "p95_absolute_error": 0.66455372,
+            "reference_span": 1.68608332,
+            "nrmse": 0.18349055,
+            "correlation": 0.77721927,
+            "jitter_amplitude": 0.05842392,
+            "jitter_ratio": 0.03465067,
+            "zero_load_noise": 0.33469259,
+            "zero_load_drift": 0.07787249,
+            "tracking_score": 77.3248,
+            "correlation_score": 69.3048,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 43.5019,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 73.3349
+          },
+          "Fz": {
+            "rmse": 2.15727109,
+            "mae": 1.61209523,
+            "p95_absolute_error": 4.32086533,
+            "reference_span": 14.68090846,
+            "nrmse": 0.14694398,
+            "correlation": 0.87746272,
+            "jitter_amplitude": 0.30291211,
+            "jitter_ratio": 0.02063306,
+            "zero_load_noise": 2.14474501,
+            "zero_load_drift": 0.65579087,
+            "tracking_score": 90.3772,
+            "correlation_score": 94.3657,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 0.0,
+            "zero_load_drift_score": 15.7015,
+            "axis_score": 62.357
+          },
+          "Mx": {
+            "rmse": 0.01144728,
+            "mae": 0.00743463,
+            "p95_absolute_error": 0.02557928,
+            "reference_span": 0.07646892,
+            "nrmse": 0.14969843,
+            "correlation": 0.84086068,
+            "jitter_amplitude": 0.00143003,
+            "jitter_ratio": 0.01870075,
+            "zero_load_noise": 0.00615458,
+            "zero_load_drift": 0.00204421,
+            "tracking_score": 89.3934,
+            "correlation_score": 85.2152,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 99.3559,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 93.9089
+          },
+          "My": {
+            "rmse": 0.01106773,
+            "mae": 0.00778085,
+            "p95_absolute_error": 0.02343114,
+            "reference_span": 0.08819921,
+            "nrmse": 0.12548558,
+            "correlation": 0.89350423,
+            "jitter_amplitude": 0.00152985,
+            "jitter_ratio": 0.01734544,
+            "zero_load_noise": 0.00864666,
+            "zero_load_drift": 0.00324526,
+            "tracking_score": 98.0409,
+            "correlation_score": 98.3761,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 88.9723,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 96.3138
+          },
+          "Mz": {
+            "rmse": 0.00863507,
+            "mae": 0.00599978,
+            "p95_absolute_error": 0.02005708,
+            "reference_span": 0.06526667,
+            "nrmse": 0.13230446,
+            "correlation": 0.85913882,
+            "jitter_amplitude": 0.0015099,
+            "jitter_ratio": 0.02313436,
+            "zero_load_noise": 0.01350535,
+            "zero_load_drift": 0.00490042,
+            "tracking_score": 95.6055,
+            "correlation_score": 89.7847,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 68.7277,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 89.1116
+          }
+        },
+        "warnings": []
+      },
+      "score": 75.1084
+    },
+    {
+      "attempt": 4,
+      "target_round": 4,
+      "started_at": "2026-08-27T05:33:37",
+      "pending_h5": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053421_batch_20260827_053148_round_04_pending.h5",
+      "status": "scored",
+      "cleaner_payload": {
+        "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053421_batch_20260827_053148_round_04_pending.h5",
+        "preview_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053421_batch_20260827_053148_round_04_pending_quality_preview.png",
+        "device_id": "coinft_260804_0010",
+        "raw_score": 94.9535,
+        "cleaned_score": 94.9627,
+        "score_gain": 0.0092,
+        "removed_samples": 1,
+        "removed_ratio": 0.00012136,
+        "removed_events": [
+          {
+            "start_index": 7256,
+            "end_index_exclusive": 7257,
+            "length": 1,
+            "max_force_error_n": 1.9669463655737622,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.4955050131045877,
+            "neighbor_local_deviation_n": 0.20471620894045106,
+            "reference_context_change_n": 0.011916672190030411,
+            "action": "removed_isolated_spike",
+            "reason": "short spike, neighbors recovered, reference was quiet"
+          }
+        ],
+        "preserved_events": [
+          {
+            "start_index": 3813,
+            "end_index_exclusive": 3814,
+            "length": 1,
+            "max_force_error_n": 2.005144109215518,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.340344393368234,
+            "neighbor_local_deviation_n": 0.8372065284720982,
+            "reference_context_change_n": 0.13750012715657434,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 3832,
+            "end_index_exclusive": 3833,
+            "length": 1,
+            "max_force_error_n": 0.9689019323569532,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0076372263675104,
+            "neighbor_local_deviation_n": 0.918194943825938,
+            "reference_context_change_n": 0.03666655222574855,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 3835,
+            "end_index_exclusive": 3836,
+            "length": 1,
+            "max_force_error_n": 0.7842405852703358,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.0029923724964824,
+            "neighbor_local_deviation_n": 0.918194943825938,
+            "reference_context_change_n": 0.03474998474121094,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 3890,
+            "end_index_exclusive": 3893,
+            "length": 3,
+            "max_force_error_n": 12.241415073578876,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 2.2562849443026067,
+            "neighbor_local_deviation_n": 0.42946795764760637,
+            "reference_context_change_n": 3.0210002263387032,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          },
+          {
+            "start_index": 3897,
+            "end_index_exclusive": 3898,
+            "length": 1,
+            "max_force_error_n": 10.564620615597457,
+            "axes": [
+              "Fz"
+            ],
+            "max_local_deviation_n": 1.1352696537260822,
+            "neighbor_local_deviation_n": 0.2855511787493086,
+            "reference_context_change_n": 3.2313330968221035,
+            "action": "preserved_context_candidate",
+            "reason": "neighbors or reference context were not quiet"
+          }
+        ],
+        "apply_requested": false,
+        "applied": false,
+        "apply_reason": "preview_only",
+        "backup_file": null,
+        "applied_result": null,
+        "raw_result": {
+          "scoring_version": "4.0-absolute-zero-load",
+          "status": "scored",
+          "device_id": "coinft_260804_0010",
+          "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053421_batch_20260827_053148_round_04_pending.h5",
+          "dataset_split": "pending",
+          "hardware_id": "coinft_260804_0010",
+          "total_score": 94.9535,
+          "raw_axis_score": 94.9535,
+          "integrity_factor": 1.0,
+          "integrity": {
+            "duration_seconds": 41.067921,
+            "samples": 8240,
+            "duplicate_timestamp_count": 544,
+            "duplicate_timestamp_ratio": 0.066027,
+            "duration_score": 100.0,
+            "sample_score": 100.0
+          },
+          "fit_waveform_scoring": {
+            "tracking_weight": 0.35,
+            "correlation_weight": 0.15,
+            "jitter_weight": 0.15,
+            "zero_load_noise_weight": 0.25,
+            "zero_load_drift_weight": 0.1
+          },
+          "zero_load_analysis": {
+            "selection_mode": "near_zero",
+            "selected_window_count": 3,
+            "no_load_fraction_estimate": 0.06067961,
+            "selected_load_index_min": 0.19504064,
+            "selected_load_index_median": 0.24772725,
+            "window_seconds": 1.0,
+            "window_step_seconds": 0.5,
+            "skip_initial_seconds": 2.0
+          },
+          "reference_distribution": {
+            "p05": {
+              "Fx": -1.21979551,
+              "Fy": -0.86131805,
+              "Fz": -14.44068949,
+              "Mx": -0.01980025,
+              "My": -0.0130199,
+              "Mz": -0.01994848
+            },
+            "mean": {
+              "Fx": -0.26001892,
+              "Fy": -0.07942609,
+              "Fz": -2.71452768,
+              "Mx": -0.0034548,
+              "My": 0.00639508,
+              "Mz": 0.00212661
+            },
+            "median": {
+              "Fx": -0.12587862,
+              "Fy": -0.01006811,
+              "Fz": -1.00902272,
+              "Mx": -0.00162625,
+              "My": 0.0018581,
+              "Mz": 0.00048485
+            },
+            "p95": {
+              "Fx": 0.19778796,
+              "Fy": 0.47943185,
+              "Fz": 2.49631062,
+              "Mx": 0.00915846,
+              "My": 0.04521935,
+              "Mz": 0.02351818
+            },
+            "near_zero_fraction": 0.06067961
+          },
+          "axis_weights": {
+            "Fx": 0.1,
+            "Fy": 0.1,
+            "Fz": 0.5,
+            "Mx": 0.1,
+            "My": 0.1,
+            "Mz": 0.1
+          },
+          "axis_metrics": {
+            "Fx": {
+              "rmse": 0.21765801,
+              "mae": 0.15734614,
+              "p95_absolute_error": 0.45665499,
+              "reference_span": 1.41758347,
+              "nrmse": 0.15354159,
+              "correlation": 0.87850217,
+              "jitter_amplitude": 0.06923603,
+              "jitter_ratio": 0.04884089,
+              "zero_load_noise": 0.09518338,
+              "zero_load_drift": 0.11338316,
+              "tracking_score": 88.0209,
+              "correlation_score": 94.6255,
+              "jitter_score": 91.9628,
+              "zero_load_noise_score": 100.0,
+              "zero_load_drift_score": 97.3234,
+              "axis_score": 93.5279
+            },
+            "Fy": {
+              "rmse": 0.21105558,
+              "mae": 0.14719788,
+              "p95_absolute_error": 0.4632163,
+              "reference_span": 1.3407499,
+              "nrmse": 0.15741607,
+              "correlation": 0.84830932,
+              "jitter_amplitude": 0.04413178,
+              "jitter_ratio": 0.03291574,
+              "zero_load_noise": 0.05457251,
+              "zero_load_drift": 0.03835093,
+              "tracking_score": 86.6371,
+              "correlation_score": 87.0773,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 100.0,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 93.3846
+            },
+            "Fz": {
+              "rmse": 1.27153833,
+              "mae": 0.78443335,
+              "p95_absolute_error": 2.42037857,
+              "reference_span": 16.93700012,
+              "nrmse": 0.07507459,
+              "correlation": 0.96949692,
+              "jitter_amplitude": 0.15140922,
+              "jitter_ratio": 0.00893955,
+              "zero_load_noise": 0.17221626,
+              "zero_load_drift": 0.35250563,
+              "tracking_score": 100.0,
+              "correlation_score": 100.0,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 100.0,
+              "zero_load_drift_score": 66.2491,
+              "axis_score": 96.6249
+            },
+            "Mx": {
+              "rmse": 0.00608962,
+              "mae": 0.00352179,
+              "p95_absolute_error": 0.01161281,
+              "reference_span": 0.0289587,
+              "nrmse": 0.21028633,
+              "correlation": 0.81923105,
+              "jitter_amplitude": 0.0011549,
+              "jitter_ratio": 0.0398808,
+              "zero_load_noise": 0.00156909,
+              "zero_load_drift": 0.00144958,
+              "tracking_score": 67.7549,
+              "correlation_score": 79.8078,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 100.0,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 85.6854
+            },
+            "My": {
+              "rmse": 0.00723805,
+              "mae": 0.00455241,
+              "p95_absolute_error": 0.01536542,
+              "reference_span": 0.05823925,
+              "nrmse": 0.12428123,
+              "correlation": 0.90706439,
+              "jitter_amplitude": 0.00093072,
+              "jitter_ratio": 0.01598093,
+              "zero_load_noise": 0.00099471,
+              "zero_load_drift": 0.00108748,
+              "tracking_score": 98.471,
+              "correlation_score": 100.0,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 100.0,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 99.4648
+            },
+            "Mz": {
+              "rmse": 0.00668036,
+              "mae": 0.00452846,
+              "p95_absolute_error": 0.01344419,
+              "reference_span": 0.04346667,
+              "nrmse": 0.15368937,
+              "correlation": 0.8615812,
+              "jitter_amplitude": 0.00131606,
+              "jitter_ratio": 0.03027752,
+              "zero_load_noise": 0.00173398,
+              "zero_load_drift": 0.00103564,
+              "tracking_score": 87.9681,
+              "correlation_score": 90.3953,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 100.0,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 94.3481
+            }
+          },
+          "warnings": []
+        },
+        "cleaned_result": {
+          "scoring_version": "4.0-absolute-zero-load",
+          "status": "scored",
+          "device_id": "coinft_260804_0010",
+          "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053421_batch_20260827_053148_round_04_pending.h5 [cleaned view]",
+          "dataset_split": "pending",
+          "hardware_id": "coinft_260804_0010",
+          "total_score": 94.9627,
+          "raw_axis_score": 94.9627,
+          "integrity_factor": 1.0,
+          "integrity": {
+            "duration_seconds": 41.067921,
+            "samples": 8239,
+            "duplicate_timestamp_count": 544,
+            "duplicate_timestamp_ratio": 0.066035,
+            "duration_score": 100.0,
+            "sample_score": 100.0
+          },
+          "fit_waveform_scoring": {
+            "tracking_weight": 0.35,
+            "correlation_weight": 0.15,
+            "jitter_weight": 0.15,
+            "zero_load_noise_weight": 0.25,
+            "zero_load_drift_weight": 0.1
+          },
+          "zero_load_analysis": {
+            "selection_mode": "near_zero",
+            "selected_window_count": 3,
+            "no_load_fraction_estimate": 0.06068698,
+            "selected_load_index_min": 0.19504064,
+            "selected_load_index_median": 0.24772725,
+            "window_seconds": 1.0,
+            "window_step_seconds": 0.5,
+            "skip_initial_seconds": 2.0
+          },
+          "reference_distribution": {
+            "p05": {
+              "Fx": -1.21979551,
+              "Fy": -0.86131805,
+              "Fz": -14.44068949,
+              "Mx": -0.01980025,
+              "My": -0.0130199,
+              "Mz": -0.01994848
+            },
+            "mean": {
+              "Fx": -0.26004422,
+              "Fy": -0.07943878,
+              "Fz": -2.71484352,
+              "Mx": -0.00345522,
+              "My": 0.00639567,
+              "Mz": 0.00212691
+            },
+            "median": {
+              "Fx": -0.12587862,
+              "Fy": -0.01006811,
+              "Fz": -1.00902272,
+              "Mx": -0.00162625,
+              "My": 0.0018581,
+              "Mz": 0.00048485
+            },
+            "p95": {
+              "Fx": 0.19778796,
+              "Fy": 0.47943185,
+              "Fz": 2.49631062,
+              "Mx": 0.009163,
+              "My": 0.04521935,
+              "Mz": 0.02351818
+            },
+            "near_zero_fraction": 0.06068698
+          },
+          "axis_weights": {
+            "Fx": 0.1,
+            "Fy": 0.1,
+            "Fz": 0.5,
+            "Mx": 0.1,
+            "My": 0.1,
+            "Mz": 0.1
+          },
+          "axis_metrics": {
+            "Fx": {
+              "rmse": 0.21767003,
+              "mae": 0.15735609,
+              "p95_absolute_error": 0.45669646,
+              "reference_span": 1.41758347,
+              "nrmse": 0.15355006,
+              "correlation": 0.87850021,
+              "jitter_amplitude": 0.06922302,
+              "jitter_ratio": 0.04883171,
+              "zero_load_noise": 0.09538905,
+              "zero_load_drift": 0.1134564,
+              "tracking_score": 88.0178,
+              "correlation_score": 94.6251,
+              "jitter_score": 91.9712,
+              "zero_load_noise_score": 100.0,
+              "zero_load_drift_score": 97.3087,
+              "axis_score": 93.5265
+            },
+            "Fy": {
+              "rmse": 0.21106667,
+              "mae": 0.14720845,
+              "p95_absolute_error": 0.46323808,
+              "reference_span": 1.3407499,
+              "nrmse": 0.15742434,
+              "correlation": 0.8483105,
+              "jitter_amplitude": 0.04409391,
+              "jitter_ratio": 0.0328875,
+              "zero_load_noise": 0.0546495,
+              "zero_load_drift": 0.03847346,
+              "tracking_score": 86.6342,
+              "correlation_score": 87.0776,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 100.0,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 93.3836
+            },
+            "Fz": {
+              "rmse": 1.27142845,
+              "mae": 0.78441731,
+              "p95_absolute_error": 2.42330139,
+              "reference_span": 16.93700012,
+              "nrmse": 0.0750681,
+              "correlation": 0.96950516,
+              "jitter_amplitude": 0.15350874,
+              "jitter_ratio": 0.00906351,
+              "zero_load_noise": 0.17305777,
+              "zero_load_drift": 0.35138456,
+              "tracking_score": 100.0,
+              "correlation_score": 100.0,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 100.0,
+              "zero_load_drift_score": 66.4359,
+              "axis_score": 96.6436
+            },
+            "Mx": {
+              "rmse": 0.00608995,
+              "mae": 0.00352223,
+              "p95_absolute_error": 0.0116162,
+              "reference_span": 0.02896325,
+              "nrmse": 0.21026458,
+              "correlation": 0.81923158,
+              "jitter_amplitude": 0.00115549,
+              "jitter_ratio": 0.03989521,
+              "zero_load_noise": 0.00156708,
+              "zero_load_drift": 0.00145128,
+              "tracking_score": 67.7626,
+              "correlation_score": 79.8079,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 100.0,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 85.6881
+            },
+            "My": {
+              "rmse": 0.00723845,
+              "mae": 0.00455267,
+              "p95_absolute_error": 0.0153622,
+              "reference_span": 0.05823925,
+              "nrmse": 0.12428819,
+              "correlation": 0.90706436,
+              "jitter_amplitude": 0.00093171,
+              "jitter_ratio": 0.01599802,
+              "zero_load_noise": 0.00099176,
+              "zero_load_drift": 0.00108724,
+              "tracking_score": 98.4685,
+              "correlation_score": 100.0,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 100.0,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 99.464
+            },
+            "Mz": {
+              "rmse": 0.00668071,
+              "mae": 0.00452881,
+              "p95_absolute_error": 0.01344547,
+              "reference_span": 0.04346667,
+              "nrmse": 0.15369733,
+              "correlation": 0.86158311,
+              "jitter_amplitude": 0.00131727,
+              "jitter_ratio": 0.0303052,
+              "zero_load_noise": 0.00173758,
+              "zero_load_drift": 0.00103551,
+              "tracking_score": 87.9652,
+              "correlation_score": 90.3958,
+              "jitter_score": 100.0,
+              "zero_load_noise_score": 100.0,
+              "zero_load_drift_score": 100.0,
+              "axis_score": 94.3472
+            }
+          },
+          "warnings": []
+        }
+      },
+      "score_result": {
+        "scoring_version": "4.0-absolute-zero-load",
+        "status": "scored",
+        "device_id": "coinft_260804_0010",
+        "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053421_batch_20260827_053148_round_04_pending.h5",
+        "dataset_split": "pending",
+        "hardware_id": "coinft_260804_0010",
+        "total_score": 94.9535,
+        "raw_axis_score": 94.9535,
+        "integrity_factor": 1.0,
+        "integrity": {
+          "duration_seconds": 41.067921,
+          "samples": 8240,
+          "duplicate_timestamp_count": 544,
+          "duplicate_timestamp_ratio": 0.066027,
+          "duration_score": 100.0,
+          "sample_score": 100.0
+        },
+        "fit_waveform_scoring": {
+          "tracking_weight": 0.35,
+          "correlation_weight": 0.15,
+          "jitter_weight": 0.15,
+          "zero_load_noise_weight": 0.25,
+          "zero_load_drift_weight": 0.1
+        },
+        "zero_load_analysis": {
+          "selection_mode": "near_zero",
+          "selected_window_count": 3,
+          "no_load_fraction_estimate": 0.06067961,
+          "selected_load_index_min": 0.19504064,
+          "selected_load_index_median": 0.24772725,
+          "window_seconds": 1.0,
+          "window_step_seconds": 0.5,
+          "skip_initial_seconds": 2.0
+        },
+        "reference_distribution": {
+          "p05": {
+            "Fx": -1.21979551,
+            "Fy": -0.86131805,
+            "Fz": -14.44068949,
+            "Mx": -0.01980025,
+            "My": -0.0130199,
+            "Mz": -0.01994848
+          },
+          "mean": {
+            "Fx": -0.26001892,
+            "Fy": -0.07942609,
+            "Fz": -2.71452768,
+            "Mx": -0.0034548,
+            "My": 0.00639508,
+            "Mz": 0.00212661
+          },
+          "median": {
+            "Fx": -0.12587862,
+            "Fy": -0.01006811,
+            "Fz": -1.00902272,
+            "Mx": -0.00162625,
+            "My": 0.0018581,
+            "Mz": 0.00048485
+          },
+          "p95": {
+            "Fx": 0.19778796,
+            "Fy": 0.47943185,
+            "Fz": 2.49631062,
+            "Mx": 0.00915846,
+            "My": 0.04521935,
+            "Mz": 0.02351818
+          },
+          "near_zero_fraction": 0.06067961
+        },
+        "axis_weights": {
+          "Fx": 0.1,
+          "Fy": 0.1,
+          "Fz": 0.5,
+          "Mx": 0.1,
+          "My": 0.1,
+          "Mz": 0.1
+        },
+        "axis_metrics": {
+          "Fx": {
+            "rmse": 0.21765801,
+            "mae": 0.15734614,
+            "p95_absolute_error": 0.45665499,
+            "reference_span": 1.41758347,
+            "nrmse": 0.15354159,
+            "correlation": 0.87850217,
+            "jitter_amplitude": 0.06923603,
+            "jitter_ratio": 0.04884089,
+            "zero_load_noise": 0.09518338,
+            "zero_load_drift": 0.11338316,
+            "tracking_score": 88.0209,
+            "correlation_score": 94.6255,
+            "jitter_score": 91.9628,
+            "zero_load_noise_score": 100.0,
+            "zero_load_drift_score": 97.3234,
+            "axis_score": 93.5279
+          },
+          "Fy": {
+            "rmse": 0.21105558,
+            "mae": 0.14719788,
+            "p95_absolute_error": 0.4632163,
+            "reference_span": 1.3407499,
+            "nrmse": 0.15741607,
+            "correlation": 0.84830932,
+            "jitter_amplitude": 0.04413178,
+            "jitter_ratio": 0.03291574,
+            "zero_load_noise": 0.05457251,
+            "zero_load_drift": 0.03835093,
+            "tracking_score": 86.6371,
+            "correlation_score": 87.0773,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 100.0,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 93.3846
+          },
+          "Fz": {
+            "rmse": 1.27153833,
+            "mae": 0.78443335,
+            "p95_absolute_error": 2.42037857,
+            "reference_span": 16.93700012,
+            "nrmse": 0.07507459,
+            "correlation": 0.96949692,
+            "jitter_amplitude": 0.15140922,
+            "jitter_ratio": 0.00893955,
+            "zero_load_noise": 0.17221626,
+            "zero_load_drift": 0.35250563,
+            "tracking_score": 100.0,
+            "correlation_score": 100.0,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 100.0,
+            "zero_load_drift_score": 66.2491,
+            "axis_score": 96.6249
+          },
+          "Mx": {
+            "rmse": 0.00608962,
+            "mae": 0.00352179,
+            "p95_absolute_error": 0.01161281,
+            "reference_span": 0.0289587,
+            "nrmse": 0.21028633,
+            "correlation": 0.81923105,
+            "jitter_amplitude": 0.0011549,
+            "jitter_ratio": 0.0398808,
+            "zero_load_noise": 0.00156909,
+            "zero_load_drift": 0.00144958,
+            "tracking_score": 67.7549,
+            "correlation_score": 79.8078,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 100.0,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 85.6854
+          },
+          "My": {
+            "rmse": 0.00723805,
+            "mae": 0.00455241,
+            "p95_absolute_error": 0.01536542,
+            "reference_span": 0.05823925,
+            "nrmse": 0.12428123,
+            "correlation": 0.90706439,
+            "jitter_amplitude": 0.00093072,
+            "jitter_ratio": 0.01598093,
+            "zero_load_noise": 0.00099471,
+            "zero_load_drift": 0.00108748,
+            "tracking_score": 98.471,
+            "correlation_score": 100.0,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 100.0,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 99.4648
+          },
+          "Mz": {
+            "rmse": 0.00668036,
+            "mae": 0.00452846,
+            "p95_absolute_error": 0.01344419,
+            "reference_span": 0.04346667,
+            "nrmse": 0.15368937,
+            "correlation": 0.8615812,
+            "jitter_amplitude": 0.00131606,
+            "jitter_ratio": 0.03027752,
+            "zero_load_noise": 0.00173398,
+            "zero_load_drift": 0.00103564,
+            "tracking_score": 87.9681,
+            "correlation_score": 90.3953,
+            "jitter_score": 100.0,
+            "zero_load_noise_score": 100.0,
+            "zero_load_drift_score": 100.0,
+            "axis_score": 94.3481
+          }
+        },
+        "warnings": []
+      },
+      "score": 94.9535
+    },
+    {
+      "attempt": 5,
+      "target_round": 5,
+      "started_at": "2026-08-27T05:34:29",
+      "status": "collector_error",
+      "returncode": 3489660927,
+      "new_h5": [],
+      "retained_files": []
+    }
+  ],
+  "existing_h5": [
+    "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053056_train.h5"
+  ],
+  "existing_import_complete": true,
+  "paused_at": "2026-08-27T05:35:09"
+}

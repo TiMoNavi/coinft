@@ -1,0 +1,97 @@
+{
+  "hardware_id": "coinft_260804_0001",
+  "sensor_name": "CFT24",
+  "input_dim": 12,
+  "output_dim": 6,
+  "train_samples": 148892,
+  "val_samples": 16403,
+  "test_samples": 16520,
+  "training_config": {
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "epochs": 30,
+    "early_stopping_patience": 8,
+    "l2_reg": 0.0001,
+    "seed": 42,
+    "hidden_layers": [
+      128,
+      64,
+      36,
+      24,
+      12
+    ],
+    "input_channels": 12,
+    "output_channels": 6,
+    "output_labels": [
+      "Fx",
+      "Fy",
+      "Fz",
+      "Mx",
+      "My",
+      "Mz"
+    ]
+  },
+  "epochs_completed": 14,
+  "best_epoch": 6,
+  "best_validation_loss": 0.16122526628564446,
+  "final_observed_validation_loss": 0.1849232211215966,
+  "early_stopping_patience": 8,
+  "model_input_is_temporal": false,
+  "model_input_contract": "each row is one independent 12-channel sample mapped to one 6-axis label",
+  "pretraining_micro_cleaning": {
+    "train": {
+      "enabled": true,
+      "version": "1.0-isolated-force-spikes-in-memory",
+      "removed_samples": 48
+    },
+    "val": {
+      "enabled": true,
+      "version": "1.0-isolated-force-spikes-in-memory",
+      "removed_samples": 12
+    },
+    "test": {
+      "enabled": true,
+      "version": "1.0-isolated-force-spikes-in-memory",
+      "removed_samples": 3
+    }
+  },
+  "pretraining_artifact_backups": {
+    "CFT24_MLP.pth": "backups/CFT24_MLP.pth.pre_train_20260811_112311_481295.bak",
+    "CFT24_MLP.onnx": "backups/CFT24_MLP.onnx.pre_train_20260811_112311_481295.bak",
+    "CFT24_MLP.onnx.data": "backups/CFT24_MLP.onnx.data.pre_train_20260811_112311_481295.bak",
+    "CFT24_norm.json": "backups/CFT24_norm.json.pre_train_20260811_112311_481295.bak",
+    "evaluation/CFT24_MLP_results.png": "backups/CFT24_MLP_results.png.pre_train_20260811_112311_481295.bak",
+    "evaluation/training_summary.json": "backups/training_summary.json.pre_train_20260811_112311_481295.bak",
+    "evaluation/acceptance_preview.mp4": "backups/acceptance_preview.mp4.pre_train_20260811_112311_481295.bak"
+  },
+  "test_mse": [
+    0.08812548272350855,
+    0.15881549369281575,
+    0.4273451692119537,
+    5.839132580069828e-05,
+    0.0001663960533647896,
+    3.435322699731137e-05
+  ],
+  "test_rmse": [
+    0.29685936522789463,
+    0.39851661658306764,
+    0.6537164287456402,
+    0.0076414217133134515,
+    0.012899459421417224,
+    0.005861162597754081
+  ],
+  "onnx_consistency": {
+    "samples": 2048,
+    "input_contract": "one independent sample with shape (1, 12)",
+    "rtol": 1e-05,
+    "atol": 1e-06,
+    "max_abs_diff": 1.0132789611816406e-06,
+    "passed": true
+  },
+  "artifacts": {
+    "pth": "CFT24_MLP.pth",
+    "onnx": "CFT24_MLP.onnx",
+    "norm": "CFT24_norm.json",
+    "results": "evaluation/CFT24_MLP_results.png"
+  }
+}

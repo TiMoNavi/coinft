@@ -1,0 +1,19 @@
+CoinFT scoring version: 5.0-cross-round-fz
+Per-axis waveform score:
+  tracking NRMSE: 35%
+  red/blue correlation: 15%
+  dynamic excess jitter: 15%
+  absolute unloaded noise: 25%
+  unloaded drift: 10%
+Axis weights:
+  Fx: 10%
+  Fy: 10%
+  Fz: 50%
+  Mx: 10%
+  My: 10%
+  Mz: 10%
+NRMSE good/bad: 0.12 / 0.4
+Correlation good/bad: 0.9 / 0.5
+Jitter ratio good/bad: 0.04 / 0.15
+Absolute zero-load thresholds are axis-specific; they are never divided by force span.
+Final batch rank uses held-out cross-round Fz zero-load noise and Fz RMSE.

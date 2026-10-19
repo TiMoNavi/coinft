@@ -1,0 +1,5 @@
+device_id=coinft_260804_0010
+batch_id=20260827_045632
+status=paused
+scoring_version=5.0-cross-round-fz
+round=01 score=72.90 Fx=77.32 Fy=82.63 Fz=58.93 Mx=87.18 My=91.92 Mz=95.36 file=coinft_260804_0010_CFT24_calibrationData_20260827_045716_batch_20260827_045632_round_01_pending.h5

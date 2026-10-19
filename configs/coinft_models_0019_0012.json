@@ -1,0 +1,16 @@
+{
+  "schema": "coinft-teensy-v2-models",
+  "model_set_id": "coinft_2606602_0019_0012",
+  "slots": {
+    "left": {
+      "hardware_label": "coinft_2606602_0019",
+      "model": "../../UMIFT-datacollect/deliverables/UMIFT_datacollect_source_20260812/modules/03_coinft_teensy/assets/calibration/production/coinft_2606602_0019/coinft_2606602_0019_MLP.onnx",
+      "norm": "../../UMIFT-datacollect/deliverables/UMIFT_datacollect_source_20260812/modules/03_coinft_teensy/assets/calibration/production/coinft_2606602_0019/coinft_2606602_0019_norm.json"
+    },
+    "right": {
+      "hardware_label": "coinft_2606602_0012",
+      "model": "../../UMIFT-datacollect/deliverables/UMIFT_datacollect_source_20260812/modules/03_coinft_teensy/assets/calibration/production/coinft_2606602_0012/coinft_2606602_0012_MLP.onnx",
+      "norm": "../../UMIFT-datacollect/deliverables/UMIFT_datacollect_source_20260812/modules/03_coinft_teensy/assets/calibration/production/coinft_2606602_0012/coinft_2606602_0012_norm.json"
+    }
+  }
+}

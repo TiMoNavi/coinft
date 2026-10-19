@@ -23,6 +23,14 @@ conda activate coin-ft
 
 All the details on preparing the hardware and using the code in this repo can be found in the [hardware instructions](https://docs.google.com/document/d/e/2PACX-1vSQ-6q2MDwoBn2g9_u95RpvHrBDzH095R--uHuNxioFIZdZOnJKnvnTMS7yw188D1-z9awBrU9pWYNI/pub)
 
+### Direct PSoC capture
+
+For a KitProg3-connected CoinFT, use the direct 1 Mbaud path documented in
+[`calibration/README.md`](calibration/README.md). It checks `q -> 0x1A`, parses
+the `0x02 ... 0x03` 26-byte frame, records per-frame timestamps, and verifies
+that `i` leaves a quiet UART. The Teensy bridge is a separate 115200-baud
+`00 00 + raw` protocol and should be selected explicitly in the raw viewer.
+
 
 
 

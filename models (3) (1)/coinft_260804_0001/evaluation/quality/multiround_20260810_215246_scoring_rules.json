@@ -1,0 +1,25 @@
+{
+  "axis_weights": {
+    "Fx": 0.1,
+    "Fy": 0.1,
+    "Fz": 0.5,
+    "Mx": 0.1,
+    "My": 0.1,
+    "Mz": 0.1
+  },
+  "axis_component_weights": {
+    "tracking": 0.5,
+    "correlation": 0.25,
+    "jitter": 0.25
+  },
+  "nrmse_good": 0.12,
+  "nrmse_bad": 0.4,
+  "correlation_good": 0.9,
+  "correlation_bad": 0.5,
+  "jitter_ratio_good": 0.04,
+  "jitter_ratio_bad": 0.15,
+  "duration_full_seconds": 39.0,
+  "duration_zero_seconds": 35.0,
+  "samples_full": 7800,
+  "samples_zero": 6000
+}

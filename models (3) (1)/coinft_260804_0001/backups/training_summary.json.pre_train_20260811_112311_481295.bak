@@ -1,0 +1,96 @@
+{
+  "hardware_id": "coinft_260804_0001",
+  "sensor_name": "CFT24",
+  "input_dim": 12,
+  "output_dim": 6,
+  "train_samples": 164895,
+  "val_samples": 16503,
+  "test_samples": 16559,
+  "training_config": {
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "epochs": 30,
+    "early_stopping_patience": 8,
+    "l2_reg": 0.0001,
+    "seed": 42,
+    "hidden_layers": [
+      128,
+      64,
+      36,
+      24,
+      12
+    ],
+    "input_channels": 12,
+    "output_channels": 6,
+    "output_labels": [
+      "Fx",
+      "Fy",
+      "Fz",
+      "Mx",
+      "My",
+      "Mz"
+    ]
+  },
+  "epochs_completed": 13,
+  "best_epoch": 5,
+  "best_validation_loss": 0.1927413524947968,
+  "final_observed_validation_loss": 0.21556585039660162,
+  "early_stopping_patience": 8,
+  "model_input_is_temporal": false,
+  "model_input_contract": "each row is one independent 12-channel sample mapped to one 6-axis label",
+  "pretraining_micro_cleaning": {
+    "train": {
+      "enabled": true,
+      "version": "1.0-isolated-force-spikes-in-memory",
+      "removed_samples": 251
+    },
+    "val": {
+      "enabled": true,
+      "version": "1.0-isolated-force-spikes-in-memory",
+      "removed_samples": 0
+    },
+    "test": {
+      "enabled": true,
+      "version": "1.0-isolated-force-spikes-in-memory",
+      "removed_samples": 3
+    }
+  },
+  "pretraining_artifact_backups": {
+    "CFT24_MLP.pth": "backups/CFT24_MLP.pth.pre_train_20260811_095140_017030.bak",
+    "CFT24_MLP.onnx": "backups/CFT24_MLP.onnx.pre_train_20260811_095140_017030.bak",
+    "CFT24_MLP.onnx.data": "backups/CFT24_MLP.onnx.data.pre_train_20260811_095140_017030.bak",
+    "CFT24_norm.json": "backups/CFT24_norm.json.pre_train_20260811_095140_017030.bak",
+    "evaluation/CFT24_MLP_results.png": "backups/CFT24_MLP_results.png.pre_train_20260811_095140_017030.bak",
+    "evaluation/training_summary.json": "backups/training_summary.json.pre_train_20260811_095140_017030.bak"
+  },
+  "test_mse": [
+    0.09178918723599494,
+    0.10994571439780229,
+    1.349449308120522,
+    7.451272210860468e-05,
+    0.00010103783517685588,
+    6.762456395612511e-05
+  ],
+  "test_rmse": [
+    0.3029673039058752,
+    0.3315806303115462,
+    1.161657999636951,
+    0.008632075191320143,
+    0.010051757815270713,
+    0.0082234155894084
+  ],
+  "onnx_consistency": {
+    "samples": 2048,
+    "input_contract": "one independent sample with shape (1, 12)",
+    "rtol": 1e-05,
+    "atol": 1e-06,
+    "max_abs_diff": 9.5367431640625e-07,
+    "passed": true
+  },
+  "artifacts": {
+    "pth": "CFT24_MLP.pth",
+    "onnx": "CFT24_MLP.onnx",
+    "norm": "CFT24_norm.json",
+    "results": "evaluation/CFT24_MLP_results.png"
+  }
+}

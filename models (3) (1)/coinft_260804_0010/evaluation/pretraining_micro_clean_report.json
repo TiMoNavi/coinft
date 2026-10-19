@@ -1,0 +1,522 @@
+{
+  "device_id": "coinft_260804_0010",
+  "created_at": "2026-08-27T05:49:44",
+  "micro_cleaning": {
+    "enabled": true,
+    "version": "1.0-isolated-force-spikes-in-memory",
+    "removed_by_split": {
+      "train": 4,
+      "val": 0,
+      "test": 0
+    }
+  },
+  "raw_h5_modified": false,
+  "model_input_is_temporal": false,
+  "model_input_shape": "one independent sample: 12 channels -> 6 outputs",
+  "files": [
+    {
+      "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053235_batch_20260827_053148_round_02_rank_08_score_55.70_train.h5",
+      "source_sha256": "48d1a1f90931c820ece5dee91661f808972426945549a9f49e087c8d16607c93",
+      "split": "train",
+      "source_samples": 8262,
+      "kept_samples": 8262,
+      "candidate_samples": 13,
+      "removed_samples": 0,
+      "candidate_events": [
+        {
+          "start_index": 3628,
+          "end_index_exclusive": 3629,
+          "length": 1,
+          "max_force_error_n": 4.586321358920556,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.0675913447415564,
+          "neighbor_local_deviation_n": 0.23813009388232942,
+          "reference_context_change_n": 0.38500000101824594,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        },
+        {
+          "start_index": 3979,
+          "end_index_exclusive": 3980,
+          "length": 1,
+          "max_force_error_n": 2.46856408485279,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.0057644556800125,
+          "neighbor_local_deviation_n": 0.13638080283779663,
+          "reference_context_change_n": 0.49500004450480173,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        },
+        {
+          "start_index": 4445,
+          "end_index_exclusive": 4446,
+          "length": 1,
+          "max_force_error_n": 2.8055950081228396,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.1829923564239166,
+          "neighbor_local_deviation_n": 0.4796903952211906,
+          "reference_context_change_n": 0.4303334554036464,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        },
+        {
+          "start_index": 4448,
+          "end_index_exclusive": 4449,
+          "length": 1,
+          "max_force_error_n": 2.6485144607160027,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.0331844943381085,
+          "neighbor_local_deviation_n": 0.4796903952211906,
+          "reference_context_change_n": 0.2225834528605155,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        },
+        {
+          "start_index": 4475,
+          "end_index_exclusive": 4476,
+          "length": 1,
+          "max_force_error_n": 2.3664764496044715,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.0770974153912363,
+          "neighbor_local_deviation_n": 0.30315696526440483,
+          "reference_context_change_n": 0.3470001220703125,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        },
+        {
+          "start_index": 4486,
+          "end_index_exclusive": 4487,
+          "length": 1,
+          "max_force_error_n": 2.1129185577549077,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.7791476318536414,
+          "neighbor_local_deviation_n": 0.46162488999245355,
+          "reference_context_change_n": 0.3542499542236328,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        },
+        {
+          "start_index": 4507,
+          "end_index_exclusive": 4508,
+          "length": 1,
+          "max_force_error_n": 0.9416620573254733,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.3457954066028144,
+          "neighbor_local_deviation_n": 0.3054743874769912,
+          "reference_context_change_n": 0.48008298873901367,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        },
+        {
+          "start_index": 4512,
+          "end_index_exclusive": 4513,
+          "length": 1,
+          "max_force_error_n": 1.029981054623022,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.434114403900363,
+          "neighbor_local_deviation_n": 0.41028718722642665,
+          "reference_context_change_n": 0.29199981689453125,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        },
+        {
+          "start_index": 4573,
+          "end_index_exclusive": 4574,
+          "length": 1,
+          "max_force_error_n": 1.7170349452675282,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.399620628600962,
+          "neighbor_local_deviation_n": 0.3682828990288023,
+          "reference_context_change_n": 0.3946666717529279,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        },
+        {
+          "start_index": 4576,
+          "end_index_exclusive": 4577,
+          "length": 1,
+          "max_force_error_n": 0.5082432669764021,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.184216315869154,
+          "neighbor_local_deviation_n": 0.35855873222618584,
+          "reference_context_change_n": 0.41374993324279963,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        },
+        {
+          "start_index": 6804,
+          "end_index_exclusive": 6806,
+          "length": 2,
+          "max_force_error_n": 1.4177897013835299,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.1818251183229158,
+          "neighbor_local_deviation_n": 0.39458154997458195,
+          "reference_context_change_n": 0.27466678619384766,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        },
+        {
+          "start_index": 6828,
+          "end_index_exclusive": 6829,
+          "length": 1,
+          "max_force_error_n": 1.266656657396986,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.0769791107188027,
+          "neighbor_local_deviation_n": 0.1809673390061235,
+          "reference_context_change_n": 0.3993333180745431,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        }
+      ],
+      "preserved_continuous_event_count": 2,
+      "raw_score": 69.7156,
+      "candidate_score": 69.03,
+      "score_gain": -0.6855999999999938,
+      "apply_reason": "candidate_score_decreased_preserve_all"
+    },
+    {
+      "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053328_batch_20260827_053148_round_03_rank_11_score_3.87_train.h5",
+      "source_sha256": "d20b02ab88a7151b6c79715becae50a795abdeab887ff7876c369a630a7eb94c",
+      "split": "train",
+      "source_samples": 8267,
+      "kept_samples": 8267,
+      "candidate_samples": 5,
+      "removed_samples": 0,
+      "candidate_events": [
+        {
+          "start_index": 5958,
+          "end_index_exclusive": 5959,
+          "length": 1,
+          "max_force_error_n": 0.9481164690965524,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.0167448043645084,
+          "neighbor_local_deviation_n": 0.4150901871609589,
+          "reference_context_change_n": 0.30999990304311,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        },
+        {
+          "start_index": 6245,
+          "end_index_exclusive": 6246,
+          "length": 1,
+          "max_force_error_n": 1.3477863717811722,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.5211441713616694,
+          "neighbor_local_deviation_n": 0.23973608955882253,
+          "reference_context_change_n": 0.2529996236165353,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        },
+        {
+          "start_index": 6279,
+          "end_index_exclusive": 6280,
+          "length": 1,
+          "max_force_error_n": 0.623234741058937,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.0298913899905138,
+          "neighbor_local_deviation_n": 0.41108674075568885,
+          "reference_context_change_n": 0.06333335240681981,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        },
+        {
+          "start_index": 6916,
+          "end_index_exclusive": 6917,
+          "length": 1,
+          "max_force_error_n": 0.4210929226314164,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.0773521877797307,
+          "neighbor_local_deviation_n": 0.4228051333659728,
+          "reference_context_change_n": 0.3470832506815569,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        },
+        {
+          "start_index": 6964,
+          "end_index_exclusive": 6965,
+          "length": 1,
+          "max_force_error_n": 1.3149668209248873,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.071671908526227,
+          "neighbor_local_deviation_n": 0.19685095767259142,
+          "reference_context_change_n": 0.1423333485921212,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        }
+      ],
+      "preserved_continuous_event_count": 0,
+      "raw_score": 75.1084,
+      "candidate_score": 74.9645,
+      "score_gain": -0.14390000000000214,
+      "apply_reason": "candidate_score_decreased_preserve_all"
+    },
+    {
+      "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053421_batch_20260827_053148_round_04_rank_07_score_57.37_train.h5",
+      "source_sha256": "25a322a5b39bc42d624ca18bb1660d9b5f93b7971c8b8dfadf7e6b0b84b11d52",
+      "split": "train",
+      "source_samples": 8240,
+      "kept_samples": 8239,
+      "candidate_samples": 1,
+      "removed_samples": 1,
+      "candidate_events": [
+        {
+          "start_index": 7256,
+          "end_index_exclusive": 7257,
+          "length": 1,
+          "max_force_error_n": 1.9669463655737622,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.4955050131045877,
+          "neighbor_local_deviation_n": 0.20471620894045106,
+          "reference_context_change_n": 0.011916672190030411,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        }
+      ],
+      "preserved_continuous_event_count": 0,
+      "raw_score": 94.9535,
+      "candidate_score": 94.9627,
+      "score_gain": 0.00919999999999277,
+      "apply_reason": "candidate_score_not_lower"
+    },
+    {
+      "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053607_batch_20260827_053514_round_05_rank_05_score_70.28_train.h5",
+      "source_sha256": "4fe398d7e14ec6cf10785c3d20a72e9cce75c989ccbe60e14d6c5954c58e7dac",
+      "split": "train",
+      "source_samples": 8444,
+      "kept_samples": 8444,
+      "candidate_samples": 0,
+      "removed_samples": 0,
+      "candidate_events": [],
+      "preserved_continuous_event_count": 0,
+      "raw_score": null,
+      "candidate_score": null,
+      "score_gain": null,
+      "apply_reason": "no_isolated_candidates"
+    },
+    {
+      "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053700_batch_20260827_053514_round_06_rank_02_score_90.56_test.h5",
+      "source_sha256": "4fd5fe4831dfae0f73d21b9e5037ec43eba9c660de8201126df49f7757968d5a",
+      "split": "test",
+      "source_samples": 8240,
+      "kept_samples": 8240,
+      "candidate_samples": 0,
+      "removed_samples": 0,
+      "candidate_events": [],
+      "preserved_continuous_event_count": 0,
+      "raw_score": null,
+      "candidate_score": null,
+      "score_gain": null,
+      "apply_reason": "no_isolated_candidates"
+    },
+    {
+      "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053753_batch_20260827_053514_round_07_rank_09_score_44.12_train.h5",
+      "source_sha256": "558f503b69aa2ed35c5f9d5d7716217918416cb49bbbd46de7c4a7d71fda5b35",
+      "split": "train",
+      "source_samples": 8255,
+      "kept_samples": 8252,
+      "candidate_samples": 3,
+      "removed_samples": 3,
+      "candidate_events": [
+        {
+          "start_index": 2811,
+          "end_index_exclusive": 2812,
+          "length": 1,
+          "max_force_error_n": 1.6484983262417767,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.0214558406728251,
+          "neighbor_local_deviation_n": 0.4048091856514535,
+          "reference_context_change_n": 0.310333251953125,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        },
+        {
+          "start_index": 4820,
+          "end_index_exclusive": 4821,
+          "length": 1,
+          "max_force_error_n": 2.4713538736580816,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.2291461982150267,
+          "neighbor_local_deviation_n": 0.3427273502121828,
+          "reference_context_change_n": 0.188416639963787,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        },
+        {
+          "start_index": 5274,
+          "end_index_exclusive": 5275,
+          "length": 1,
+          "max_force_error_n": 1.7214321001847424,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.1063056141202985,
+          "neighbor_local_deviation_n": 0.33852281026426567,
+          "reference_context_change_n": 0.17425012588500977,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        }
+      ],
+      "preserved_continuous_event_count": 9,
+      "raw_score": 86.0654,
+      "candidate_score": 86.179,
+      "score_gain": 0.11360000000000525,
+      "apply_reason": "candidate_score_not_lower"
+    },
+    {
+      "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053846_batch_20260827_053514_round_08_rank_01_score_94.25_val.h5",
+      "source_sha256": "5dcf40d090c84d5c3958b928b803df6b41a0b8bf2afa9a26080a2b6c2389fd5a",
+      "split": "val",
+      "source_samples": 8255,
+      "kept_samples": 8255,
+      "candidate_samples": 2,
+      "removed_samples": 0,
+      "candidate_events": [
+        {
+          "start_index": 753,
+          "end_index_exclusive": 754,
+          "length": 1,
+          "max_force_error_n": 1.2578985412456483,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.1704026609549842,
+          "neighbor_local_deviation_n": 0.21760950312885186,
+          "reference_context_change_n": 0.235666592915853,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        },
+        {
+          "start_index": 6792,
+          "end_index_exclusive": 6793,
+          "length": 1,
+          "max_force_error_n": 2.0563555540073715,
+          "axes": [
+            "Fz"
+          ],
+          "max_local_deviation_n": 1.1213399906574315,
+          "neighbor_local_deviation_n": 0.468853371200999,
+          "reference_context_change_n": 0.484499990940094,
+          "action": "removed_isolated_spike",
+          "reason": "short spike, neighbors recovered, reference was quiet"
+        }
+      ],
+      "preserved_continuous_event_count": 0,
+      "raw_score": 95.1759,
+      "candidate_score": 95.1747,
+      "score_gain": -0.0011999999999972033,
+      "apply_reason": "candidate_score_decreased_preserve_all"
+    },
+    {
+      "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_053939_batch_20260827_053514_round_09_rank_10_score_32.48_train.h5",
+      "source_sha256": "342e214f791ccb2fec70192392e49a343e496655a7c608b475f79980c4478548",
+      "split": "train",
+      "source_samples": 8247,
+      "kept_samples": 8247,
+      "candidate_samples": 0,
+      "removed_samples": 0,
+      "candidate_events": [],
+      "preserved_continuous_event_count": 0,
+      "raw_score": null,
+      "candidate_score": null,
+      "score_gain": null,
+      "apply_reason": "no_isolated_candidates"
+    },
+    {
+      "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_054032_batch_20260827_053514_round_10_rank_06_score_63.92_train.h5",
+      "source_sha256": "419f5f207f335271c8ec0ea1e4db03f3c6aac5b88b30f37fee6a30cbc8448535",
+      "split": "train",
+      "source_samples": 8236,
+      "kept_samples": 8236,
+      "candidate_samples": 0,
+      "removed_samples": 0,
+      "candidate_events": [],
+      "preserved_continuous_event_count": 0,
+      "raw_score": null,
+      "candidate_score": null,
+      "score_gain": null,
+      "apply_reason": "no_isolated_candidates"
+    },
+    {
+      "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_054125_batch_20260827_053514_round_11_rank_03_score_76.42_train.h5",
+      "source_sha256": "6381dc67697d8b1dd91d73fb93b6fb44bf190daf95220d73a10034ecf8021f47",
+      "split": "train",
+      "source_samples": 8260,
+      "kept_samples": 8260,
+      "candidate_samples": 0,
+      "removed_samples": 0,
+      "candidate_events": [],
+      "preserved_continuous_event_count": 0,
+      "raw_score": null,
+      "candidate_score": null,
+      "score_gain": null,
+      "apply_reason": "no_isolated_candidates"
+    },
+    {
+      "source_file": "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\raw_data\\coinft_260804_0010_CFT24_calibrationData_20260827_054218_batch_20260827_053514_round_12_rank_04_score_70.31_train.h5",
+      "source_sha256": "984f40400314a86338125b64560f16863abacf74a5826695453a13f4c4bff2d9",
+      "split": "train",
+      "source_samples": 8259,
+      "kept_samples": 8259,
+      "candidate_samples": 0,
+      "removed_samples": 0,
+      "candidate_events": [],
+      "preserved_continuous_event_count": 0,
+      "raw_score": null,
+      "candidate_score": null,
+      "score_gain": null,
+      "apply_reason": "no_isolated_candidates"
+    }
+  ],
+  "processed_samples": {
+    "train": 74466,
+    "val": 8255,
+    "test": 8240
+  },
+  "replaced_output_backups": {
+    "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\processed_data\\train.h5": null,
+    "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\processed_data\\val.h5": null,
+    "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\data\\coinft_260804_0010\\processed_data\\test.h5": null,
+    "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\models\\coinft_260804_0010\\CFT24_norm.json": null,
+    "D:\\CS_homework\\creation\\apple\\camera\\UMI_learn\\Gripper hardware design\\reference\\Hardware\\sensor\\CoinFT Hardware Documentation\\workflow_steps\\05_testing_calibration_acceptance\\coin-ft\\models\\coinft_260804_0010\\evaluation\\pretraining_micro_clean_report.json": null
+  }
+}

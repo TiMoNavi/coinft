@@ -1,0 +1,91 @@
+{
+  "hardware_id": "coinft_260804_0010",
+  "sensor_name": "CFT24",
+  "input_dim": 12,
+  "output_dim": 6,
+  "train_samples": 74466,
+  "val_samples": 8255,
+  "test_samples": 8240,
+  "training_config": {
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "epochs": 30,
+    "early_stopping_patience": 8,
+    "l2_reg": 0.0001,
+    "seed": 42,
+    "hidden_layers": [
+      128,
+      64,
+      36,
+      24,
+      12
+    ],
+    "input_channels": 12,
+    "output_channels": 6,
+    "output_labels": [
+      "Fx",
+      "Fy",
+      "Fz",
+      "Mx",
+      "My",
+      "Mz"
+    ]
+  },
+  "epochs_completed": 9,
+  "best_epoch": 1,
+  "best_validation_loss": 0.17037384348844198,
+  "final_observed_validation_loss": 0.1966653551152715,
+  "early_stopping_patience": 8,
+  "model_input_is_temporal": false,
+  "model_input_contract": "each row is one independent 12-channel sample mapped to one 6-axis label",
+  "pretraining_micro_cleaning": {
+    "train": {
+      "enabled": true,
+      "version": "1.0-isolated-force-spikes-in-memory",
+      "removed_samples": 4
+    },
+    "val": {
+      "enabled": true,
+      "version": "1.0-isolated-force-spikes-in-memory",
+      "removed_samples": 0
+    },
+    "test": {
+      "enabled": true,
+      "version": "1.0-isolated-force-spikes-in-memory",
+      "removed_samples": 0
+    }
+  },
+  "pretraining_artifact_backups": {
+    "CFT24_norm.json": "backups/CFT24_norm.json.pre_train_20260827_055131_407420.bak"
+  },
+  "test_mse": [
+    0.13457685061035063,
+    0.15514558635910866,
+    0.9413994248390211,
+    6.315911521764522e-05,
+    6.71086958085693e-05,
+    9.711325210864413e-05
+  ],
+  "test_rmse": [
+    0.36684717609700995,
+    0.3938852451655287,
+    0.97025740133174,
+    0.007947270928919262,
+    0.008191989734403314,
+    0.00985460562928036
+  ],
+  "onnx_consistency": {
+    "samples": 2048,
+    "input_contract": "one independent sample with shape (1, 12)",
+    "rtol": 1e-05,
+    "atol": 1e-06,
+    "max_abs_diff": 9.5367431640625e-07,
+    "passed": true
+  },
+  "artifacts": {
+    "pth": "CFT24_MLP.pth",
+    "onnx": "CFT24_MLP.onnx",
+    "norm": "CFT24_norm.json",
+    "results": "evaluation/CFT24_MLP_results.png"
+  }
+}

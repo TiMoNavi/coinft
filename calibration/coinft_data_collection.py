@@ -1,10 +1,20 @@
 import numpy as np
-import nidaqmx
-from nidaqmx.stream_readers import AnalogMultiChannelReader, DigitalSingleChannelReader
+try:
+    import nidaqmx
+    from nidaqmx.stream_readers import AnalogMultiChannelReader, DigitalSingleChannelReader
+except ModuleNotFoundError as exc:
+    raise SystemExit(
+        "coinft_data_collection.py needs NI-DAQmx Python support; "
+        "use calibration/coinft_sync_capture.py for direct raw capture, "
+        "or install NI-DAQmx and h5py before ATI calibration."
+    ) from exc
 import serial
 import serial.tools.list_ports
 import time
-import h5py
+try:
+    import h5py
+except ModuleNotFoundError as exc:
+    raise SystemExit("ATI calibration also needs h5py; install it in the CoinFT environment.") from exc
 import threading
 import matplotlib.pyplot as plt
 from datetime import datetime
@@ -14,7 +24,7 @@ import os
 #########################
 # 1. CONTROL PANEL      #
 #########################
-COM_NAME = 'COM6'           # Serial port for CoinFT
+COM_NAME = os.environ.get('COINFT_PORT', '/dev/cu.usbmodem14403')
 BAUD_RATE = 1000000
 NI_DEVICE = "Dev1"
 ATI_CHANNELS = f"{NI_DEVICE}/ai0:5"
@@ -25,6 +35,11 @@ SAMPLING_DURATION = 40      # How long to collect data in [s]
 M_ARM = 0.0115              # distance between the reference sensor surface and the CoinFT surface in [m]
 SENSOR_NAME = 'CFT24'
 ID = 'test'  # Unique identifier for the calibration session
+
+# This legacy collector retains the original six-frame synthetic sync fallback
+# below for old datasets. It is not a measurement of a PSoC sync output. For
+# new calibration work use calibration/coinft_sync_capture.py, which records
+# complete-frame timestamps and joins them to an ATI logger explicitly.
 
 #########################
 # 2. INITIALIZATION     #

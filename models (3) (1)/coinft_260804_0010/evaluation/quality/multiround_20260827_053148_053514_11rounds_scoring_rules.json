@@ -1,0 +1,100 @@
+{
+  "axis_weights": {
+    "Fx": 0.1,
+    "Fy": 0.1,
+    "Fz": 0.5,
+    "Mx": 0.1,
+    "My": 0.1,
+    "Mz": 0.1
+  },
+  "axis_component_weights": {
+    "tracking": 0.35,
+    "correlation": 0.15,
+    "jitter": 0.15,
+    "zero_load_noise": 0.25,
+    "zero_load_drift": 0.1
+  },
+  "nrmse_good": 0.12,
+  "nrmse_bad": 0.4,
+  "correlation_good": 0.9,
+  "correlation_bad": 0.5,
+  "jitter_ratio_good": 0.04,
+  "jitter_ratio_bad": 0.15,
+  "window_seconds": 1.0,
+  "window_step_seconds": 0.5,
+  "skip_initial_seconds": 2.0,
+  "initial_baseline_seconds": 2.0,
+  "minimum_fallback_windows": 3,
+  "near_zero_center_limits": [
+    0.2,
+    0.2,
+    0.2,
+    0.02,
+    0.02,
+    0.02
+  ],
+  "near_zero_activity_limits": [
+    0.2,
+    0.2,
+    0.2,
+    0.02,
+    0.02,
+    0.02
+  ],
+  "zero_load_noise_good": {
+    "Fx": 0.12,
+    "Fy": 0.12,
+    "Fz": 0.18,
+    "Mx": 0.006,
+    "My": 0.006,
+    "Mz": 0.006
+  },
+  "zero_load_noise_bad": {
+    "Fx": 0.5,
+    "Fy": 0.5,
+    "Fz": 0.7,
+    "Mx": 0.03,
+    "My": 0.03,
+    "Mz": 0.03
+  },
+  "zero_load_drift_good": {
+    "Fx": 0.1,
+    "Fy": 0.1,
+    "Fz": 0.15,
+    "Mx": 0.005,
+    "My": 0.005,
+    "Mz": 0.005
+  },
+  "zero_load_drift_bad": {
+    "Fx": 0.6,
+    "Fy": 0.6,
+    "Fz": 0.75,
+    "Mx": 0.035,
+    "My": 0.035,
+    "Mz": 0.035
+  },
+  "duration_full_seconds": 39.0,
+  "duration_zero_seconds": 35.0,
+  "samples_full": 7800,
+  "samples_zero": 6000,
+  "batch_consistency": {
+    "enabled": true,
+    "minimum_rounds": 8,
+    "minimum_samples_per_round": 100,
+    "ridge": 0.0001,
+    "good_percentile": 25.0,
+    "bad_percentile": 90.0,
+    "near_zero_force_limits": [
+      0.1,
+      0.1,
+      0.05
+    ],
+    "selection_weights": {
+      "single_round_total": 0.1,
+      "single_round_fz_zero_noise": 0.2,
+      "raw_zero_load_noise": 0.2,
+      "cross_round_fz_zero_noise": 0.3,
+      "cross_round_fz_rmse": 0.2
+    }
+  }
+}

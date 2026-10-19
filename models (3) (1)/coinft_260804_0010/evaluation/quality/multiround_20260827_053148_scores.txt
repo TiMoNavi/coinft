@@ -1,0 +1,8 @@
+device_id=coinft_260804_0010
+batch_id=20260827_053148
+status=paused
+scoring_version=5.0-cross-round-fz
+round=01 score=86.24 Fx=93.11 Fy=91.80 Fz=75.51 Mx=100.00 My=99.94 Mz=100.00 file=coinft_260804_0010_CFT24_calibrationData_20260827_053056_train.h5
+round=02 score=69.72 Fx=71.57 Fy=62.05 Fz=54.90 Mx=93.07 My=96.30 Mz=99.65 file=coinft_260804_0010_CFT24_calibrationData_20260827_053235_batch_20260827_053148_round_02_pending.h5
+round=03 score=75.11 Fx=86.63 Fy=73.33 Fz=62.36 Mx=93.91 My=96.31 Mz=89.11 file=coinft_260804_0010_CFT24_calibrationData_20260827_053328_batch_20260827_053148_round_03_pending.h5
+round=04 score=94.95 Fx=93.53 Fy=93.38 Fz=96.62 Mx=85.69 My=99.46 Mz=94.35 file=coinft_260804_0010_CFT24_calibrationData_20260827_053421_batch_20260827_053148_round_04_pending.h5
