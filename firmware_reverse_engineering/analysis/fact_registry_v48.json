@@ -1,0 +1,388 @@
+{
+ "_comment": [
+  "CoinFT 逆向事实登记表 v48。",
+  "存在理由：v45-v47 每轮重写「未闭合清单」，导致 v2/v33 已恢复的语义被",
+  "重新标记为未知。本表是已确立事实的唯一持久载体。",
+  "规则：established 中的事实不得出现在 open 中；validate_facts_v48.py 会强制检查。",
+  "只有当证据被推翻时才能删除条目，并必须在 superseded 中留痕。"
+ ],
+ "established": [
+  {
+   "id": "cmd-t-four-params",
+   "claim": "UART 命令 't' 阻塞读取 4 个参数字节：index, value_lo, value_hi, extra；index < 12 时把 16-bit 值写入该通道的扫描参数表（不是数据值）",
+   "first_recovered": "v2",
+   "evidence": [
+    "coinft_firmware_pseudocode_v2.c: case 't' 的四次 uart_read_byte_blocking()",
+    "restoration_progress_v33.md 命令表：读取 4 字节，更新 12 项通道表，执行一次采集",
+    "v48 实测：单发 't' 后 INTR->0 且扫描停止；补齐 4 字节后立即恢复 INTR=0x01001000",
+    "v48 实测：t+index=0+value 使 ch0 的 raw 与 baseline 一起被接管，其余通道不变，UART 同步输出被接管的值"
+   ],
+   "operational_warning": "两点：(1) 只发 't' 不给参数会让主循环阻塞在 UART 读取上，扫描重装与 UART 打包一起停止，必须一次发满 5 字节；(2) 't' 会修改运行配置且 i/s 无法清除，只有断电重上电才恢复。它不是只读探测手段。"
+  },
+  {
+   "id": "cmd-table",
+   "claim": "UART 命令集：q=控制发送(参数0x1a), s=开始流(stream_state=1), i=清流/活动标志, t=见 cmd-t-four-params, w=接收最多12字节并发类型0x40消息, n=发送固定终止文本",
+   "first_recovered": "v29",
+   "evidence": [
+    "restoration_progress_v33.md 命令分支表",
+    "coinft_firmware_pseudocode_v29.c"
+   ]
+  },
+  {
+   "id": "record-array",
+   "claim": "0x2000045c 起 13 条 10 字节 sensor record；field0=raw(即UART通道值), field1=baseline, field2/field3 恒零, field4=limit_word",
+   "first_recovered": "v46",
+   "evidence": [
+    "v46: channel_identity 115/120 对照 0/120",
+    "v47: field2/field3 在 111644 样本中恒零"
+   ]
+  },
+  {
+   "id": "channel-electrode-map",
+   "claim": "ch0=RU1/P3.5 ch1=RU2/P3.4 ch2=LD2/P0.2 ch3=LD1/P0.3 ch4=LU2/P0.0 ch5=LU1/P0.1 ch6=RD2/P3.0 ch7=RD1/P3.1 ch8..11 复用 0/2/4/6 的引脚",
+   "first_recovered": "v47",
+   "evidence": [
+    "v47 外力实验 quadrant_mapping_confirmed=4/4",
+    "capsense_static_config_v3.md 静态 pin record"
+   ]
+  },
+  {
+   "id": "cdac-pairing",
+   "claim": "ch8..11 与 ch0/2/4/6 共用引脚，仅 widget context +0x2e (cdac_sel_re) 不同：20 vs 40；record limit_word 同步为 0x1e00 vs 0x3c00",
+   "first_recovered": "v47",
+   "evidence": [
+    "13 个 widget context 逐字段比对",
+    "v47 偏心按压响应比 0.71~1.43，中心 0.90~1.02"
+   ]
+  },
+  {
+   "id": "msc-register-names",
+   "claim": "MSC +0x170=INTR (bit8=SCAN bit12=INIT bit24=CONFIG_REQ), +0x178=INTR_MASK, +0x190=FRAME_CMD(bit0=START_FRAME), +0x20C..+0x220=六字 sensor frame (SNS_SW_SEL_CSW_MASK2/1/0, SNS_SCAN_CTL, SNS_CDAC_CTL, SNS_CTL)",
+   "first_recovered": "v46",
+   "evidence": [
+    "cyip_msc.h 官方定义",
+    "v46 实测 SRAM 帧与 MSC 寄存器逐字对照"
+   ]
+  },
+  {
+   "id": "scan-loop",
+   "claim": "INTR_MASK=0x100 仅开放 SCAN；RESULT_FIFO 始终为空；固件在 scan-complete 中断中取结果，帧启动靠软件写 FRAME_CMD (EXT_FRAME_START_EN=0)",
+   "first_recovered": "v46",
+   "evidence": [
+    "v46 实测 INTR_MASK/FIFO_STATUS/CTL=0x81100011"
+   ]
+  },
+  {
+   "id": "baseline-no-upward-follow",
+   "claim": "baseline 不向上跟随 raw：5 分钟含 5 次 30 秒保压期间，13 条 record 的 baseline 各自只有一个取值，而 raw 上升约 3000",
+   "first_recovered": "v47",
+   "evidence": [
+    "v47 baseline_frozen_records=13/13"
+   ],
+   "explicitly_not_established": "baseline 的更新规则。已证伪『i->s 时定格』与『idle 下 raw==baseline』两说。"
+  },
+  {
+   "id": "force-polarity",
+   "claim": "受力使 raw 增大；松开后回到 baseline 附近。力信号 = raw - baseline，为正",
+   "first_recovered": "v47",
+   "evidence": [
+    "v47 右上角 ch1: 空载20318 -> 保压23751 -> 松开20323"
+   ]
+  },
+  {
+   "id": "force-scale",
+   "claim": "中心 100g 负载 = 12 路合计约 +333 counts（每路约 +28），噪声底 sigma=4.7 counts，信噪比约 6 sigma",
+   "first_recovered": "v47",
+   "evidence": [
+    "v47 三相位差分（有砝码/拿走/放回），12/12 通道同号"
+   ]
+  },
+  {
+   "id": "force-linearity",
+   "claim": "12 路对总力的相关系数全部 >= 0.9917，即各路按固定比例跟随总力（渐进加力实验，峰值约 1.72kg）",
+   "first_recovered": "v48",
+   "evidence": [
+    "ramp_tare_v48_20260830/ramp_tare.json 的 30 秒渐进加力段"
+   ]
+  },
+  {
+   "id": "scan-vs-uart-separable",
+   "claim": "扫描与 UART 输出是可分离的两个状态：扫描停止后 UART 仍会继续发送陈旧的 record 值",
+   "first_recovered": "v48",
+   "evidence": [
+    "v48 实测：frozen 状态下发 s，UART 累计增加 5226 字节而 record 逐位不变"
+   ],
+   "supersedes": "v46 的『INTR!=0 等价于 streaming』表述"
+  },
+  {
+   "id": "same-board-topology",
+   "claim": "KitProg3 同时提供 SWD 与一个 USB-CDC UART 桥，两者接到同一块 CoinFT，可同时工作；因此同板 UART/SWD 同步采集不需要第二块板",
+   "first_recovered": "v46",
+   "evidence": [
+    "/dev/cu.usbmodem14403 与 CMSIS-DAP 同属序列号 0808191601051400"
+   ]
+  },
+  {
+   "id": "swd-read-reliability",
+   "claim": "SWD 读取失败的主因是物理连线接触不良，不是扫描态下的总线仲裁竞争；接线良好时扫描态下可连续 8588 次无失败",
+   "first_recovered": "v47",
+   "evidence": [
+    "v47 force experiment swd_reads_ok=8588/8588"
+   ],
+   "supersedes": "v46 第1节把读失败归因于 SWD 仲裁竞争"
+  },
+  {
+   "id": "msc-frame-verification",
+   "claim": "由 Flash 表、SRAM scheduler、widget/sensor context 和 pin/shield 表可生成全部 14 个 MSC frame，六个字全部匹配",
+   "first_recovered": "v18",
+   "evidence": [
+    "recover_msc_v18.py: 14/14 frames match all six words"
+   ]
+  },
+  {
+   "id": "history-array",
+   "claim": "0x2000091a 起 13 条 10 字节 history，每条 5 个 uint16 槽位，槽位1 恒零，其余槽位等于该通道 baseline",
+   "first_recovered": "v46",
+   "evidence": [
+    "v46 history_entries_matching_baseline=12/13"
+   ]
+  },
+  {
+   "id": "device-identity",
+   "claim": "CY8C4149AZI-S593, Silicon 0x2E2B Family 0xBE Rev 0x11(A0), Main Flash 384kb, Chip Protection OPEN",
+   "first_recovered": "v46",
+   "evidence": [
+    "OpenOCD 目标识别输出"
+   ]
+  },
+  {
+   "id": "uart-frame-format",
+   "claim": "26 字节帧：0x02 + 12 个小端 uint16 + 0x03，1Mbaud，约 201 Hz",
+   "first_recovered": "v5",
+   "evidence": [
+    "v45: 1003 帧 remainder=0 valid_headers=1003/1003",
+    "v46 实测帧率 201 Hz"
+   ]
+  },
+  {
+   "id": "cmd-t-inverse-scan-parameter",
+   "claim": "'t' 写入的 16-bit 值是该通道的扫描参数，对 raw 呈反比关系：raw ≈ K/value（K 约 2.4e8~2.6e8），小值时 raw 被钳在 0x7FF8=32760，即 widget context 的 maxRawCount。写入后 raw 与 baseline 同时变为该配置下的稳定读数。",
+   "first_recovered": "v48",
+   "evidence": [
+    "v48 扫描 8 个写入值：4096->33359(钳位), 16384->14622, 32760->7518, 48879->5135, 65535->3955",
+    "值×raw 在未钳位区间近似恒定 239.5M~259.2M",
+    "钳位值 32760 与 v44 恢复的 widget context maxRawCount=0x7ff8 一致"
+   ],
+   "interpretation": "行为符合时钟分频器或转换次数（numSubConversions / snsClk 类）参数，而非数据注入。这与 v33 命令表『更新 12 项通道表』一致，并支持把 't' 理解为 tuner/调试通道，而不是 tare。"
+  },
+  {
+   "id": "aeabi-runtime-helpers",
+   "claim": "四个 ARM EABI 运行时例程已确认：FUN_00004378 = __aeabi_uidivmod/__udivsi3（展开的移位减法无符号除法，返回 CONCAT44(余数,商)，除零跳 FUN_0000448c）；FUN_00004484 = divmod 包装（除数非零则除法，否则调除零钩子）；FUN_000044b8 = memset；FUN_0000448c = __aeabi_idiv0（空函数，标准行为）",
+   "first_recovered": "v49",
+   "evidence": [
+    "FUN_00004378 体：逐级比较 param_2 与 param_1>>1/4/8/0xc/0x10，返回 CONCAT44",
+    "FUN_00004484 体：if (param_2 != 0) FUN_00004378() else FUN_0000448c(0)",
+    "FUN_000044b8 体：for (; p != end; ++p) *p = value —— 标准 memset",
+    "调用次数 24/10/12/2，与编译器辅助例程的分布一致",
+    "整个反编译输出中 '/' 与 '%' 各出现 0 次，因为所有除法都编译成对 FUN_00004378 的调用"
+   ],
+   "significance": "这解释了为什么 Ghidra 输出里看不到除法运算符，也解释了为什么早期版本会把这些例程误认为业务函数。"
+  },
+  {
+   "id": "scb-uart-and-tcpwm-init",
+   "claim": "FUN_000038e4 = SCB UART 初始化（写 CTRL / UART_CTRL / UART_RX_CTRL，CTRL.MODE 与 UART_CTRL.MODE 均在 bit24，配置字含 0x2000000 即 MODE=2=UART）；FUN_00004274 = TCPWM counter 初始化（按 CNT[n] 的 0x40 字节步长写 CTRL/COUNTER/CC/CC_BUFF/PERIOD/TR_CTRL0，基址 +0x100）。两者的外设基址由调用者以参数传入，因此按字面地址扫描检测不到。",
+   "first_recovered": "v49",
+   "evidence": [
+    "cyip_scb_v3.h: CTRL=0x00, UART_CTRL=0x40, UART_RX_CTRL=0x48, SCB_CTRL_MODE_Pos=24",
+    "cyip_tcpwm_v2.h: CNT[8] 位于 0x100，CNT_Type 内 CTRL=0x00 COUNTER=0x08 CC=0x0c CC_BUFF=0x10 PERIOD=0x14 TR_CTRL0=0x20",
+    "FUN_00004274 的写入偏移 (param_2+4)*0x40 与 +0x108/+0x10c/+0x110/+0x114/+0x120 逐项对应",
+    "v40 已确认 PCLK 3=SCB3, PCLK 6=TCPWM_CLOCKS0，与这两个初始化函数的存在一致"
+   ]
+  },
+  {
+   "id": "em-eeprom-storage-path",
+   "claim": "0x00002ba4 = Cy_Em_EEPROM_Read，0x00002e14 = Cy_Em_EEPROM_Write（同签名 addr/buf/len/context）。0x00002870 = CRC-8（poly 0x31，init 0xFF，校验 len-4 字节，起点 +1）；0x000028a4 = 校验和比对；0x000028de = wear-leveling 副本选择；0x000028c0 = 行指针推进（带回绕）；0x00004510 = strcpy。状态码常量为 Em_EEPROM 中间件的 0x093E00xx 形式。",
+   "first_recovered": "v50",
+   "evidence": [
+    "FUN_000005f8: read(0x40,buf,0xc,ctx) -> 扫描 '\\r' -> 未找到则 strcpy 默认值并 write(0x40,buf,0xc,ctx)",
+    "FUN_00002870 是 CRC-8/poly-0x31，正是 Em_EEPROM 所用校验",
+    "DAT_000028bc=0x093e0001, DAT_00002e08=0x093e0004, DAT_00002e0c=0x093e0001",
+    "仓库内 em_eeprom-1.0.cypersonality 的参数 (EEPROM Size / Wear Leveling Factor / Redundant Copy) 与 context 字段逐项对应",
+    "FUN_00002ba4 的二次遍历扫描 {+8:地址,+0xc:长度,+0x10:数据} 块列表并覆盖读取结果，即缓冲写覆盖层"
+   ],
+   "supersedes": "v36 把 FUN_00002E14 列为『上层消息对象及 UART t/w 参数的业务映射』"
+  },
+  {
+   "id": "em-eeprom-config-and-device-id",
+   "claim": "Em_EEPROM 运行时配置（context @0x20000af0）：EEPROM 大小 128，wear leveling factor 2，redundant copy 关闭（param_4[7] 低字节为 0），Flash 存储基址 0x00005000，块列表 0x00005100，vtable @0x20000b6c（slot[5]=0x00000a49 为复制函数）。存储内容是一个 12 字节、'\\r' 终止的设备 ID 字符串，逻辑地址 0x40，默认模板位于 Flash 0x00004f78 = \"NFT\\r\"。",
+   "first_recovered": "v50",
+   "evidence": [
+    "live_0_sram.bin 按 ushort* 指针算术解码 context",
+    "SRAM 0x200004fd 缓冲实测为 b'NFT\\r' + 零填充",
+    "CoinFT_V2_firmware.bin 0x4f78 = 4e46540d = 'NFT\\r'"
+   ],
+   "note": "HEX 镜像与 2026-08-28 Flash 实读快照在 0x5000 区均为全零，因此无法断言写回是否成功持久化；只能确认默认模板路径存在且 SRAM 中为默认值。"
+  },
+  {
+   "id": "cmd-qwn-semantics",
+   "claim": "'q' = 经 FUN_00003820（Cy_SCB_UART_Put，SCB 基址 0x40270000，查 TX_FIFO_STATUS +0x208 后写 TX_FIFO_WR +0x240）发送单字节 0x1a；'w' = 阻塞读取直到 CR(0x0d) 或满 12 字节，写入 buf[0xb]=0，然后 Cy_Em_EEPROM_Write(0x40, buf, 0xc) 持久化设备 ID，并直落(fall through)到 'n'；'n' = 调用 FUN_000005f8 读取设备 ID（若未初始化则写入默认模板）。",
+   "first_recovered": "v51",
+   "evidence": [
+    "FUN_0000063c 的 switch: case 0x71 -> FUN_00003820(DAT_00000958, 0x1a)",
+    "case 0x77 的阻塞读循环终止条件 (byte != 0x0d && ++i != 0xc)，随后 FUN_00002e14(0x40,...)",
+    "case 0x77 无 break，直落 case 0x6e",
+    "DAT_00000958=0x40270000 (SCB), DAT_00000974=0x20000af0 (EEPROM context), DAT_000009b0=0x200004fd (ID 缓冲)",
+    "阻塞读取自 DAT_00000958[0xd0] 即 SCB+0x340 = RX_FIFO_RD，轮询直到 != 0xffffffff"
+   ],
+   "operational_warning": "'w' 与 't' 一样会阻塞主循环（等 CR 或 12 字节），且 'w' 会执行 Flash 写入；'n' 在 EEPROM 未初始化时也会触发 Flash 写入。因此阶段 H 中只有 'q' 可以无条件安全实测。"
+  },
+  {
+   "id": "baseline-update-rule",
+   "claim": "baseline 只由显式 tare 更新，从不自动跟随 raw。't' 命令**无条件**（即使 index 被 index<12 拒绝）对全部 13 条 record 执行 baseline := 当前 raw；执行后全通道 raw-baseline≈0（实测 +4/+2/-7/-10/-8/-2）。在无命令的正常 streaming 下，baseline 在 20 分钟 21216 次读取中零次变化。",
+   "first_recovered": "v51",
+   "evidence": [
+    "baseline_watch_v51: reads_ok=21216/21216, 20 分钟, baseline_events=0",
+    "实验1: t + index=0xFF（被拒绝）仍重置 11 个通道的 baseline -> 重置与写入解耦",
+    "实验2: t + index=5 写入 ch5 扫描参数并重置全 12 通道 baseline",
+    "重置后 raw-baseline 全部落在 ±10 counts 内"
+   ],
+   "significance": "这解释了跨会话观察到的 baseline 下降（如 ch1 20326->20053）：那是本人先前 t 命令造成的 tare，不是温漂导致的自动跟随。"
+  },
+  {
+   "id": "sar-unused-in-production",
+   "claim": "SAR 硬件已初始化（SAR_CTRL.enabled=True），但 chan_en=0x00000，所有 17 个通道未使能。固件配置了 SAR 寄存器但从不执行实际转换。",
+   "first_recovered": "v53",
+   "evidence": [
+    "SWD 实测：SAR_SAMPLE_CTRL=0x00000000",
+    "所有通道结果标记 [无效]",
+    "SRAM 0x20000B30=0x1330 是静态值"
+   ],
+   "significance": "SAR 是预留功能（可能为温度补偿或电源监控），但当前固件版本未激活。12 路 CSD 是对外数据的唯一来源。"
+  },
+  {
+   "id": "field2-field3-always-zero",
+   "claim": "record 结构的 field2(+0x04) 和 field3(+0x06) 在所有已测工况下恒为零（111644 + v54 额外验证）。它们可能是预留字段或只在未启用模式下使用。",
+   "first_recovered": "v47",
+   "confirmed_in": "v54",
+   "evidence": [
+    "v47: 111644 次采样（空载、受力、阻塞）全零",
+    "v54: SWD 实时读取 13 条 record，清除污染后全零",
+    "反汇编存在写入路径，但条件恒为假"
+   ],
+   "significance": "field2/field3 不影响当前固件的可观察行为，可视为保留字段。"
+  },
+  {
+   "id": "empty-stub-functions",
+   "claim": "8 个函数反汇编为空函数体（只有 return;）：0x278, 0x2cc, 0x348, 0x36c, 0x4ac, 0x448c, 0x4538, 0x4544。它们是预留钩子、调试残留或编译器优化产物。",
+   "first_recovered": "v50（分类器）",
+   "confirmed_in": "v54（调用点分析）",
+   "evidence": [
+    "Ghidra 反汇编：8 个函数体只有 'return;'",
+    "调用点：初始化链(3个)、条件调用(1个)、清理钩子(1个)、除零处理(1个)、孤立(2个)",
+    "无寄存器写入、无内存访问、无外设操作"
+   ],
+   "significance": "这些函数对固件行为无影响，可安全忽略。证明 D1 达标时无需为它们建模。"
+  }
+ ],
+ "open": [
+  {
+   "id": "field23-purpose",
+   "question": "record field2/field3 属于哪个未启用功能？",
+   "why_open": "11 万样本恒零，排除了 diff/touch status"
+  },
+  {
+   "id": "limit-word-relation",
+   "question": "limit_word 与 cdac_sel_re 的精确函数关系？",
+   "why_open": "ch0..11 满足比值 384，ch12 为 256，不服从单一公式"
+  },
+  {
+   "id": "untouched-functions",
+   "question": "76 个 untouched 函数中哪些参与主数据路径？",
+   "why_open": "function_inventory_v48.md 已按体量排序，尚未逐个分析"
+  },
+  {
+   "id": "slot-last-timing",
+   "question": "slot 调度与 SNS_CTL.LAST 的完整 IRQ 时序？",
+   "why_open": "寄存器已正名，尚未在两个完整扫描周期中复现"
+  },
+  {
+   "id": "middleware-provenance",
+   "question": "历史 CapSense middleware 版本、裁剪宏、原始 Creator 工程？",
+   "why_open": "信息论上不可从单个 HEX 唯一恢复",
+   "recoverable": false
+  },
+  {
+   "id": "sar-network",
+   "question": "17 路 SAR 通道对应的板级模拟网络，以及 0x20000b30 的业务消费者？",
+   "why_open": "寄存器与调用边界已恢复，物理网络未知"
+  }
+ ],
+ "superseded": [
+  {
+   "claim": "baseline 在 i->s 切换瞬间定格",
+   "asserted_in": "v47 第4节",
+   "refuted_by": "v47 第11节：两次完整 i->s 循环 baseline 不变，且 idle 下 raw != baseline",
+   "status": "已在 v47 文档内更正"
+  },
+  {
+   "claim": "idle 态下 raw == baseline 是普遍规律",
+   "asserted_in": "v46",
+   "refuted_by": "v47 第11节：idle 下 raw=19703 vs baseline=19406",
+   "status": "已更正为『那份快照恰好如此』"
+  },
+  {
+   "claim": "SWD 读失败源于扫描态下的总线仲裁竞争",
+   "asserted_in": "v46 第1节",
+   "refuted_by": "v47：接线修复后扫描态下 8588/8588 全通",
+   "status": "已更正为经验性规避手法"
+  },
+  {
+   "claim": "field2/field3 预期为 CapSense diff / touch status",
+   "asserted_in": "v46",
+   "refuted_by": "v47：111644 样本恒零",
+   "status": "已明确否定"
+  },
+  {
+   "claim": "q/w/n/t 命令的完整协议未知",
+   "asserted_in": "v45/v46/v47 未闭合清单",
+   "refuted_by": "v2 伪代码与 v33 命令表早已恢复各命令的机器码行为",
+   "status": "v48 更正：应区分『机器码行为已知』与『业务命名未知』"
+  },
+  {
+   "claim": "'t' 是 tare（归零）命令",
+   "asserted_in": "v48 实验设计初期（本轮口头假设）",
+   "refuted_by": "部分否定过度。v51 更正：'t' 确实包含 tare —— 它无条件对全部 record 执行 baseline := raw。v48 之所以看不出来，是因为每次都同时写入会改变 raw 的扫描参数，两个效应叠加。正确表述是：'t' = 写通道扫描参数（index<12 时）+ 无条件全通道 tare。",
+   "status": "已在 v51 更正；正确语义见 baseline-update-rule 与 cmd-t-inverse-scan-parameter"
+  },
+  {
+   "claim": "FUN_00004378 是时钟换算函数（含时钟换算常量）",
+   "asserted_in": "v42 第『仍不能确定』节、v43 已知硬缺口第1条",
+   "refuted_by": "v49：函数体是标准 __aeabi_uidivmod 移位减法除法；它在时钟路径与 Flash 地址路径中都出现，只因两处都需要做除法",
+   "status": "已推翻；正确身份见 aeabi-runtime-helpers"
+  },
+  {
+   "claim": "FUN_00004484 是 mode-0 的外部有效性回调，其业务输入未知",
+   "asserted_in": "v44 第『仍未唯一闭合』第1条、v45 未实现清单第1条、v47 第8节第6条",
+   "refuted_by": "v49：FUN_00004484 只是 divmod 包装，做除零检查后调用 FUN_00004378",
+   "status": "已推翻；不存在需要闭合的业务回调"
+  },
+  {
+   "claim": "FUN_00002E14 是上层消息对象，与 UART t/w 参数的业务映射有关",
+   "asserted_in": "v36 未闭合清单第4条（v43 沿用）",
+   "refuted_by": "v50：它与 FUN_00002ba4 同签名成对出现，是 Em_EEPROM 写入函数，与 UART 消息无关",
+   "status": "已推翻；见 em-eeprom-storage-path"
+  },
+  {
+   "claim": "baseline 只向下跟随 raw（lowBslnRst 驱动的单向跟随）",
+   "asserted_in": "v47 第11节作为『新的工作假设』提出",
+   "refuted_by": "v51：20 分钟被动监控中 raw 从未降到 baseline 以下（0/2279 样本，全 12 路），因此该假设的前提从未成立、从未被真正测试；而跨会话的 baseline 下降已由 't' 的无条件 tare 完整解释，无需引入自动跟随机制。",
+   "status": "已推翻；假设不成立且不必要"
+  },
+  {
+   "claim": "history[1] 恒为零",
+   "asserted_in": "早期快照观察（未记录具体版本）",
+   "refuted_by": "v53 污染测试：写入 0xDEADBEEF 后扫描 5 秒，10/12 通道保持污染值，2/12 通道部分字节被改写（ch10/ch11）。证明 history[1] 是条件写入的槽位。",
+   "status": "已推翻；history[1] 是正常使用的累加器，写入条件与通道状态相关"
+  }
+ ]
+}

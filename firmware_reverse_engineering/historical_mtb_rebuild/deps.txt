@@ -1,0 +1,4 @@
+https://github.com/Infineon/mtb-pdl-cat2#latest-v2.X
+https://github.com/Infineon/mtb-hal-cat2#latest-v2.X
+https://github.com/Infineon/core-lib#latest-v1.X
+https://github.com/Infineon/core-make#latest-v3.X

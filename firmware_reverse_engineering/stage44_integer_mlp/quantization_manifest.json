@@ -1,0 +1,70 @@
+{
+  "schema": "coinft-fixed-mlp-v1",
+  "physical_coinft_id": "coinft_2606602_0019",
+  "architecture": [
+    12,
+    128,
+    64,
+    36,
+    24,
+    12,
+    6
+  ],
+  "weight_format": "symmetric per-output-channel int8",
+  "activation_format": "signed int16 with per-layer power-of-two scale",
+  "accumulator_format": "signed int32",
+  "activation_scales": [
+    4096,
+    2048,
+    1024,
+    2048,
+    1024,
+    2048
+  ],
+  "input_requant_shift": 8,
+  "hidden_requant_shift": 24,
+  "output_requant_shift": 20,
+  "output_units": [
+    "uN",
+    "uN",
+    "uN",
+    "uNm",
+    "uNm",
+    "uNm"
+  ],
+  "source_sha256": {
+    "coinft_2606602_0019_MLP.onnx": "7893ffd0036b8be61c7616cada31ef55f6280e2a14da0f3354705b5ef86b49e1",
+    "CFT24_MLP.onnx.data": "1d1077744fb2b1be5667f07c6e96c7cfea2a72aa26a698026365a374750690d8",
+    "coinft_2606602_0019_norm.json": "4fb28fc61f19f482427a4d241d6b3471be94c398bb3eac2f031f730824c5a01b"
+  },
+  "historical_capture": {
+    "samples": 2012,
+    "total_saturations": 0,
+    "float_error": {
+      "Fx": {
+        "rmse_si": 0.005268797195355557,
+        "max_abs_si": 0.03617099763613241
+      },
+      "Fy": {
+        "rmse_si": 0.008055983433479266,
+        "max_abs_si": 0.048008543233636514
+      },
+      "Fz": {
+        "rmse_si": 0.015633349604434695,
+        "max_abs_si": 0.1248057434484584
+      },
+      "Mx": {
+        "rmse_si": 0.0003140704907375285,
+        "max_abs_si": 0.0021135454048189714
+      },
+      "My": {
+        "rmse_si": 0.0001205481045049243,
+        "max_abs_si": 0.0006547109082911395
+      },
+      "Mz": {
+        "rmse_si": 0.00010368185733938588,
+        "max_abs_si": 0.0007222695938350412
+      }
+    }
+  }
+}

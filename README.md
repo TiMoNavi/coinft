@@ -31,6 +31,11 @@ the `0x02 ... 0x03` 26-byte frame, records per-frame timestamps, and verifies
 that `i` leaves a quiet UART. The Teensy bridge is a separate 115200-baud
 `00 00 + raw` protocol and should be selected explicitly in the raw viewer.
 
+### Firmware reverse engineering archive
+
+The original CoinFT V2 HEX, reverse-engineering notes, and later rebuild images
+are indexed in [`firmware_reverse_engineering/`](firmware_reverse_engineering/README.md).
+
 
 
 

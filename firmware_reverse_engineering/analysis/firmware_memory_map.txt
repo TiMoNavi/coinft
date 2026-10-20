@@ -1,0 +1,4 @@
+Intel HEX records mapped from 0x00000000 through 0x000058C7.
+Binary export size: 22728 bytes.
+Gap bytes are filled with 0xFF only in the derived .bin; the original HEX is authoritative.
+Vector table: initial MSP=0x20008000; reset handler pointer=0x0000042D (Thumb entry 0x0000042C).
