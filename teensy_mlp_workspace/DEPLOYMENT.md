@@ -2,6 +2,52 @@
 
 本说明用于在新电脑上运行 Teensy 端 MLP 的 CoinFT 工作区。所有命令都从工作区目录运行，或通过 `COINFT_WS` 指向工作区，因此不依赖终端当前所在目录。
 
+## Linux 快速启动波形图
+
+下面按顺序在装有桌面环境的 Ubuntu/Linux 电脑执行。Teensy 用 USB 连到这台电脑；左、右 CoinFT 仍接在 Teensy 上。波形窗口每边显示一张图，每张图叠加六轴曲线。
+
+先安装 Git、Git LFS 和 Python 图形依赖。跳过 Git LFS 文件下载，因为波形图和 Teensy 输出接口不需要模型压缩包或训练视频：
+
+```bash
+sudo apt update
+sudo apt install -y git git-lfs python3 python3-venv python3-tk
+git lfs install
+GIT_LFS_SKIP_SMUDGE=1 git clone --depth 1 https://github.com/TiMoNavi/coinft.git
+cd coinft
+python3 -m venv .venv
+.venv/bin/python -m pip install --upgrade pip
+.venv/bin/python -m pip install pyserial matplotlib
+```
+
+连接 Teensy 后，运行下面整段。它会自动查找 Teensy 4 USB 串口（USB ID `16c0:0483`），找到后直接打开左右手波形图：
+
+```bash
+PORT="$(.venv/bin/python -c 'from serial.tools import list_ports; print(next((p.device for p in list_ports.comports() if p.vid == 0x16C0 and p.pid == 0x0483), ""))')"
+if [ -n "$PORT" ]; then
+  echo "Teensy 串口：$PORT"
+  .venv/bin/python teensy_mlp_workspace/visualization/plot_dual_wrench.py --port "$PORT"
+else
+  echo "没有自动找到 Teensy。可用串口如下："
+  .venv/bin/python -m serial.tools.list_ports -v
+  echo "从上面找到 Teensy 的 /dev/ttyACM* 端口后，替换下面命令中的端口再运行："
+  echo '.venv/bin/python teensy_mlp_workspace/visualization/plot_dual_wrench.py --port /dev/ttyACM0'
+fi
+```
+
+如果显示 `PermissionError` / `Permission denied`，给当前用户串口权限，然后注销并重新登录 Linux：
+
+```bash
+sudo usermod -aG dialout "$USER"
+```
+
+运行波形图需要 Linux 图形桌面；纯 SSH 终端没有显示环境时不会弹出窗口。波形程序启动传感器并重新执行 Teensy 端归零，开始时请保持两侧传感器空载，等待状态变为 `ready` 后再施力。关闭窗口会释放串口。
+
+如果不想自动查找端口，也可直接指定常见的 `/dev/ttyACM0`：
+
+```bash
+.venv/bin/python teensy_mlp_workspace/visualization/plot_dual_wrench.py --port /dev/ttyACM0
+```
+
 ## 1. 准备工作区
 
 把整个 `teensy_mlp_workspace` 文件夹复制到新电脑的任意位置。例如：

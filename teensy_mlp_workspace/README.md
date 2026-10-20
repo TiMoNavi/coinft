@@ -9,6 +9,9 @@ receiver decodes those results as JSON Lines.
 The exact task scope and hardware/model mapping are in [TASK.md](TASK.md).
 For new-computer setup, relocatable paths, and shell shortcuts, see
 [DEPLOYMENT.md](DEPLOYMENT.md).
+Linux users can follow the copy-paste [Linux waveform quick start](DEPLOYMENT.md)
+to clone the repository, install plotting dependencies, find the Teensy USB
+port, and launch both six-axis plots.
 
 ## Files
 
