@@ -6,7 +6,11 @@ import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from host.coinft_interface import CoinFTInterface
+from host.coinft_interface import (
+    CalibrationFailedError,
+    CoinFTInterface,
+    ZeroCheckFailedError,
+)
 from host.protocol import encode_frame
 
 
@@ -95,6 +99,72 @@ class CoinFTInterfaceTest(unittest.TestCase):
         interface.restart_calibration(restart_delay=0)
         interface.close()
         self.assertEqual(fake.writes, [b"i", b"s", b"i"])
+
+    def test_wait_until_ready_skips_calibration_frames(self) -> None:
+        fake = FakeSerial()
+        interface = CoinFTInterface(
+            "/dev/fake",
+            start_stream=False,
+            serial_factory=lambda *args, **kwargs: fake,
+        )
+        fake.chunks.append(
+            encode_frame(1, 1000, (0,) * 6, (0,) * 6, calibration_status=6, wrench_valid=False)
+            + encode_frame(2, 2000, (1, 2, 3, 4, 5, 6), (7, 8, 9, 10, 11, 12))
+        )
+
+        sample = interface.wait_until_ready(timeout=1)
+        interface.close()
+
+        self.assertTrue(sample.wrench_valid)
+        self.assertEqual(sample.calibration_status, "ready")
+
+    def test_wait_until_ready_returns_sample_with_zero_check_warning(self) -> None:
+        fake = FakeSerial()
+        interface = CoinFTInterface(
+            "/dev/fake",
+            start_stream=False,
+            serial_factory=lambda *args, **kwargs: fake,
+        )
+        fake.chunks.append(
+            encode_frame(1, 1000, (1,) * 6, (2,) * 6, zero_check_warning=True)
+        )
+
+        sample = interface.wait_until_ready(timeout=1)
+        interface.close()
+
+        self.assertTrue(sample.wrench_valid)
+        self.assertTrue(sample.zero_check_warning)
+        self.assertIn("warning", sample.as_dict())
+
+    def test_wait_until_ready_raises_on_zero_check_failure(self) -> None:
+        fake = FakeSerial()
+        interface = CoinFTInterface(
+            "/dev/fake",
+            start_stream=False,
+            serial_factory=lambda *args, **kwargs: fake,
+        )
+        fake.chunks.append(
+            encode_frame(1, 1000, (0,) * 6, (0,) * 6, calibration_status=8, wrench_valid=False)
+        )
+
+        with self.assertRaises(ZeroCheckFailedError):
+            interface.wait_until_ready(timeout=1)
+        interface.close()
+
+    def test_wait_until_ready_raises_on_firmware_error(self) -> None:
+        fake = FakeSerial()
+        interface = CoinFTInterface(
+            "/dev/fake",
+            start_stream=False,
+            serial_factory=lambda *args, **kwargs: fake,
+        )
+        fake.chunks.append(
+            encode_frame(1, 1000, (0,) * 6, (0,) * 6, calibration_status=9, wrench_valid=False)
+        )
+
+        with self.assertRaises(CalibrationFailedError):
+            interface.wait_until_ready(timeout=1)
+        interface.close()
 
 
 if __name__ == "__main__":

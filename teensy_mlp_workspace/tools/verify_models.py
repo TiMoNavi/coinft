@@ -107,15 +107,21 @@ def verify_protocol(binary: Path) -> None:
 
     left = (1.25, -2.5, 3.75, -0.0125, 0.025, -0.0375)
     right = (-4.25, 5.5, -6.75, 0.0625, -0.075, 0.0875)
-    request = "P 7 1 4294967295 305419896 " + " ".join(map(str, left + right)) + "\n"
-    hex_frame = subprocess.run([str(binary)], input=request, text=True, capture_output=True, check=True).stdout.strip()
-    cpp_bytes = bytes.fromhex(hex_frame)
-    py_bytes = encode_frame(0xFFFFFFFF, 0x12345678, left, right, calibration_status=7, wrench_valid=True)
-    if cpp_bytes != py_bytes:
-        raise AssertionError("C++ and Python frame encoders produced different bytes")
-    decoded = decode_frame(cpp_bytes)
-    if decoded.sequence != 0xFFFFFFFF or decoded.teensy_time_us != 0x12345678:
-        raise AssertionError("C++ frame metadata did not round-trip")
+    for warning in (False, True):
+        request = "P 7 1 4294967295 305419896 " + " ".join(map(str, left + right)) + f" {int(warning)}\n"
+        hex_frame = subprocess.run([str(binary)], input=request, text=True, capture_output=True, check=True).stdout.strip()
+        cpp_bytes = bytes.fromhex(hex_frame)
+        py_bytes = encode_frame(
+            0xFFFFFFFF, 0x12345678, left, right,
+            calibration_status=7, wrench_valid=True, zero_check_warning=warning,
+        )
+        if cpp_bytes != py_bytes:
+            raise AssertionError("C++ and Python frame encoders produced different bytes")
+        decoded = decode_frame(cpp_bytes)
+        if decoded.sequence != 0xFFFFFFFF or decoded.teensy_time_us != 0x12345678:
+            raise AssertionError("C++ frame metadata did not round-trip")
+        if decoded.zero_check_warning != warning or not decoded.wrench_valid:
+            raise AssertionError("zero-check warning changed wrench validity")
 
 
 def verify_calibration(binary: Path, sample_count: int = 500) -> None:
@@ -190,9 +196,9 @@ def verify_calibration(binary: Path, sample_count: int = 500) -> None:
     max_force = 0.0
     for sample, line in enumerate(output):
         values = line.split()
-        if len(values) != 14:
+        if len(values) != 15:
             raise AssertionError(f"malformed C++ calibration row {sample}: {line}")
-        status, valid = map(int, values[:2])
+        status, valid, warning = map(int, values[:3])
         if status != expected_statuses[sample]:
             raise AssertionError(
                 f"calibration state mismatch at sample {sample}: C++={status}, Python={expected_statuses[sample]}"
@@ -201,8 +207,10 @@ def verify_calibration(binary: Path, sample_count: int = 500) -> None:
             raise AssertionError(
                 f"wrench validity mismatch at sample {sample}: C++={valid}, Python={expected_valid[sample]}"
             )
-        actual_left = np.asarray([float(value) for value in values[2:8]], dtype=np.float32)
-        actual_right = np.asarray([float(value) for value in values[8:14]], dtype=np.float32)
+        if warning:
+            raise AssertionError(f"unexpected zero-check warning in stable calibration sample {sample}")
+        actual_left = np.asarray([float(value) for value in values[3:9]], dtype=np.float32)
+        actual_right = np.asarray([float(value) for value in values[9:15]], dtype=np.float32)
         if expected_wrenches[sample] is not None:
             expected_left, expected_right = expected_wrenches[sample]
             max_parity_error = max(
@@ -219,6 +227,19 @@ def verify_calibration(binary: Path, sample_count: int = 500) -> None:
         raise AssertionError(f"Teensy tare/bias/filter parity exceeded 2e-4: {max_parity_error}")
     if max_force > 0.15:
         raise AssertionError(f"stationary zero-check force exceeds 0.15 N: {max_force}")
+    warning_result = subprocess.run(
+        [str(binary)], input="W\n", text=True, capture_output=True, check=True
+    ).stdout.split()
+    if tuple(map(int, warning_result)) != (7, 1, 1):
+        raise AssertionError(f"zero-check disturbance must warn and keep output valid: {warning_result}")
+    lifecycle = subprocess.run(
+        [str(binary)], input="Q 700 120 50000\n", text=True, capture_output=True, check=True
+    ).stdout.split()
+    first_ready_us, quick_ready_us = map(int, lifecycle)
+    if not 20_000_000 <= first_ready_us <= 35_000_000:
+        raise AssertionError(f"first startup calibration took an unexpected time: {first_ready_us} us")
+    if not 2_000_000 <= quick_ready_us <= 4_000_000:
+        raise AssertionError(f"subsequent quick tare took an unexpected time: {quick_ready_us} us")
     wrap_result = subprocess.run(
         [str(binary)], input="B 14000 1000\n", text=True, capture_output=True, check=True
     ).stdout.split()
@@ -231,6 +252,8 @@ def verify_calibration(binary: Path, sample_count: int = 500) -> None:
                 "samples": sample_count,
                 "max_force_n": max_force,
                 "max_python_parity_error": max_parity_error,
+                "first_startup_ready_s": first_ready_us / 1_000_000.0,
+                "subsequent_tare_ready_s": quick_ready_us / 1_000_000.0,
                 "states_checked": sorted(set(expected_statuses)),
                 "ring_wrap_1khz": "ready",
             },
@@ -242,7 +265,7 @@ def verify_calibration(binary: Path, sample_count: int = 500) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--repo-root", type=Path, default=REPO_ROOT)
-    parser.add_argument("--samples", type=int, default=512)
+    parser.add_argument("--samples", type=int, default=700)
     parser.add_argument("--compiler", default=os.environ.get("CXX", "g++"))
     args = parser.parse_args()
     with tempfile.TemporaryDirectory(prefix="coinft-mlp-check-") as temporary:

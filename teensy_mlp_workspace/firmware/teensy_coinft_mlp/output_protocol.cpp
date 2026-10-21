@@ -37,7 +37,8 @@ uint16_t crc16CcittFalse(const uint8_t* data, size_t length) {
 
 void encodeOutputFrame(uint8_t frame[kOutputFrameSize], uint32_t sequence,
                        uint32_t teensy_time_us, uint8_t calibration_status,
-                       bool wrench_valid, const float left[6],
+                       bool wrench_valid, bool zero_check_warning,
+                       const float left[6],
                        const float right[6]) {
   frame[0] = 'C';
   frame[1] = 'F';
@@ -45,7 +46,8 @@ void encodeOutputFrame(uint8_t frame[kOutputFrameSize], uint32_t sequence,
   frame[3] = 'F';
   frame[4] = kOutputProtocolVersion;
   frame[5] = calibration_status;
-  frame[6] = wrench_valid ? 0x01 : 0x00;
+  frame[6] = (wrench_valid ? 0x01 : 0x00) |
+             (zero_check_warning ? 0x02 : 0x00);
   writeU32Le(frame + 7, sequence);
   writeU32Le(frame + 11, teensy_time_us);
   for (size_t index = 0; index < 6; ++index) {

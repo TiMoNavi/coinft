@@ -11,9 +11,11 @@ namespace {
 
 const uint32_t kRawStabilityWindowUs = 2000000;
 const uint32_t kRawStabilityMinWaitUs = 5000000;
+const uint32_t kFirstStartupStabilityMinWaitUs = 20000000;
 const uint32_t kRawStabilityCheckIntervalUs = 500000;
 const uint32_t kRuntimeSettlingUs = 5000000;
 const uint32_t kFinalTareWindowUs = 2000000;
+const uint32_t kQuickTareWindowUs = 1000000;
 const uint32_t kBiasWindowUs = 1000000;
 const uint32_t kZeroCheckWindowUs = 1000000;
 const float kStableMeanDeltaCounts = 8.0f;
@@ -33,8 +35,12 @@ CoinFTCalibration::CoinFTCalibration()
       last_stability_check_us_(0),
       stability_passes_(0),
       settling_started_us_(0),
+      quick_tare_(false),
+      has_completed_calibration_(false),
+      require_boot_stability_(false),
       bias_started_us_(0),
       zero_started_us_(0),
+      zero_check_warning_(false),
       bias_count_(0),
       filter_next_(0),
       filter_count_(0),
@@ -56,8 +62,12 @@ void CoinFTCalibration::reset() {
   last_stability_check_us_ = 0;
   stability_passes_ = 0;
   settling_started_us_ = 0;
+  quick_tare_ = false;
+  has_completed_calibration_ = false;
+  require_boot_stability_ = false;
   bias_started_us_ = 0;
   zero_started_us_ = 0;
+  zero_check_warning_ = false;
   bias_count_ = 0;
   filter_next_ = 0;
   filter_count_ = 0;
@@ -67,6 +77,21 @@ void CoinFTCalibration::reset() {
   memset(bias_sum_, 0, sizeof(bias_sum_));
   memset(filter_history_, 0, sizeof(filter_history_));
   memset(zero_force_sum_, 0, sizeof(zero_force_sum_));
+}
+
+void CoinFTCalibration::begin() {
+  const bool use_quick_tare = has_completed_calibration_;
+  reset();
+  if (!use_quick_tare) {
+    require_boot_stability_ = true;
+    return;
+  }
+
+  // The sensor streams have just been restarted. Capture one unloaded raw
+  // second, then recompute the model bias and run the normal zero check.
+  has_completed_calibration_ = true;
+  quick_tare_ = true;
+  status_ = kRuntimeSettling;
 }
 
 void CoinFTCalibration::appendRaw(const uint16_t left_raw[12],
@@ -133,7 +158,10 @@ bool CoinFTCalibration::windowStats(uint32_t now_us, uint32_t min_age_us,
 }
 
 void CoinFTCalibration::advanceStability(uint32_t timestamp_us) {
-  if (static_cast<uint32_t>(timestamp_us - started_at_us_) < kRawStabilityMinWaitUs) {
+  const uint32_t minimum_wait_us = require_boot_stability_
+                                       ? kFirstStartupStabilityMinWaitUs
+                                       : kRawStabilityMinWaitUs;
+  if (static_cast<uint32_t>(timestamp_us - started_at_us_) < minimum_wait_us) {
     status_ = kWarmingUp;
     return;
   }
@@ -194,6 +222,21 @@ void CoinFTCalibration::advanceFinalTare(uint32_t timestamp_us) {
   status_ = kFinalTare;
 }
 
+void CoinFTCalibration::advanceQuickTare(uint32_t timestamp_us) {
+  if (static_cast<uint32_t>(timestamp_us - started_at_us_) < kQuickTareWindowUs) {
+    return;
+  }
+  float means[2][12];
+  if (!windowStats(timestamp_us, 0, kQuickTareWindowUs, means, NULL)) return;
+  memcpy(raw_offset_, means, sizeof(raw_offset_));
+  resetFilter();
+  clearRawHistory();
+  bias_started_us_ = timestamp_us;
+  bias_count_ = 0;
+  memset(bias_sum_, 0, sizeof(bias_sum_));
+  status_ = kBiasCalibration;
+}
+
 bool CoinFTCalibration::predictUncorrected(const uint16_t raw[12],
                                            unsigned int side,
                                            float wrench[6]) const {
@@ -247,6 +290,7 @@ void CoinFTCalibration::fillOutput(CalibrationOutput* output, bool has_wrench,
                                    const float right[6]) const {
   output->status = status_;
   output->has_wrench = has_wrench;
+  output->zero_check_warning = zero_check_warning_;
   for (size_t axis = 0; axis < 6; ++axis) {
     output->left_wrench[axis] = has_wrench ? left[axis] : 0.0f;
     output->right_wrench[axis] = has_wrench ? right[axis] : 0.0f;
@@ -279,7 +323,11 @@ void CoinFTCalibration::process(const uint16_t left_raw[12],
   }
 
   if (status_ == kRuntimeSettling) {
-    advanceFinalTare(timestamp_us);
+    if (quick_tare_) {
+      advanceQuickTare(timestamp_us);
+    } else {
+      advanceFinalTare(timestamp_us);
+    }
     fillOutput(output, false, NULL, NULL);
     return;
   }
@@ -350,7 +398,9 @@ void CoinFTCalibration::process(const uint16_t left_raw[12],
           max_abs_force = std::max(max_abs_force, std::fabs(mean));
         }
       }
-      status_ = max_abs_force <= kZeroForceLimitN ? kReady : kZeroCheckFailed;
+      zero_check_warning_ = max_abs_force > kZeroForceLimitN;
+      status_ = kReady;
+      has_completed_calibration_ = true;
     }
   }
   fillOutput(output, status_ == kReady, left, right);

@@ -21,6 +21,7 @@ enum CalibrationStatus : uint8_t {
 struct CalibrationOutput {
   CalibrationStatus status;
   bool has_wrench;
+  bool zero_check_warning;
   float left_wrench[6];
   float right_wrench[6];
 };
@@ -28,6 +29,9 @@ struct CalibrationOutput {
 class CoinFTCalibration {
  public:
   CoinFTCalibration();
+  // Start a new acquisition calibration. The first start after power-up runs
+  // the complete stability/tare sequence; later starts use the short tare.
+  void begin();
   void reset();
 
   void process(const uint16_t left_raw[12], const uint16_t right_raw[12],
@@ -51,6 +55,7 @@ class CoinFTCalibration {
                    float standard_deviations[24]) const;
   void advanceStability(uint32_t timestamp_us);
   void advanceFinalTare(uint32_t timestamp_us);
+  void advanceQuickTare(uint32_t timestamp_us);
   bool predictUncorrected(const uint16_t raw[12], unsigned int side,
                           float wrench[6]) const;
   bool predictCorrected(const uint16_t left_raw[12],
@@ -70,8 +75,12 @@ class CoinFTCalibration {
   uint32_t last_stability_check_us_;
   uint8_t stability_passes_;
   uint32_t settling_started_us_;
+  bool quick_tare_;
+  bool has_completed_calibration_;
+  bool require_boot_stability_;
   uint32_t bias_started_us_;
   uint32_t zero_started_us_;
+  bool zero_check_warning_;
   float raw_offset_[2][12];
   float ft_bias_[2][6];
   double bias_sum_[2][6];

@@ -40,7 +40,7 @@ fi
 sudo usermod -aG dialout "$USER"
 ```
 
-运行波形图需要 Linux 图形桌面；纯 SSH 终端没有显示环境时不会弹出窗口。波形程序启动传感器并重新执行 Teensy 端归零，开始时请保持两侧传感器空载，等待状态变为 `ready` 后再施力。关闭窗口会释放串口。
+运行波形图需要 Linux 图形桌面；纯 SSH 终端没有显示环境时不会弹出窗口。波形程序每次开始新采集都会发送 `i`、`s`，触发 Teensy 板端归零。每次上电后的首次归零至少等待 20 秒稳定检查，通常约 28–30 秒到 `ready`；同一次上电后续归零通常约 3 秒。两种情况下都要保持两侧空载、静止，看到 `ready` 后再施力。关闭窗口会释放串口。
 
 如果不想自动查找端口，也可直接指定常见的 `/dev/ttyACM0`：
 
@@ -152,7 +152,7 @@ coinft-read --output run.jsonl
 coinft-build                # 编译 Teensy 4.0
 ```
 
-波形窗口左下角的“重新归零”会发送 `i`、`s`，让 Teensy 停止并重新启动两侧传感器流，同时重跑板端稳定性、tare、bias、滤波和零点检查。稳定性检查通过时约需 14 秒，操作时保持传感器空载。
+波形窗口左下角的“重新归零”会发送 `i`、`s`，让 Teensy 停止并重新启动两侧传感器流，同时触发板端归零。上电后的第一次归零会先等待至少 20 秒并判断原始值稳定，再执行 tare、力偏差校准和零点检查，正常约 28–30 秒到 `ready`。之后每次归零使用约 1 秒原始 tare、1 秒力偏差校准和 1 秒零点检查，正常约 3 秒到 `ready`。归零期间须空载静止；即使是快速归零，约 1 秒 tare 样本仍要求稳定。
 
 在命令中临时覆盖端口：
 
@@ -184,7 +184,7 @@ with CoinFTInterface("/dev/cu.usbmodem123") as device:
 "$COINFT_PY" "$COINFT_WS/host/read_wrench.py" --port "$COINFT_PORT"
 ```
 
-默认启动会向 Teensy 发送 `i`、`s`，触发传感器流和板端自动校准。等待 `ready` 后再使用有效力数据。退出时会发送 `i` 停止传感器流。需要接入已有流且不重启校准时，可给波形程序添加 `--no-start-command`，或在接口中使用 `CoinFTInterface(port, start_stream=False)`。
+默认启动会向 Teensy 发送 `i`、`s`，每次开始新采集都触发板端归零。每次上电后的第一次归零通常约 28–30 秒到 `ready`，后续归零通常约 3 秒；归零期间保持空载静止，并且只在 `ready` 后使用有效力数据。一个进程内开始下一段采集时，调用 `device.restart_calibration()`。退出时会发送 `i` 停止传感器流。`--no-start-command` 和 `CoinFTInterface(port, start_stream=False)` 只用于接入已经运行且已经校准的流，不能用于开始一段新采集。
 
 ## 6. 串口使用和验证
 

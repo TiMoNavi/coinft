@@ -81,7 +81,7 @@ void pollHostCommands() {
       rightSensor.ready = false;
       leftSensor.ready = false;
       forwardCommand(command);
-      calibration.reset();
+      calibration.begin();
       has_output_timestamp = false;
       streaming = true;
     } else if (command == 't') {
@@ -118,7 +118,8 @@ void emitIfBothFresh() {
 
   uint8_t frame[coinft::kOutputFrameSize];
   coinft::encodeOutputFrame(frame, sequence++, timestamp_us, output.status,
-                            output.has_wrench, output.left_wrench,
+                            output.has_wrench, output.zero_check_warning,
+                            output.left_wrench,
                             output.right_wrench);
   Serial.write(frame, sizeof(frame));
 }

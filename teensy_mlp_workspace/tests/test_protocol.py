@@ -34,6 +34,17 @@ class ProtocolTest(unittest.TestCase):
         np.testing.assert_allclose(decoded.left, left, rtol=1e-7, atol=1e-8)
         np.testing.assert_allclose(decoded.right, right, rtol=1e-7, atol=1e-8)
 
+    def test_zero_check_warning_keeps_wrench_valid(self) -> None:
+        raw = encode_frame(
+            4, 5, (1, 2, 3, 4, 5, 6), (7, 8, 9, 10, 11, 12),
+            zero_check_warning=True,
+        )
+        frame = decode_frame(raw)
+        row = sample_to_json(frame, 123, 0)
+        self.assertTrue(frame.wrench_valid)
+        self.assertTrue(frame.zero_check_warning)
+        self.assertEqual(row["warning"], "zero check exceeded 0.15 N; wrench output remains valid")
+
     def test_crc_known_vector(self) -> None:
         from host.protocol import crc16_ccitt_false
 

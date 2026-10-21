@@ -15,6 +15,14 @@ except ImportError:  # pragma: no cover - environment dependent
 from .protocol import StreamParser, WrenchFrame, sample_to_json, sequence_gap
 
 
+class CalibrationFailedError(RuntimeError):
+    """The Teensy reported an inference or calibration failure."""
+
+
+class ZeroCheckFailedError(CalibrationFailedError):
+    """The unloaded force zero check did not pass."""
+
+
 @dataclass(frozen=True)
 class CoinFTSample:
     sequence: int
@@ -23,6 +31,7 @@ class CoinFTSample:
     calibration_status_id: int
     calibration_ready: bool
     wrench_valid: bool
+    zero_check_warning: bool
     left_wrench: tuple[float, ...] | None
     right_wrench: tuple[float, ...] | None
     dropped_before: int
@@ -40,6 +49,7 @@ class CoinFTSample:
             calibration_status_id=frame.calibration_status,
             calibration_ready=row["calibration_ready"],
             wrench_valid=frame.wrench_valid,
+            zero_check_warning=frame.zero_check_warning,
             left_wrench=frame.left if frame.wrench_valid else None,
             right_wrench=frame.right if frame.wrench_valid else None,
             dropped_before=dropped_before,
@@ -67,6 +77,12 @@ class CoinFTSample:
                 else None
             ),
             "wrench_valid": self.wrench_valid,
+            "zero_check_warning": self.zero_check_warning,
+            "warning": (
+                "zero check exceeded 0.15 N; wrench output remains valid"
+                if self.zero_check_warning
+                else None
+            ),
             "side_order": ["left", "right"],
             "wrench_axes": ["fx", "fy", "fz", "mx", "my", "mz"],
             "dropped_before": self.dropped_before,
@@ -81,7 +97,9 @@ class CoinFTInterface:
     """Read validated samples from one Teensy USB serial port.
 
     The default startup sends ``i`` then ``s``. This stops and restarts the
-    sensor stream, which resets and reruns the Teensy's automatic calibration.
+    sensor stream and triggers Teensy calibration for the new acquisition. The
+    first calibration after board power-up runs the long stability sequence;
+    later starts use the short tare sequence.
     """
 
     def __init__(
@@ -139,13 +157,31 @@ class CoinFTInterface:
         self._previous_sequence = frame.sequence
         return CoinFTSample.from_frame(frame, received_ns, dropped)
 
+    def wait_until_ready(self, timeout: float | None = None) -> CoinFTSample:
+        """Wait for the first valid wrench sample or raise on failure/timeout."""
+        deadline = time.monotonic() + timeout if timeout is not None else None
+        while True:
+            remaining = None if deadline is None else max(0.0, deadline - time.monotonic())
+            if remaining == 0.0:
+                raise TimeoutError("CoinFT calibration did not reach ready before timeout")
+            sample = self.read_sample(timeout=remaining)
+            if sample.calibration_status == "zero_check_failed":
+                raise ZeroCheckFailedError(
+                    "Teensy unloaded zero check failed; discard this acquisition and "
+                    "check that both sensors are unloaded and still before retrying"
+                )
+            if sample.calibration_status == "error":
+                raise CalibrationFailedError("Teensy reported an inference or calibration error")
+            if sample.wrench_valid:
+                return sample
+
     @property
     def parser_stats(self) -> tuple[int, int]:
         """Return the number of rejected frames and discarded stream bytes."""
         return self._parser.bad_frames, self._parser.discarded_bytes
 
     def restart_calibration(self, restart_delay: float = 0.2) -> None:
-        """Restart both sensor streams and rerun the Teensy calibration sequence."""
+        """Restart sensor streams and trigger board-side tare for a new run."""
         if self._closed:
             raise RuntimeError("CoinFT interface is closed")
         self._send(b"i")

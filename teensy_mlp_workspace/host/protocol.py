@@ -36,6 +36,7 @@ class WrenchFrame:
     teensy_time_us: int
     calibration_status: int
     wrench_valid: bool
+    zero_check_warning: bool
     left: tuple[float, ...]
     right: tuple[float, ...]
     raw: bytes
@@ -57,6 +58,7 @@ def encode_frame(
     right: tuple[float, ...],
     calibration_status: int = 7,
     wrench_valid: bool = True,
+    zero_check_warning: bool = False,
 ) -> bytes:
     if len(left) != 6 or len(right) != 6:
         raise ProtocolError("left and right must each contain six axes")
@@ -65,7 +67,7 @@ def encode_frame(
         raise ProtocolError("wrench values must be finite")
     if calibration_status not in CALIBRATION_STATES:
         raise ProtocolError(f"unsupported calibration status: {calibration_status}")
-    flags = 0x01 if wrench_valid else 0x00
+    flags = (0x01 if wrench_valid else 0x00) | (0x02 if zero_check_warning else 0x00)
     body = bytes((VERSION, calibration_status, flags)) + struct.pack(
         "<II12f", sequence & 0xFFFFFFFF, teensy_time_us & 0xFFFFFFFF, *values
     )
@@ -88,10 +90,12 @@ def decode_frame(raw: bytes) -> WrenchFrame:
     if calibration_status not in CALIBRATION_STATES:
         raise ProtocolError(f"unsupported calibration status: {calibration_status}")
     flags = raw[6]
-    if flags & ~0x01:
+    if flags & ~0x03:
         raise ProtocolError(f"unsupported frame flags: 0x{flags:02x}")
     if bool(flags & 0x01) != (calibration_status == 7):
         raise ProtocolError("wrench validity must match the ready calibration state")
+    if flags & 0x02 and not flags & 0x01:
+        raise ProtocolError("zero-check warning requires a valid wrench")
     sequence, teensy_time_us, *values = struct.unpack_from("<II12f", raw, 7)
     if not all(math.isfinite(value) for value in values):
         raise ProtocolError("frame contains a non-finite wrench value")
@@ -100,6 +104,7 @@ def decode_frame(raw: bytes) -> WrenchFrame:
         teensy_time_us,
         calibration_status,
         bool(flags & 0x01),
+        bool(flags & 0x02),
         tuple(values[:6]),
         tuple(values[6:]),
         raw,
@@ -167,6 +172,10 @@ def sample_to_json(frame: WrenchFrame, host_receive_monotonic_ns: int, dropped_b
             "unloaded zero check failed" if state == "zero_check_failed" else "inference or calibration error" if state == "error" else None
         ),
         "wrench_valid": frame.wrench_valid,
+        "zero_check_warning": frame.zero_check_warning,
+        "warning": "zero check exceeded 0.15 N; wrench output remains valid"
+        if frame.zero_check_warning
+        else None,
         "side_order": ["left", "right"],
         "wrench_axes": list(AXES),
         "dropped_before": dropped_before,

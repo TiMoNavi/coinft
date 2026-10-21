@@ -123,7 +123,7 @@ def run_dual(args: argparse.Namespace) -> int:
         zero_button.label.set_text("校准中...")
         zero_button.ax.set_facecolor("#e9ecef")
         control_queue.put("zero")
-        status.set_text("正在重启传感器并完整重跑板端归零（约 14 秒）；请保持空载")
+        status.set_text("正在执行板端归零；首次上电约 28-30 秒，后续约 3 秒；请保持空载")
         figure.canvas.draw_idle()
 
     zero_button.on_clicked(request_zero)
@@ -230,6 +230,12 @@ def run_dual(args: argparse.Namespace) -> int:
             elif sample.calibration_status == "error":
                 message = "异常: Teensy 推理或校准失败 | 请检查固件状态"
                 status.set_color("crimson")
+            elif sample.zero_check_warning:
+                message = (
+                    f"提示: 归零检查窗口受到扰动，六轴数据仍有效并持续采集 | "
+                    f"有效帧 {valid_count} | 约 {measured_hz:.0f} Hz | 丢帧 {sample.dropped_before}"
+                )
+                status.set_color("darkorange")
             else:
                 message = (
                     f"状态: {sample.calibration_status} | 有效帧 {valid_count} | "
